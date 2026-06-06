@@ -1,26 +1,133 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --navy: #0a192f;
+  --navy-dark: #050d18;
+  --blue: #2563eb;
+  --blue-light: #3b82f6;
+  --gold: #fbbf24;
+  --white-panel: #ffffff;
+  --text-dark: #0f172a;
+  --text-muted: #64748b;
+  --border-light: #e2e8f0;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-sans: var(--font-inter);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  background: var(--navy-dark);
+  color: #f8fafc;
+}
+
+/* —— Kit: dark band —— */
+.kit-dark-band {
+  background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%);
+}
+
+.kit-page-hero {
+  background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%);
+  @apply relative overflow-hidden py-14 sm:py-16;
+}
+
+.kit-page-hero-title {
+  @apply text-3xl font-bold tracking-tight text-white sm:text-4xl;
+}
+
+.kit-page-hero-sub {
+  @apply mt-3 max-w-2xl text-slate-300;
+}
+
+/* —— Kit: white content area —— */
+.kit-white-main {
+  @apply bg-slate-50 text-[var(--text-dark)];
+}
+
+.kit-container {
+  @apply mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8;
+}
+
+.kit-card {
+  @apply rounded-xl border border-[var(--border-light)] bg-white p-6 shadow-md shadow-slate-200/60;
+}
+
+.kit-card-hover {
+  @apply rounded-xl border border-[var(--border-light)] bg-white p-6 shadow-md shadow-slate-200/60 transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-slate-300/50;
+}
+
+.kit-btn-primary {
+  @apply inline-flex items-center justify-center gap-2 rounded-lg bg-[var(--blue)] px-6 py-2.5 text-sm font-semibold text-white shadow-md transition hover:bg-[var(--blue-light)];
+}
+
+.kit-btn-outline {
+  @apply inline-flex items-center justify-center gap-2 rounded-lg border-2 border-[var(--gold)] px-6 py-2.5 text-sm font-semibold text-[var(--gold)] transition hover:bg-amber-50;
+}
+
+.kit-btn-outline-white {
+  @apply inline-flex items-center justify-center rounded-lg border border-white/80 px-5 py-2 text-sm font-semibold text-white transition hover:bg-white/10;
+}
+
+.kit-input {
+  @apply w-full rounded-lg border border-[var(--border-light)] bg-white px-3 py-2.5 text-[var(--text-dark)] placeholder:text-slate-400 focus:border-[var(--blue)] focus:outline-none focus:ring-2 focus:ring-blue-500/20;
+}
+
+.kit-label {
+  @apply mb-1 block text-sm font-medium text-slate-700;
+}
+
+.kit-filter-active {
+  @apply rounded-lg bg-[var(--blue)] px-4 py-2 text-sm font-medium text-white;
+}
+
+.kit-filter {
+  @apply rounded-lg border border-[var(--border-light)] bg-white px-4 py-2 text-sm font-medium text-slate-600 transition hover:border-[var(--blue)] hover:text-[var(--blue)];
+}
+
+.kit-badge {
+  @apply inline-block rounded-md bg-blue-100 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-blue-700;
+}
+
+.kit-section-title {
+  @apply text-2xl font-bold text-[var(--text-dark)];
+}
+
+.kit-section-sub {
+  @apply mt-1 text-sm text-[var(--text-muted)];
+}
+
+.nav-link {
+  @apply text-sm font-medium text-slate-300 transition hover:text-white;
+}
+
+.nav-link-active {
+  @apply text-white;
+}
+
+.nav-link-active::after {
+  content: "";
+  display: block;
+  height: 2px;
+  margin-top: 4px;
+  border-radius: 9999px;
+  background: var(--blue-light);
+}
+
+.btn-sm-primary {
+  @apply inline-flex items-center justify-center rounded-lg bg-[var(--blue)] px-4 py-2 text-xs font-semibold text-white transition hover:bg-[var(--blue-light)];
+}
+
+.footer-heading {
+  @apply text-base font-bold text-white;
+}
+
+.footer-heading::after {
+  content: "";
+  display: block;
+  margin-top: 0.5rem;
+  height: 2px;
+  width: 2rem;
+  border-radius: 9999px;
+  background: var(--gold);
 }
