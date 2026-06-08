@@ -60,11 +60,9 @@ function ResultDetail({ result }: { result: AlResult }) {
     { label: "Year", value: result.examYear },
     { label: "Name", value: result.studentName },
     { label: "Index Number", value: result.indexNumber },
+    { label: "NIC Number", value: result.nicNumber ?? "—" },
   ];
 
-  if (result.nicNumber) {
-    infoRows.push({ label: "NIC Number", value: result.nicNumber });
-  }
   if (result.district) {
     infoRows.push({ label: "District", value: result.district });
   }
@@ -139,8 +137,7 @@ function ResultDetail({ result }: { result: AlResult }) {
 }
 
 export function ResultsSearch() {
-  const [index, setIndex] = useState("");
-  const [year, setYear] = useState("");
+  const [query, setQuery] = useState("");
   const [results, setResults] = useState<AlResult[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -152,7 +149,7 @@ export function ResultsSearch() {
     setError("");
     setSearched(true);
     try {
-      setResults(await searchResults(index.trim(), year ? Number(year) : undefined));
+      setResults(await searchResults(query.trim()));
     } catch (err) {
       setError(getErrorMessage(err));
       setResults([]);
@@ -169,33 +166,20 @@ export function ResultsSearch() {
         <form onSubmit={onSubmit} className="kit-card h-fit lg:sticky lg:top-8">
           <h2 className="text-lg font-bold text-slate-900">Check Your Results</h2>
           <p className="mt-1 text-sm text-slate-500">
-            Enter your index number to view the A/L results.
+            Enter your index number or NIC number to view the A/L results.
           </p>
           <div className="mt-6 space-y-4">
             <div>
-              <label className="kit-label" htmlFor="index-number">
-                Index Number
+              <label className="kit-label" htmlFor="search-query">
+                Index Number or NIC Number
               </label>
               <input
-                id="index-number"
+                id="search-query"
                 className="kit-input"
                 required
-                value={index}
-                onChange={(e) => setIndex(e.target.value)}
-                placeholder="7364521"
-              />
-            </div>
-            <div>
-              <label className="kit-label" htmlFor="exam-year">
-                Exam Year (optional)
-              </label>
-              <input
-                id="exam-year"
-                className="kit-input"
-                type="number"
-                value={year}
-                onChange={(e) => setYear(e.target.value)}
-                placeholder="2025"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="7364521 or 200012345678"
               />
             </div>
             <button type="submit" disabled={loading} className="kit-btn-primary w-full py-3">
@@ -211,11 +195,11 @@ export function ResultsSearch() {
             <div className="flex h-full min-h-[320px] flex-col items-center justify-center rounded-xl border border-dashed border-slate-200 bg-white/60 p-8 text-slate-500">
               <Search className="mb-3 h-12 w-12 text-slate-300" />
               <p className="font-medium">Results will appear here</p>
-              <p className="mt-1 text-sm text-slate-400">Search by index number to view your A/L results</p>
+              <p className="mt-1 text-sm text-slate-400">Search by index number or NIC number to view your A/L results</p>
             </div>
           ) : !result ? (
             <div className="kit-card flex min-h-[320px] items-center justify-center">
-              <p className="text-slate-600">No results found for this index number.</p>
+              <p className="text-slate-600">No results found for this index or NIC number.</p>
             </div>
           ) : (
             <ResultDetail result={result} />

@@ -64,9 +64,9 @@ export async function getSitePage(slug: string) {
   return data.data;
 }
 
-export async function searchResults(indexNumber: string, examYear?: number) {
+export async function searchResults(query: string, examYear?: number) {
   const { data } = await publicApi.get<ApiResponse<AlResult[]>>("/v1/al-results/public", {
-    params: { indexNumber, examYear },
+    params: { query, examYear },
   });
   return data.data;
 }
