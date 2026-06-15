@@ -3,6 +3,7 @@
 import { Suspense, useCallback, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Award, Search } from "lucide-react";
+import { loadAlResults, searchAlResults } from "@/lib/data/al-results";
 import type { AlResult, SubjectResult } from "@/lib/types/api";
 
 const SUBJECT_ORDER: Record<string, string[]> = {
@@ -138,42 +139,93 @@ function ResultDetail({ result }: { result: AlResult }) {
 function ResultsSearchForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const [allResults, setAllResults] = useState<AlResult[]>([]);
+  const [dataLoading, setDataLoading] = useState(true);
+  const [dataError, setDataError] = useState("");
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<AlResult[]>([]);
   const [loading, setLoading] = useState(false);
   const [searched, setSearched] = useState(false);
 
-  const runSearch = useCallback(async (value: string) => {
-    const trimmed = value.trim();
-    if (!trimmed) {
-      return;
-    }
-
-    setLoading(true);
-    setSearched(true);
-    setResults([]);
-    setLoading(false);
+  useEffect(() => {
+    let cancelled = false;
+    loadAlResults()
+      .then((data) => {
+        if (!cancelled) setAllResults(data);
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setDataError("Could not load results data. Run npm run import:results and refresh.");
+        }
+      })
+      .finally(() => {
+        if (!cancelled) setDataLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
-  useEffect(() => {
-    const urlQuery = searchParams.get("query") ?? "";
-    setQuery(urlQuery);
-    if (urlQuery) {
-      runSearch(urlQuery);
-    }
-  }, [searchParams, runSearch]);
+  const runSearch = useCallback((value: string, dataset: AlResult[]) => {
+    const trimmed = value.trim();
+    if (!trimmed) return;
+    setSearched(true);
+    setResults(searchAlResults(dataset, trimmed));
+  }, []);
 
-  const onSubmit = async (e: React.FormEvent) => {
+  const urlQuery = searchParams.get("query") ?? "";
+
+  useEffect(() => {
+    if (dataLoading || allResults.length === 0) return;
+    setQuery((prev) => (prev === urlQuery ? prev : urlQuery));
+    if (urlQuery) runSearch(urlQuery, allResults);
+  }, [urlQuery, allResults, dataLoading, runSearch]);
+
+  const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const trimmed = query.trim();
-    router.replace(trimmed ? `/results?query=${encodeURIComponent(trimmed)}` : "/results");
-    await runSearch(trimmed);
+    setLoading(true);
+    const params = new URLSearchParams();
+    if (trimmed) params.set("query", trimmed);
+    router.replace(params.size ? `/results?${params.toString()}` : "/results");
+    runSearch(trimmed, allResults);
+    setLoading(false);
   };
 
   const result = results[0];
 
+  if (dataLoading) {
+    return (
+      <div className="kit-container pb-16">
+        <div className="kit-card flex min-h-[320px] items-center justify-center">
+          <p className="text-slate-400">Loading results data...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (dataError || allResults.length === 0) {
+    return (
+      <div className="kit-container pb-16">
+        <div className="kit-card max-w-2xl space-y-3">
+          <p className="font-semibold text-white">No results data loaded</p>
+          <p className="text-sm text-slate-400">
+            {dataError ||
+              "Add your Excel sheet to data/source/al-results.xlsx, then run npm run import:results."}
+          </p>
+          <ol className="list-decimal space-y-1 pl-5 text-sm text-slate-400">
+            <li>Copy data/source/al-results-template.csv as a starting point</li>
+            <li>Paste all ~360 student rows from your sheet</li>
+            <li>Save as data/source/al-results.xlsx (or .csv)</li>
+            <li>Run: npm run import:results</li>
+          </ol>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="kit-container">
+    <div className="kit-container pb-16">
       <div className="grid gap-8 lg:grid-cols-[minmax(280px,360px)_1fr]">
         <form onSubmit={onSubmit} method="post" className="kit-card h-fit lg:sticky lg:top-8">
           <h2 className="text-lg font-bold text-white">Check Your Results</h2>
@@ -192,9 +244,12 @@ function ResultsSearchForm() {
                 required
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="7364521 or 200012345678"
+                placeholder="7364521 or 200512345678"
               />
             </div>
+            <p className="text-xs text-slate-500">
+              {allResults.length} students loaded. Search by exact index or NIC number.
+            </p>
             <button type="submit" disabled={loading} className="kit-btn-primary w-full py-3">
               <Search className="h-4 w-4" />
               {loading ? "Searching..." : "Search Results"}
@@ -215,7 +270,9 @@ function ResultsSearchForm() {
             </div>
           ) : !result ? (
             <div className="kit-card flex min-h-[320px] items-center justify-center">
-              <p className="text-slate-400">No results found for this index or NIC number.</p>
+              <p className="text-center text-slate-400">
+                No results found for this index or NIC number.
+              </p>
             </div>
           ) : (
             <ResultDetail result={result} />

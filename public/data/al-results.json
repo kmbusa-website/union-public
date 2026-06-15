@@ -1,0 +1,302 @@
+[
+  {
+    "studentName": "Kamal",
+    "indexNumber": "7364531",
+    "nicNumber": "200572500152",
+    "examYear": 2025,
+    "stream": "PHYSICAL_SCIENCE",
+    "district": "Kilinochchi",
+    "schoolName": "Central College",
+    "subjectResults": [
+      {
+        "subjectCode": "PHY",
+        "subjectName": "Physics",
+        "grade": "A",
+        "zScore": 1.856,
+        "districtRank": 50
+      },
+      {
+        "subjectCode": "CHE",
+        "subjectName": "Chemistry",
+        "grade": "A",
+        "zScore": 1.856
+      },
+      {
+        "subjectCode": "MAT",
+        "subjectName": "Combined Mathematics",
+        "grade": "A",
+        "zScore": 1.856
+      }
+    ]
+  },
+  {
+    "studentName": "aaa",
+    "indexNumber": "7364522",
+    "nicNumber": "200572500153",
+    "examYear": 2025,
+    "stream": "PHYSICAL_SCIENCE",
+    "district": "Kilinochchi",
+    "schoolName": "Central College",
+    "subjectResults": [
+      {
+        "subjectCode": "PHY",
+        "subjectName": "Physics",
+        "grade": "B",
+        "zScore": 1.42,
+        "districtRank": 20
+      },
+      {
+        "subjectCode": "CHE",
+        "subjectName": "Chemistry",
+        "grade": "B",
+        "zScore": 1.42
+      },
+      {
+        "subjectCode": "MAT",
+        "subjectName": "Combined Mathematics",
+        "grade": "B",
+        "zScore": 1.42
+      }
+    ]
+  },
+  {
+    "studentName": "bbb",
+    "indexNumber": "7364523",
+    "nicNumber": "200572500152",
+    "examYear": 2025,
+    "stream": "PHYSICAL_SCIENCE",
+    "district": "Kilinochchi",
+    "schoolName": "Central College",
+    "subjectResults": [
+      {
+        "subjectCode": "PHY",
+        "subjectName": "Physics",
+        "grade": "C",
+        "zScore": 1.65,
+        "districtRank": 15
+      },
+      {
+        "subjectCode": "CHE",
+        "subjectName": "Chemistry",
+        "grade": "C",
+        "zScore": 1.65
+      },
+      {
+        "subjectCode": "MAT",
+        "subjectName": "Combined Mathematics",
+        "grade": "C",
+        "zScore": 1.65
+      }
+    ]
+  },
+  {
+    "studentName": "Student 1",
+    "indexNumber": "7364524",
+    "nicNumber": "200572507152",
+    "examYear": 2025,
+    "stream": "PHYSICAL_SCIENCE",
+    "district": "Kilinochchi",
+    "schoolName": "Central College",
+    "subjectResults": [
+      {
+        "subjectCode": "PHY",
+        "subjectName": "Physics",
+        "grade": "S",
+        "zScore": 1.1,
+        "districtRank": 10
+      },
+      {
+        "subjectCode": "CHE",
+        "subjectName": "Chemistry",
+        "grade": "S",
+        "zScore": 1.1
+      },
+      {
+        "subjectCode": "MAT",
+        "subjectName": "Combined Mathematics",
+        "grade": "S",
+        "zScore": 1.1
+      }
+    ]
+  },
+  {
+    "studentName": "Student 2",
+    "indexNumber": "7364525",
+    "nicNumber": "200572860152",
+    "examYear": 2025,
+    "stream": "PHYSICAL_SCIENCE",
+    "district": "Kilinochchi",
+    "schoolName": "Central College",
+    "subjectResults": [
+      {
+        "subjectCode": "PHY",
+        "subjectName": "Physics",
+        "grade": "F",
+        "zScore": 1.15,
+        "districtRank": 11
+      },
+      {
+        "subjectCode": "CHE",
+        "subjectName": "Chemistry",
+        "grade": "F",
+        "zScore": 1.15
+      },
+      {
+        "subjectCode": "MAT",
+        "subjectName": "Combined Mathematics",
+        "grade": "F",
+        "zScore": 1.15
+      }
+    ]
+  },
+  {
+    "studentName": "Student 3",
+    "indexNumber": "7364526",
+    "nicNumber": "205672500152",
+    "examYear": 2025,
+    "stream": "PHYSICAL_SCIENCE",
+    "district": "Kilinochchi",
+    "schoolName": "Central College",
+    "subjectResults": [
+      {
+        "subjectCode": "PHY",
+        "subjectName": "Physics",
+        "grade": "A",
+        "zScore": 1.2,
+        "districtRank": 12
+      },
+      {
+        "subjectCode": "CHE",
+        "subjectName": "Chemistry",
+        "grade": "A",
+        "zScore": 1.2
+      },
+      {
+        "subjectCode": "MAT",
+        "subjectName": "Combined Mathematics",
+        "grade": "A",
+        "zScore": 1.2
+      }
+    ]
+  },
+  {
+    "studentName": "Student 4",
+    "indexNumber": "7364527",
+    "nicNumber": "200572300152",
+    "examYear": 2025,
+    "stream": "PHYSICAL_SCIENCE",
+    "district": "Kilinochchi",
+    "schoolName": "Central College",
+    "subjectResults": [
+      {
+        "subjectCode": "PHY",
+        "subjectName": "Physics",
+        "grade": "B",
+        "zScore": 1.25,
+        "districtRank": 13
+      },
+      {
+        "subjectCode": "CHE",
+        "subjectName": "Chemistry",
+        "grade": "B",
+        "zScore": 1.25
+      },
+      {
+        "subjectCode": "MAT",
+        "subjectName": "Combined Mathematics",
+        "grade": "B",
+        "zScore": 1.25
+      }
+    ]
+  },
+  {
+    "studentName": "Student 5",
+    "indexNumber": "7364528",
+    "nicNumber": "200572508952",
+    "examYear": 2025,
+    "stream": "PHYSICAL_SCIENCE",
+    "district": "Kilinochchi",
+    "schoolName": "Central College",
+    "subjectResults": [
+      {
+        "subjectCode": "PHY",
+        "subjectName": "Physics",
+        "grade": "C",
+        "zScore": 1.3,
+        "districtRank": 14
+      },
+      {
+        "subjectCode": "CHE",
+        "subjectName": "Chemistry",
+        "grade": "C",
+        "zScore": 1.3
+      },
+      {
+        "subjectCode": "MAT",
+        "subjectName": "Combined Mathematics",
+        "grade": "C",
+        "zScore": 1.3
+      }
+    ]
+  },
+  {
+    "studentName": "Student 6",
+    "indexNumber": "7364529",
+    "nicNumber": "200572502352",
+    "examYear": 2025,
+    "stream": "PHYSICAL_SCIENCE",
+    "district": "Kilinochchi",
+    "schoolName": "Central College",
+    "subjectResults": [
+      {
+        "subjectCode": "PHY",
+        "subjectName": "Physics",
+        "grade": "F",
+        "zScore": 1.35,
+        "districtRank": 15
+      },
+      {
+        "subjectCode": "CHE",
+        "subjectName": "Chemistry",
+        "grade": "F",
+        "zScore": 1.35
+      },
+      {
+        "subjectCode": "MAT",
+        "subjectName": "Combined Mathematics",
+        "grade": "F",
+        "zScore": 1.35
+      }
+    ]
+  },
+  {
+    "studentName": "Student 7",
+    "indexNumber": "7364530",
+    "nicNumber": "200572589152",
+    "examYear": 2025,
+    "stream": "PHYSICAL_SCIENCE",
+    "district": "Kilinochchi",
+    "schoolName": "Central College",
+    "subjectResults": [
+      {
+        "subjectCode": "PHY",
+        "subjectName": "Physics",
+        "grade": "A",
+        "zScore": 1.4,
+        "districtRank": 16
+      },
+      {
+        "subjectCode": "CHE",
+        "subjectName": "Chemistry",
+        "grade": "A",
+        "zScore": 1.4
+      },
+      {
+        "subjectCode": "MAT",
+        "subjectName": "Combined Mathematics",
+        "grade": "A",
+        "zScore": 1.4
+      }
+    ]
+  }
+]
