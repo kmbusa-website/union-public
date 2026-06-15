@@ -12,11 +12,9 @@ const links = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/committee", label: "Committee" },
-  { href: "/news", label: "News" },
   { href: "/events", label: "Events" },
   { href: "/gallery", label: "Gallery" },
   { href: "/results", label: "A/L Results" },
-  { href: "/past-papers", label: "Past Papers" },
   { href: "/contact", label: "Contact" },
 ];
 

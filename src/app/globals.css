@@ -22,9 +22,20 @@ body {
   color: #f8fafc;
 }
 
-/* —— Kit: dark band —— */
-.kit-dark-band {
+/* —— Kit: page content area (dark) —— */
+.kit-dark-band,
+.kit-page-main {
   background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%);
+}
+
+.kit-page-main {
+  @apply border-t border-white/10;
+}
+
+/* Legacy alias — same dark background */
+.kit-white-main {
+  background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%);
+  @apply border-t border-white/10 text-slate-200;
 }
 
 .kit-page-hero {
@@ -41,20 +52,16 @@ body {
 }
 
 /* —— Kit: white content area —— */
-.kit-white-main {
-  @apply bg-slate-50 text-[var(--text-dark)];
-}
-
 .kit-container {
   @apply mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8;
 }
 
 .kit-card {
-  @apply rounded-xl border border-[var(--border-light)] bg-white p-6 shadow-md shadow-slate-200/60;
+  @apply rounded-xl border border-white/10 bg-[#0c1527] p-6 text-slate-100 shadow-lg shadow-black/20;
 }
 
 .kit-card-hover {
-  @apply rounded-xl border border-[var(--border-light)] bg-white p-6 shadow-md shadow-slate-200/60 transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-slate-300/50;
+  @apply rounded-xl border border-white/10 bg-[#0c1527] p-6 text-slate-100 shadow-lg shadow-black/20 transition hover:-translate-y-0.5 hover:border-white/20 hover:shadow-xl;
 }
 
 .kit-btn-primary {
@@ -74,15 +81,15 @@ body {
 }
 
 .kit-label {
-  @apply mb-1 block text-sm font-medium text-slate-700;
+  @apply mb-1 block text-sm font-medium text-slate-300;
 }
 
 .kit-filter-active {
-  @apply rounded-lg bg-[var(--blue)] px-4 py-2 text-sm font-medium text-white;
+  @apply rounded-lg bg-cyan-500 px-4 py-2 text-sm font-medium text-[#0a192f];
 }
 
 .kit-filter {
-  @apply rounded-lg border border-[var(--border-light)] bg-white px-4 py-2 text-sm font-medium text-slate-600 transition hover:border-[var(--blue)] hover:text-[var(--blue)];
+  @apply rounded-lg border border-white/15 bg-white/5 px-4 py-2 text-sm font-medium text-slate-300 transition hover:border-cyan-400/50 hover:text-white;
 }
 
 .kit-badge {
@@ -90,11 +97,11 @@ body {
 }
 
 .kit-section-title {
-  @apply text-2xl font-bold text-[var(--text-dark)];
+  @apply text-2xl font-bold text-white;
 }
 
 .kit-section-sub {
-  @apply mt-1 text-sm text-[var(--text-muted)];
+  @apply mt-1 text-sm text-slate-400;
 }
 
 .nav-link {

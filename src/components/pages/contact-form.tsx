@@ -2,26 +2,28 @@
 
 import { useState } from "react";
 import { Mail, MapPin, Phone } from "lucide-react";
-import { submitContact } from "@/lib/api";
-import { getErrorMessage } from "@/lib/api/client";
 import { CONTACT, MAP_EMBED_URL, SOCIAL_LINKS } from "@/lib/brand";
 import { SocialIcon } from "@/components/ui/social-icon";
 
 export function ContactForm() {
   const [form, setForm] = useState({ name: "", email: "", phone: "", subject: "", message: "" });
-  const [status, setStatus] = useState<"idle" | "ok" | "err">("idle");
-  const [error, setError] = useState("");
+  const [status, setStatus] = useState<"idle" | "ok">("idle");
 
-  const submit = async (e: React.FormEvent) => {
+  const submit = (e: React.FormEvent) => {
     e.preventDefault();
-    try {
-      await submitContact(form);
-      setStatus("ok");
-      setForm({ name: "", email: "", phone: "", subject: "", message: "" });
-    } catch (err) {
-      setStatus("err");
-      setError(getErrorMessage(err));
-    }
+    const body = [
+      `Name: ${form.name}`,
+      `Email: ${form.email}`,
+      form.phone ? `Phone: ${form.phone}` : "",
+      "",
+      form.message,
+    ]
+      .filter(Boolean)
+      .join("\n");
+
+    window.location.href = `mailto:${CONTACT.email}?subject=${encodeURIComponent(form.subject)}&body=${encodeURIComponent(body)}`;
+    setStatus("ok");
+    setForm({ name: "", email: "", phone: "", subject: "", message: "" });
   };
 
   return (
@@ -59,7 +61,7 @@ export function ContactForm() {
           </div>
         </div>
         <form onSubmit={submit} className="kit-card lg:col-span-5">
-          <h2 className="text-lg font-bold text-slate-900">Send Us a Message</h2>
+          <h2 className="text-lg font-bold text-white">Send Us a Message</h2>
           {["name", "email", "subject"].map((f) => (
             <div key={f} className="mt-4">
               <label className="kit-label capitalize">{f}</label>
@@ -83,8 +85,9 @@ export function ContactForm() {
           <button type="submit" className="kit-btn-primary mt-6 w-full py-3">
             Send Message
           </button>
-          {status === "ok" && <p className="mt-3 text-sm text-green-600">Message sent successfully.</p>}
-          {status === "err" && <p className="mt-3 text-sm text-red-600">{error}</p>}
+          {status === "ok" && (
+            <p className="mt-3 text-sm text-emerald-400">Your email app should open with your message ready to send.</p>
+          )}
         </form>
         <div className="overflow-hidden rounded-xl lg:col-span-4">
           <iframe title="Map" src={MAP_EMBED_URL} className="h-full min-h-[360px] w-full border-0" loading="lazy" />

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { CalendarDays, Newspaper } from "lucide-react";
+import { CalendarDays } from "lucide-react";
 import { HERO_CAMPUS_IMAGE, LOGO_PATH, ORG_SHORT, ORG_TAGLINE, STATS } from "@/lib/brand";
 
 export function HomeHero() {

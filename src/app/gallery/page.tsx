@@ -5,7 +5,7 @@ export default function GalleryPage() {
   return (
     <>
       <PageHero title="Photo" highlight="Gallery" subtitle="Moments from our events and activities." />
-      <div className="kit-white-main">
+      <div className="kit-page-main">
         <GalleryGrid />
       </div>
     </>

@@ -5,7 +5,7 @@ export default function ContactPage() {
   return (
     <>
       <PageHero title="Contact" highlight="Us" subtitle="We would love to hear from you." />
-      <div className="kit-dark-band">
+      <div className="kit-page-main">
         <ContactForm />
       </div>
     </>

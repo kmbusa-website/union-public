@@ -13,7 +13,7 @@ function MiniCalendar({ events }: { events: Event[] }) {
 
   return (
     <div className="kit-card">
-      <h3 className="text-center font-semibold text-slate-900">{format(now, "MMMM yyyy")}</h3>
+      <h3 className="text-center font-semibold text-white">{format(now, "MMMM yyyy")}</h3>
       <div className="mt-4 grid grid-cols-7 gap-1 text-center text-xs">
         {["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"].map((d) => (
           <span key={d} className="font-medium text-slate-500">
@@ -26,7 +26,7 @@ function MiniCalendar({ events }: { events: Event[] }) {
         {days.map((d) => (
           <span
             key={d.toISOString()}
-            className={`rounded py-1 ${isSameDay(d, now) ? "bg-blue-600 font-bold text-white" : has(d) ? "bg-blue-100 font-semibold text-blue-700" : "text-slate-700"}`}
+            className={`rounded py-1 ${isSameDay(d, now) ? "bg-cyan-500 font-bold text-[#0a192f]" : has(d) ? "bg-cyan-500/20 font-semibold text-cyan-400" : "text-slate-300"}`}
           >
             {format(d, "d")}
           </span>
@@ -51,7 +51,7 @@ export function EventsList({ events }: { events: Event[] }) {
       <div className="grid gap-8 lg:grid-cols-5">
         <div className="space-y-4 lg:col-span-3">
           {sorted.length === 0 ? (
-            <p className="text-slate-600">No upcoming events.</p>
+            <p className="text-slate-400">No upcoming events.</p>
           ) : (
             sorted.map((event) => {
               const start = new Date(event.startAt);
@@ -62,13 +62,13 @@ export function EventsList({ events }: { events: Event[] }) {
                     <span className="text-xl font-bold leading-none">{format(start, "dd")}</span>
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-semibold text-slate-900">{event.title}</h3>
-                    <p className="mt-1 flex items-center gap-1 text-sm text-slate-500">
+                    <h3 className="font-semibold text-white">{event.title}</h3>
+                    <p className="mt-1 flex items-center gap-1 text-sm text-slate-400">
                       <Clock className="h-3.5 w-3.5" />
                       {format(start, "h:mm a")}
                     </p>
                     {event.location && (
-                      <p className="flex items-center gap-1 text-sm text-slate-500">
+                      <p className="flex items-center gap-1 text-sm text-slate-400">
                         <MapPin className="h-3.5 w-3.5" />
                         {event.location}
                       </p>
@@ -87,10 +87,10 @@ export function EventsList({ events }: { events: Event[] }) {
       <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {features.map((f) => (
           <div key={f.title} className="kit-card flex gap-3">
-            <f.icon className="h-8 w-8 shrink-0 text-blue-600" strokeWidth={1.5} />
+            <f.icon className="h-8 w-8 shrink-0 text-cyan-400" strokeWidth={1.5} />
             <div>
-              <p className="font-semibold text-slate-900">{f.title}</p>
-              <p className="text-xs text-slate-500">{f.desc}</p>
+              <p className="font-semibold text-white">{f.title}</p>
+              <p className="text-xs text-slate-400">{f.desc}</p>
             </div>
           </div>
         ))}

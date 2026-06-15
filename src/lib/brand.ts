@@ -23,9 +23,7 @@ export const FOOTER_QUICK_LINKS = [
 
 export const FOOTER_RESOURCES = [
   { href: "/results", label: "A/L Results" },
-  { href: "/past-papers", label: "Past Papers" },
   { href: "/gallery", label: "Gallery" },
-  { href: "/news", label: "News" },
   { href: "/events", label: "Events" },
 ] as const;
 
@@ -62,7 +60,11 @@ export const MILESTONES = [
   { value: "5+", label: "Annual Events" },
 ] as const;
 
-export const NEWS_FILTERS = ["All", "Academic", "Events", "Sports", "Announcements"] as const;
+export const ABOUT_INTRO = [
+  `${ORG_SHORT} brings together Maths and Bio university students in Kilinochchi to support academic growth, events, and community outreach.`,
+  "We create opportunities for students to learn, collaborate, and represent their interests — from workshops and seminars to sports, community service, and peer support.",
+] as const;
+
 export const GALLERY_FILTERS = [
   "All",
   "Academic",
@@ -79,7 +81,6 @@ export const GALLERY_CATEGORY_API: Record<string, string> = {
   Seminars: "SEMINARS",
   "Community Service": "COMMUNITY_SERVICE",
 };
-export const POPULAR_SUBJECTS = ["Combined Mathematics", "Biology", "Chemistry", "Physics", "ICT"] as const;
 
 export const MAP_EMBED_URL =
   "https://maps.google.com/maps?q=Akshaya+Hospital,+Kilinochchi,+Sri+Lanka&hl=en&z=16&output=embed";
