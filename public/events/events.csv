@@ -1,0 +1,15 @@
+id,title,year,date,category,description,imageUrl,featured
+annual-meeting-2024,Annual Meeting & 1st Union Selection,2024,2024-03-01,meeting,,, true
+course-seminar-2024,University Course Selection Seminar,2024,2024-06-01,seminar,,,false
+al-pilot-2024,A/L Pilot Exam,2024,2024-07-01,seminar,,,false
+ol-seminar-2024,O/L Seminar,2024,2024-09-01,seminar,,,false
+office-opening,Office Opening Ceremony,2024,2024-04-01,ceremony,,,true
+pongal-2025,"Mathuram" Thai Pongal,2025,2025-01-14,cultural,,,true
+course-seminar-2025,University Course Selection Seminar,2025,2025-06-01,seminar,,,false
+al-pilot-2025,A/L Pilot Exam,2025,2025-07-01,seminar,,,false
+annual-meeting-2025,Annual Meeting & 2nd Union Selection,2025,2025-03-01,meeting,,,true
+ol-seminar-2025,"Ezhumin" O/L Seminar,2025,2025-09-01,seminar,,,false
+pongal-2026,"Mathuram" Thai Pongal,2026,2026-01-14,cultural,,,true
+cricket-2026,Annual Cricket Friendship Match,2026,2026-02-01,sports,,,false
+course-seminar-2026,University Course Selection Seminar,2026,2026-06-01,seminar,,,false
+al-pilot-2026,A/L Pilot Exam,2026,2026-07-01,seminar,,,false

@@ -1,4 +1,4 @@
-export type CommitteeTier = "executive" | "roles" | "members";
+export type CommitteeTier = "executive" | "roles" | "mentors" | "members";
 
 export interface CommitteeMember {
   id: string;
@@ -15,5 +15,6 @@ export interface CommitteeMember {
 export const COMMITTEE_TIER_LABELS: Record<CommitteeTier, string> = {
   executive: "Executive",
   roles: "Committee",
+  mentors: "Mentor",
   members: "General",
 };

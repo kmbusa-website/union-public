@@ -1,14 +1,47 @@
+"use client";
+
+import { useState } from "react";
 import { Building2, GraduationCap, Users } from "lucide-react";
 import { COMMITTEE_TIER_LABELS, type CommitteeMember } from "@/lib/types/committee";
 
+function getInitials(name: string) {
+  return name
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0])
+    .join("")
+    .toUpperCase();
+}
+
 function MemberPhoto({ member, size }: { member: CommitteeMember; size: "md" | "lg" }) {
+  const [imageFailed, setImageFailed] = useState(false);
   const dims = size === "lg" ? "h-28 w-24" : "h-24 w-20";
+  const initials = getInitials(member.name);
+  const hasPhoto = Boolean(member.photoUrl?.trim());
+
   return (
     <div
       className={`relative shrink-0 overflow-hidden rounded-xl ${dims}`}
       style={{ boxShadow: `0 0 0 2px ${member.accent}` }}
     >
-      <img src={member.photoUrl} alt={member.name} className="h-full w-full object-cover object-top" loading="lazy" />
+      {hasPhoto && !imageFailed ? (
+        <img
+          src={member.photoUrl}
+          alt={member.name}
+          className="h-full w-full object-cover object-top"
+          loading="lazy"
+          onError={() => setImageFailed(true)}
+        />
+      ) : (
+        <div
+          className="flex h-full w-full items-center justify-center bg-slate-900 text-lg font-bold text-white"
+          style={{ background: `linear-gradient(135deg, ${member.accent}44, #0f172a)` }}
+          aria-label={member.name}
+        >
+          {initials}
+        </div>
+      )}
     </div>
   );
 }
