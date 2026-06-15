@@ -169,6 +169,7 @@ function ResultsSearchForm() {
   const runSearch = useCallback((value: string, dataset: AlResult[]) => {
     const trimmed = value.trim();
     if (!trimmed) return;
+
     setSearched(true);
     setResults(searchAlResults(dataset, trimmed));
   }, []);
@@ -177,18 +178,22 @@ function ResultsSearchForm() {
 
   useEffect(() => {
     if (dataLoading || allResults.length === 0) return;
+
     setQuery((prev) => (prev === urlQuery ? prev : urlQuery));
-    if (urlQuery) runSearch(urlQuery, allResults);
+    if (urlQuery) {
+      runSearch(urlQuery, allResults);
+    }
   }, [urlQuery, allResults, dataLoading, runSearch]);
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const trimmed = query.trim();
+    if (!trimmed) return;
+
     setLoading(true);
-    const params = new URLSearchParams();
-    if (trimmed) params.set("query", trimmed);
-    router.replace(params.size ? `/results?${params.toString()}` : "/results");
-    runSearch(trimmed, allResults);
+    setSearched(true);
+    setResults(searchAlResults(allResults, trimmed));
+    router.replace(`/results?query=${encodeURIComponent(trimmed)}`);
     setLoading(false);
   };
 
@@ -244,7 +249,7 @@ function ResultsSearchForm() {
                 required
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="7364521 or 200512345678"
+                placeholder="7364523 or 200572500152"
               />
             </div>
             <p className="text-xs text-slate-500">

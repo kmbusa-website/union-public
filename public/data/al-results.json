@@ -298,5 +298,305 @@
         "zScore": 1.4
       }
     ]
+  },
+  {
+    "studentName": "Kamali",
+    "indexNumber": "7364620",
+    "nicNumber": "200873000000",
+    "examYear": 2025,
+    "stream": "BIO_SCIENCE",
+    "district": "Kilinochchi",
+    "schoolName": "Central College",
+    "subjectResults": [
+      {
+        "subjectCode": "BIO",
+        "subjectName": "Biology",
+        "grade": "A",
+        "zScore": 1.856,
+        "districtRank": 50
+      },
+      {
+        "subjectCode": "CHE",
+        "subjectName": "Chemistry",
+        "grade": "A",
+        "zScore": 1.856
+      },
+      {
+        "subjectCode": "PHY",
+        "subjectName": "Physics",
+        "grade": "A",
+        "zScore": 1.856
+      }
+    ]
+  },
+  {
+    "studentName": "aaa",
+    "indexNumber": "7364621",
+    "nicNumber": "200873000000",
+    "examYear": 2025,
+    "stream": "BIO_SCIENCE",
+    "district": "Kilinochchi",
+    "schoolName": "Central College",
+    "subjectResults": [
+      {
+        "subjectCode": "BIO",
+        "subjectName": "Biology",
+        "grade": "B",
+        "zScore": 1.42,
+        "districtRank": 20
+      },
+      {
+        "subjectCode": "CHE",
+        "subjectName": "Chemistry",
+        "grade": "B",
+        "zScore": 1.42
+      },
+      {
+        "subjectCode": "PHY",
+        "subjectName": "Physics",
+        "grade": "B",
+        "zScore": 1.42
+      }
+    ]
+  },
+  {
+    "studentName": "bbb",
+    "indexNumber": "7364622",
+    "nicNumber": "200873000000",
+    "examYear": 2025,
+    "stream": "BIO_SCIENCE",
+    "district": "Kilinochchi",
+    "schoolName": "Central College",
+    "subjectResults": [
+      {
+        "subjectCode": "BIO",
+        "subjectName": "Biology",
+        "grade": "C",
+        "zScore": 1.65,
+        "districtRank": 15
+      },
+      {
+        "subjectCode": "CHE",
+        "subjectName": "Chemistry",
+        "grade": "C",
+        "zScore": 1.65
+      },
+      {
+        "subjectCode": "PHY",
+        "subjectName": "Physics",
+        "grade": "C",
+        "zScore": 1.65
+      }
+    ]
+  },
+  {
+    "studentName": "Student 1",
+    "indexNumber": "7364623",
+    "nicNumber": "200873000000",
+    "examYear": 2025,
+    "stream": "BIO_SCIENCE",
+    "district": "Kilinochchi",
+    "schoolName": "Central College",
+    "subjectResults": [
+      {
+        "subjectCode": "BIO",
+        "subjectName": "Biology",
+        "grade": "S",
+        "zScore": 1.1,
+        "districtRank": 10
+      },
+      {
+        "subjectCode": "CHE",
+        "subjectName": "Chemistry",
+        "grade": "S",
+        "zScore": 1.1
+      },
+      {
+        "subjectCode": "PHY",
+        "subjectName": "Physics",
+        "grade": "S",
+        "zScore": 1.1
+      }
+    ]
+  },
+  {
+    "studentName": "Student 2",
+    "indexNumber": "7364629",
+    "nicNumber": "200873000000",
+    "examYear": 2025,
+    "stream": "BIO_SCIENCE",
+    "district": "Kilinochchi",
+    "schoolName": "Central College",
+    "subjectResults": [
+      {
+        "subjectCode": "BIO",
+        "subjectName": "Biology",
+        "grade": "F",
+        "zScore": 1.15,
+        "districtRank": 11
+      },
+      {
+        "subjectCode": "CHE",
+        "subjectName": "Chemistry",
+        "grade": "F",
+        "zScore": 1.15
+      },
+      {
+        "subjectCode": "PHY",
+        "subjectName": "Physics",
+        "grade": "F",
+        "zScore": 1.15
+      }
+    ]
+  },
+  {
+    "studentName": "Student 3",
+    "indexNumber": "7364624",
+    "nicNumber": "2008730000000",
+    "examYear": 2025,
+    "stream": "BIO_SCIENCE",
+    "district": "Kilinochchi",
+    "schoolName": "Central College",
+    "subjectResults": [
+      {
+        "subjectCode": "BIO",
+        "subjectName": "Biology",
+        "grade": "A",
+        "zScore": 1.2,
+        "districtRank": 12
+      },
+      {
+        "subjectCode": "CHE",
+        "subjectName": "Chemistry",
+        "grade": "A",
+        "zScore": 1.2
+      },
+      {
+        "subjectCode": "PHY",
+        "subjectName": "Physics",
+        "grade": "A",
+        "zScore": 1.2
+      }
+    ]
+  },
+  {
+    "studentName": "Student 4",
+    "indexNumber": "7364625",
+    "nicNumber": "200873000000",
+    "examYear": 2025,
+    "stream": "BIO_SCIENCE",
+    "district": "Kilinochchi",
+    "schoolName": "Central College",
+    "subjectResults": [
+      {
+        "subjectCode": "BIO",
+        "subjectName": "Biology",
+        "grade": "B",
+        "zScore": 1.25,
+        "districtRank": 13
+      },
+      {
+        "subjectCode": "CHE",
+        "subjectName": "Chemistry",
+        "grade": "B",
+        "zScore": 1.25
+      },
+      {
+        "subjectCode": "PHY",
+        "subjectName": "Physics",
+        "grade": "B",
+        "zScore": 1.25
+      }
+    ]
+  },
+  {
+    "studentName": "Student 5",
+    "indexNumber": "7364626",
+    "nicNumber": "200873000000",
+    "examYear": 2025,
+    "stream": "BIO_SCIENCE",
+    "district": "Kilinochchi",
+    "schoolName": "Central College",
+    "subjectResults": [
+      {
+        "subjectCode": "BIO",
+        "subjectName": "Biology",
+        "grade": "C",
+        "zScore": 1.3,
+        "districtRank": 14
+      },
+      {
+        "subjectCode": "CHE",
+        "subjectName": "Chemistry",
+        "grade": "C",
+        "zScore": 1.3
+      },
+      {
+        "subjectCode": "PHY",
+        "subjectName": "Physics",
+        "grade": "C",
+        "zScore": 1.3
+      }
+    ]
+  },
+  {
+    "studentName": "Student 6",
+    "indexNumber": "7364627",
+    "nicNumber": "200871000000",
+    "examYear": 2025,
+    "stream": "BIO_SCIENCE",
+    "district": "Kilinochchi",
+    "schoolName": "Central College",
+    "subjectResults": [
+      {
+        "subjectCode": "BIO",
+        "subjectName": "Biology",
+        "grade": "F",
+        "zScore": 1.35,
+        "districtRank": 15
+      },
+      {
+        "subjectCode": "CHE",
+        "subjectName": "Chemistry",
+        "grade": "F",
+        "zScore": 1.35
+      },
+      {
+        "subjectCode": "PHY",
+        "subjectName": "Physics",
+        "grade": "F",
+        "zScore": 1.35
+      }
+    ]
+  },
+  {
+    "studentName": "Student 7",
+    "indexNumber": "7364628",
+    "nicNumber": "200763000000",
+    "examYear": 2025,
+    "stream": "BIO_SCIENCE",
+    "district": "Kilinochchi",
+    "schoolName": "Central College",
+    "subjectResults": [
+      {
+        "subjectCode": "BIO",
+        "subjectName": "Biology",
+        "grade": "A",
+        "zScore": 1.4,
+        "districtRank": 16
+      },
+      {
+        "subjectCode": "CHE",
+        "subjectName": "Chemistry",
+        "grade": "A",
+        "zScore": 1.4
+      },
+      {
+        "subjectCode": "PHY",
+        "subjectName": "Physics",
+        "grade": "A",
+        "zScore": 1.4
+      }
+    ]
   }
 ]

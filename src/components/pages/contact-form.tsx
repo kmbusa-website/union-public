@@ -1,29 +1,70 @@
 "use client";
 
 import { useState } from "react";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Loader2, Mail, MapPin, Phone } from "lucide-react";
 import { CONTACT, MAP_EMBED_URL, SOCIAL_LINKS } from "@/lib/brand";
 import { SocialIcon } from "@/components/ui/social-icon";
 
+const WEB3FORMS_URL = "https://api.web3forms.com/submit";
+
+async function parseJsonResponse(res: Response) {
+  const text = await res.text();
+  if (!text) return null;
+  try {
+    return JSON.parse(text) as { success?: boolean; message?: string };
+  } catch {
+    return null;
+  }
+}
+
 export function ContactForm() {
   const [form, setForm] = useState({ name: "", email: "", phone: "", subject: "", message: "" });
-  const [status, setStatus] = useState<"idle" | "ok">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "ok" | "err">("idle");
+  const [error, setError] = useState("");
 
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const body = [
-      `Name: ${form.name}`,
-      `Email: ${form.email}`,
-      form.phone ? `Phone: ${form.phone}` : "",
-      "",
-      form.message,
-    ]
-      .filter(Boolean)
-      .join("\n");
+    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
+    if (!accessKey) {
+      setStatus("err");
+      setError("Contact form is not configured. Add NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY to .env.local");
+      return;
+    }
 
-    window.location.href = `mailto:${CONTACT.email}?subject=${encodeURIComponent(form.subject)}&body=${encodeURIComponent(body)}`;
-    setStatus("ok");
-    setForm({ name: "", email: "", phone: "", subject: "", message: "" });
+    setStatus("sending");
+    setError("");
+
+    const fullMessage = form.phone.trim()
+      ? `${form.message.trim()}\n\nPhone: ${form.phone.trim()}`
+      : form.message.trim();
+
+    try {
+      const res = await fetch(WEB3FORMS_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: accessKey,
+          name: form.name.trim(),
+          email: form.email.trim(),
+          subject: form.subject.trim(),
+          message: fullMessage,
+          from_name: form.name.trim(),
+          replyto: form.email.trim(),
+        }),
+      });
+
+      const data = await parseJsonResponse(res);
+
+      if (!data?.success) {
+        throw new Error(data?.message ?? "Could not send your message. Please try again.");
+      }
+
+      setStatus("ok");
+      setForm({ name: "", email: "", phone: "", subject: "", message: "" });
+    } catch (err) {
+      setStatus("err");
+      setError(err instanceof Error ? err.message : "Failed to send message.");
+    }
   };
 
   return (
@@ -71,23 +112,46 @@ export function ContactForm() {
                 type={f === "email" ? "email" : "text"}
                 value={form[f as keyof typeof form]}
                 onChange={(e) => setForm({ ...form, [f]: e.target.value })}
+                disabled={status === "sending"}
               />
             </div>
           ))}
           <div className="mt-4">
             <label className="kit-label">Phone</label>
-            <input className="kit-input" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} />
+            <input
+              className="kit-input"
+              value={form.phone}
+              onChange={(e) => setForm({ ...form, phone: e.target.value })}
+              disabled={status === "sending"}
+            />
           </div>
           <div className="mt-4">
             <label className="kit-label">Message</label>
-            <textarea className="kit-input" rows={5} required value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} />
+            <textarea
+              className="kit-input"
+              rows={5}
+              required
+              value={form.message}
+              onChange={(e) => setForm({ ...form, message: e.target.value })}
+              disabled={status === "sending"}
+            />
           </div>
-          <button type="submit" className="kit-btn-primary mt-6 w-full py-3">
-            Send Message
+          <button type="submit" disabled={status === "sending"} className="kit-btn-primary mt-6 w-full py-3">
+            {status === "sending" ? (
+              <>
+                <Loader2 className="h-4 w-4 animate-spin" />
+                Sending...
+              </>
+            ) : (
+              "Send Message"
+            )}
           </button>
           {status === "ok" && (
-            <p className="mt-3 text-sm text-emerald-400">Your email app should open with your message ready to send.</p>
+            <p className="mt-3 text-sm text-emerald-400">
+              Message sent successfully. We will get back to you soon.
+            </p>
           )}
+          {status === "err" && <p className="mt-3 text-sm text-red-400">{error}</p>}
         </form>
         <div className="overflow-hidden rounded-xl lg:col-span-4">
           <iframe title="Map" src={MAP_EMBED_URL} className="h-full min-h-[360px] w-full border-0" loading="lazy" />

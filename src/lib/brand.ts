@@ -9,7 +9,7 @@ export const LOGO_PATH = "/logo.png";
 
 export const CONTACT = {
   location: "AKSHAYA HOSPITAL, 2ND FLOOR",
-  email: "info@kmbsa.lk",
+  email: "kmbusasl@gmail.com",
   phone: "+94 77 123 4567",
 } as const;
 
@@ -30,7 +30,7 @@ export const FOOTER_RESOURCES = [
 export const FOOTER_SOCIAL = [
   { label: "Facebook", href: "https://facebook.com", icon: "facebook" as const, color: "bg-[#1877F2]" },
   { label: "Instagram", href: "https://instagram.com", icon: "instagram" as const, color: "bg-gradient-to-br from-[#f58529] via-[#dd2a7b] to-[#8134af]" },
-  { label: "Email", href: `mailto:info@kmbsa.lk`, icon: "email" as const, color: "bg-[#7c3aed]" },
+  { label: "Email", href: `mailto:${CONTACT.email}`, icon: "email" as const, color: "bg-[#7c3aed]" },
   { label: "YouTube", href: "https://youtube.com", icon: "youtube" as const, color: "bg-[#FF0000]" },
 ] as const;
 

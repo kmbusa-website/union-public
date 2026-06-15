@@ -28,28 +28,26 @@ const INPUT_CANDIDATES = [
   "al-results.csv",
 ];
 
-function findInputFile() {
-  const exactExam = ["exam_results.xlsx", "exam_results.xls", "exam_results.csv"];
-  for (const name of exactExam) {
-    const file = path.join(sourceDir, name);
-    if (fs.existsSync(file)) return file;
-  }
+function findInputFiles() {
+  const files = [];
 
   if (fs.existsSync(sourceDir)) {
-    const examMatch = fs
+    const examFiles = fs
       .readdirSync(sourceDir)
       .filter((name) => /^exam_results/i.test(name) && /\.(xlsx|xls|csv)$/i.test(name))
       .sort()
-      .pop();
-    if (examMatch) return path.join(sourceDir, examMatch);
+      .map((name) => path.join(sourceDir, name));
+    files.push(...examFiles);
   }
 
-  for (const name of ["al-results.xlsx", "al-results.xls", "al-results.csv"]) {
+  if (files.length > 0) return files;
+
+  for (const name of INPUT_CANDIDATES) {
     const file = path.join(sourceDir, name);
-    if (fs.existsSync(file)) return file;
+    if (fs.existsSync(file)) files.push(file);
   }
 
-  return null;
+  return files;
 }
 
 const HEADER_ALIASES = {
@@ -112,6 +110,36 @@ function cell(value) {
   return String(value).trim();
 }
 
+function formatDigits(value) {
+  if (value == null || value === "") return "";
+
+  if (typeof value === "number" && Number.isFinite(value)) {
+    return String(Math.trunc(value));
+  }
+
+  let text = String(value).trim().replace(/\s+/g, "");
+  if (/^[\d.]+e[+-]?\d+$/i.test(text)) {
+    const n = Number(text);
+    if (Number.isFinite(n)) return String(Math.trunc(n));
+  }
+  if (/^\d+\.0+$/.test(text)) return text.split(".")[0];
+
+  return text;
+}
+
+function resolveStream(cells, col) {
+  if (col.stream != null && cell(cells[col.stream])) {
+    return parseStream(cells[col.stream]);
+  }
+
+  const hasBio = col.bio != null && cell(cells[col.bio]);
+  const hasMat = col.mat != null && cell(cells[col.mat]);
+
+  if (hasBio && !hasMat) return "BIO_SCIENCE";
+  if (hasMat && !hasBio) return "PHYSICAL_SCIENCE";
+  return hasBio ? "BIO_SCIENCE" : "PHYSICAL_SCIENCE";
+}
+
 function toNumber(value) {
   if (value == null || value === "") return undefined;
   const n = Number(value);
@@ -129,15 +157,10 @@ function buildColumnMap(headers) {
 
 function rowToResult(cells, col) {
   const studentName = cell(cells[col.studentName]);
-  const indexNumber = cell(cells[col.indexNumber]);
+  const indexNumber = formatDigits(cells[col.indexNumber]);
   if (!studentName || !indexNumber) return null;
 
-  const stream =
-    col.stream != null
-      ? parseStream(cells[col.stream])
-      : col.bio != null && cell(cells[col.bio]) && !(col.mat != null && cell(cells[col.mat]))
-        ? "BIO_SCIENCE"
-        : "PHYSICAL_SCIENCE";
+  const stream = resolveStream(cells, col);
   const zScore = toNumber(cells[col.zScore]);
   const districtRank = toNumber(cells[col.districtRank]);
   const islandRank = toNumber(cells[col.islandRank]);
@@ -163,10 +186,12 @@ function rowToResult(cells, col) {
     })
     .filter(Boolean);
 
+  const nic = formatDigits(cells[col.nicNumber]);
+
   return {
     studentName,
     indexNumber,
-    nicNumber: cell(cells[col.nicNumber]) || undefined,
+    nicNumber: nic || undefined,
     examYear: toNumber(cells[col.examYear]) ?? new Date().getFullYear(),
     examSessionName: cell(cells[col.examSessionName]) || undefined,
     stream,
@@ -209,10 +234,10 @@ function importFile(filePath) {
 }
 
 function main() {
-  const input = findInputFile();
+  const inputs = findInputFiles();
 
-  if (!input) {
-    console.log("No file found in data/source/ (al-results.xlsx, .xls, or .csv). Skipping import.");
+  if (inputs.length === 0) {
+    console.log("No result files found in data/source/. Skipping import.");
     if (!fs.existsSync(outFile)) {
       fs.mkdirSync(outDir, { recursive: true });
       fs.writeFileSync(outFile, "[]\n");
@@ -221,15 +246,27 @@ function main() {
     return;
   }
 
-  const { results, skipped } = importFile(input);
+  const byIndex = new Map();
+  let skipped = 0;
+
+  for (const input of inputs) {
+    const { results, skipped: fileSkipped } = importFile(input);
+    skipped += fileSkipped.length;
+    for (const result of results) {
+      byIndex.set(result.indexNumber, result);
+    }
+    console.log(`  ${results.length} rows from ${path.basename(input)}`);
+  }
+
+  const merged = [...byIndex.values()];
 
   fs.mkdirSync(outDir, { recursive: true });
-  fs.writeFileSync(outFile, `${JSON.stringify(results, null, 2)}\n`);
+  fs.writeFileSync(outFile, `${JSON.stringify(merged, null, 2)}\n`);
 
-  console.log(`Imported ${results.length} results from ${path.basename(input)}`);
+  console.log(`Imported ${merged.length} unique results from ${inputs.length} file(s)`);
   console.log(`Output: public/data/al-results.json`);
-  if (skipped.length) {
-    console.log(`Skipped ${skipped.length} row(s) missing name or index: ${skipped.slice(0, 10).join(", ")}${skipped.length > 10 ? "…" : ""}`);
+  if (skipped > 0) {
+    console.log(`Skipped ${skipped} row(s) missing name or index`);
   }
 }
 
