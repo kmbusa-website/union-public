@@ -1,15 +1,21 @@
-import { PageHero } from "@/components/kit/page-hero";
+import { PageIntroHero } from "@/components/kit/page-intro-hero";
 import { CommitteeMembers } from "@/components/pages/committee-members";
+import { COMMITTEE_HERO_IMAGE, COMMITTEE_INTRO } from "@/lib/brand";
 
 export default function CommitteePage() {
   return (
     <>
-      <PageHero
+      <PageIntroHero
+        overline="Leadership"
         title="Executive"
-        highlight="Committee"
-        subtitle="Kilinochchi Maths Bio University Students' Association — leadership and members."
+        titleHighlight="Committee"
+        lead={COMMITTEE_INTRO}
+        imageSrc={COMMITTEE_HERO_IMAGE}
+        imageAlt="KMBUSA executive committee"
+        cta={{ href: "#committee-members", label: "Meet the Team" }}
+        imageFit="contain"
       />
-      <div className="kit-page-main">
+      <div id="committee-members" className="kit-page-main scroll-mt-28">
         <CommitteeMembers />
       </div>
     </>

@@ -2,7 +2,20 @@
 
 import { Suspense, useCallback, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Award, Search } from "lucide-react";
+import {
+  Award,
+  BarChart3,
+  BookOpen,
+  Hash,
+  IdCard,
+  MapPin,
+  School,
+  Search,
+  Sparkles,
+  TrendingUp,
+  Trophy,
+  User,
+} from "lucide-react";
 import { loadAlResults, searchAlResults } from "@/lib/data/al-results";
 import type { AlResult, SubjectResult } from "@/lib/types/api";
 
@@ -51,86 +64,94 @@ function displaySubjectName(subject: SubjectResult) {
   return names[subject.subjectCode ?? ""] ?? subject.subjectCode ?? "—";
 }
 
+function InfoItem({
+  icon: Icon,
+  label,
+  value,
+  highlight = false,
+}: {
+  icon: React.ElementType;
+  label: string;
+  value: React.ReactNode;
+  highlight?: boolean;
+}) {
+  return (
+    <div className="flex items-start gap-3">
+      <Icon className="results-accent mt-0.5 h-4 w-4 shrink-0" strokeWidth={1.75} />
+      <div className="min-w-0">
+        <p className="results-subtle text-xs font-medium">{label}</p>
+        <p
+          className={
+            highlight
+              ? "results-accent mt-0.5 text-sm font-bold uppercase tracking-wide"
+              : "mt-0.5 text-sm font-semibold"
+          }
+          style={{ color: highlight ? undefined : "var(--text-primary)" }}
+        >
+          {value}
+        </p>
+      </div>
+    </div>
+  );
+}
+
 function ResultDetail({ result }: { result: AlResult }) {
-  const { zScore, districtRank, islandRank } = getZScoreMeta(result);
+  const { zScore, districtRank } = getZScoreMeta(result);
   const subjects = sortSubjects(result.stream, result.subjectResults ?? []);
 
-  const infoRows: { label: string; value: React.ReactNode }[] = [
-    { label: "Examination", value: "G.C.E. (A/L) Examination" },
-    { label: "Year", value: result.examYear },
-    { label: "Name", value: result.studentName },
-    { label: "Index Number", value: result.indexNumber },
-    { label: "NIC Number", value: result.nicNumber ?? "—" },
-  ];
-
-  if (result.district) {
-    infoRows.push({ label: "District", value: result.district });
-  }
-  if (result.schoolName) {
-    infoRows.push({ label: "School", value: result.schoolName });
-  }
-
-  infoRows.push(
-    { label: "District Rank", value: districtRank ?? "—" },
-    { label: "Z-Score", value: formatZScore(zScore) }
-  );
-
-  if (islandRank != null) {
-    infoRows.push({ label: "Island Rank", value: islandRank });
-  }
-
-  infoRows.push({
-    label: "Subject Stream",
-    value: (
-      <span className="font-semibold uppercase tracking-wide text-cyan-400">
-        {formatStream(result.stream)}
-      </span>
-    ),
-  });
-
   return (
-    <div className="overflow-hidden rounded-xl border shadow-lg" style={{ background: "var(--bg-card)", borderColor: "var(--border-color)" }}>
-      <div className="border-b bg-linear-to-b from-cyan-500/10 to-transparent px-6 py-8 text-center" style={{ borderColor: "var(--border-color)" }}>
-        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-cyan-500/15">
-          <Award className="h-9 w-9 text-cyan-400" strokeWidth={1.5} />
+    <div className="results-panel relative shadow-lg">
+      <span className="results-year-badge absolute right-5 top-5">{result.examYear} Year</span>
+
+      <div
+        className="border-b px-6 pb-8 pt-10 text-center"
+        style={{ borderColor: "var(--border-color)" }}
+      >
+        <div className="results-award-icon mx-auto">
+          <Award className="results-accent h-10 w-10" strokeWidth={1.5} />
         </div>
-        <h3 className="mt-4 text-2xl font-bold tracking-tight" style={{ color: "var(--text-primary)" }}>{result.studentName}</h3>
+        <h3 className="mt-5 text-2xl font-bold tracking-tight sm:text-3xl" style={{ color: "var(--text-primary)" }}>
+          {result.studentName}
+        </h3>
+        <p className="results-accent mt-1 text-sm font-medium">G.C.E. (A/L) Examination</p>
       </div>
 
-      <div className="px-6 py-5">
-        <dl className="divide-y" style={{ borderColor: "var(--border-color)" }}>
-          {infoRows.map((row) => (
-            <div key={row.label} className="flex items-center justify-between gap-4 py-3 text-sm">
-              <dt className="font-medium" style={{ color: "var(--text-secondary)" }}>{row.label}</dt>
-              <dd className="text-right font-semibold" style={{ color: "var(--text-primary)" }}>{row.value}</dd>
-            </div>
-          ))}
-        </dl>
-
-        <div className="mt-6 overflow-hidden rounded-lg border" style={{ borderColor: "var(--border-color)" }}>
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="text-left" style={{ background: "var(--bg-surface)" }}>
-                <th className="px-4 py-3 font-semibold text-cyan-400">Subject</th>
-                <th className="px-4 py-3 text-right font-semibold text-cyan-400">Result</th>
-              </tr>
-            </thead>
-            <tbody style={{ borderColor: "var(--border-color)" }}>
-              {subjects.map((subject) => (
-                <tr key={subject.subjectCode ?? subject.subjectName} className="border-t" style={{ borderColor: "var(--border-color)" }}>
-                  <td className="px-4 py-3 font-medium" style={{ color: "var(--text-primary)" }}>
-                    {displaySubjectName(subject)}
-                  </td>
-                  <td className="px-4 py-3 text-right">
-                    <span className="inline-flex min-w-[2rem] items-center justify-center rounded-md bg-cyan-500/20 px-2.5 py-1 text-base font-bold text-cyan-400">
-                      {subject.grade ?? "—"}
-                    </span>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+      <div
+        className="grid gap-8 border-b p-6 sm:grid-cols-2"
+        style={{ borderColor: "var(--border-color)" }}
+      >
+        <div className="space-y-5">
+          <InfoItem icon={User} label="Name" value={result.studentName} />
+          <InfoItem icon={Hash} label="Index Number" value={result.indexNumber} />
+          <InfoItem icon={IdCard} label="NIC Number" value={result.nicNumber ?? "—"} />
+          {result.district && <InfoItem icon={MapPin} label="District" value={result.district} />}
+          {result.schoolName && <InfoItem icon={School} label="School" value={result.schoolName} />}
         </div>
+        <div className="space-y-5">
+          <InfoItem icon={Trophy} label="District Rank" value={districtRank ?? "—"} />
+          <InfoItem icon={TrendingUp} label="Z-Score" value={formatZScore(zScore)} />
+          <InfoItem icon={BookOpen} label="Subject Stream" value={formatStream(result.stream)} highlight />
+        </div>
+      </div>
+
+      <div className="p-6">
+        <h4 className="results-accent flex items-center gap-2 text-sm font-bold uppercase tracking-wider">
+          <BarChart3 className="h-4 w-4" />
+          Subject Results
+        </h4>
+        <ul className="results-subject-list">
+          {subjects.map((subject) => (
+            <li
+              key={subject.subjectCode ?? subject.subjectName}
+              className="flex items-center justify-between gap-4 px-4 py-3.5"
+            >
+              <span className="text-sm font-semibold tracking-wide" style={{ color: "var(--text-primary)" }}>
+                {displaySubjectName(subject)}
+              </span>
+              <span className="results-grade-badge">{subject.grade ?? "—"}</span>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
@@ -169,7 +190,6 @@ function ResultsSearchForm() {
   const runSearch = useCallback((value: string, dataset: AlResult[]) => {
     const trimmed = value.trim();
     if (!trimmed) return;
-
     setSearched(true);
     setResults(searchAlResults(dataset, trimmed));
   }, []);
@@ -178,18 +198,14 @@ function ResultsSearchForm() {
 
   useEffect(() => {
     if (dataLoading || allResults.length === 0) return;
-
     setQuery((prev) => (prev === urlQuery ? prev : urlQuery));
-    if (urlQuery) {
-      runSearch(urlQuery, allResults);
-    }
+    if (urlQuery) runSearch(urlQuery, allResults);
   }, [urlQuery, allResults, dataLoading, runSearch]);
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const trimmed = query.trim();
     if (!trimmed) return;
-
     setLoading(true);
     setSearched(true);
     setResults(searchAlResults(allResults, trimmed));
@@ -202,8 +218,8 @@ function ResultsSearchForm() {
   if (dataLoading) {
     return (
       <div className="kit-container pb-16">
-        <div className="kit-card flex min-h-[320px] items-center justify-center">
-          <p style={{ color: "var(--text-secondary)" }}>Loading results data...</p>
+        <div className="kit-card flex min-h-[400px] items-center justify-center">
+          <p className="results-muted">Loading results data...</p>
         </div>
       </div>
     );
@@ -213,17 +229,12 @@ function ResultsSearchForm() {
     return (
       <div className="kit-container pb-16">
         <div className="kit-card max-w-2xl space-y-3">
-          <p className="font-semibold" style={{ color: "var(--text-primary)" }}>No results data loaded</p>
-          <p className="text-sm" style={{ color: "var(--text-secondary)" }}>
-            {dataError ||
-              "Add your Excel sheet to data/source/al-results.xlsx, then run npm run import:results."}
+          <p className="font-semibold" style={{ color: "var(--text-primary)" }}>
+            No results data loaded
           </p>
-          <ol className="list-decimal space-y-1 pl-5 text-sm" style={{ color: "var(--text-secondary)" }}>
-            <li>Copy data/source/al-results-template.csv as a starting point</li>
-            <li>Paste all ~360 student rows from your sheet</li>
-            <li>Save as data/source/al-results.xlsx (or .csv)</li>
-            <li>Run: npm run import:results</li>
-          </ol>
+          <p className="results-muted text-sm">
+            {dataError || "Add your Excel files to data/source/, then run npm run import:results."}
+          </p>
         </div>
       </div>
     );
@@ -231,53 +242,77 @@ function ResultsSearchForm() {
 
   return (
     <div className="kit-container pb-16">
-      <div className="grid gap-8 lg:grid-cols-[minmax(280px,360px)_1fr]">
-        <form onSubmit={onSubmit} method="post" className="kit-card h-fit lg:sticky lg:top-8">
-          <h2 className="text-lg font-bold" style={{ color: "var(--text-primary)" }}>Check Your Results</h2>
-          <p className="mt-1 text-sm" style={{ color: "var(--text-secondary)" }}>
-            Enter your index number or NIC number to view the A/L results.
-          </p>
-          <div className="mt-6 space-y-4">
-            <div>
+      <div className="grid gap-8 lg:grid-cols-[minmax(300px,360px)_1fr] lg:items-start">
+        <aside className="space-y-6 lg:sticky lg:top-24">
+          <form onSubmit={onSubmit} className="results-panel p-6">
+            <h2 className="flex items-center gap-2 text-lg font-bold" style={{ color: "var(--text-primary)" }}>
+              <Search className="results-accent h-5 w-5" />
+              Find Your Results
+            </h2>
+            <p className="results-muted mt-1 text-sm">Enter your index number or NIC to view results.</p>
+
+            <div className="mt-6">
               <label className="kit-label" htmlFor="search-query">
                 Index Number or NIC Number
               </label>
-              <input
-                id="search-query"
-                name="query"
-                className="kit-input"
-                required
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="7364523 or 200572500152"
-              />
+              <div className="relative mt-1">
+                <User className="results-subtle absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2" />
+                <input
+                  id="search-query"
+                  name="query"
+                  className="kit-input pl-10"
+                  required
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  placeholder="200572507152"
+                />
+              </div>
+              <p className="results-subtle mt-2 text-xs">
+                {allResults.length} students loaded. Search by exact index or NIC number.
+              </p>
             </div>
-            <p className="text-xs" style={{ color: "var(--text-subtle)" }}>
-              {allResults.length} students loaded. Search by exact index or NIC number.
-            </p>
-            <button type="submit" disabled={loading} className="kit-btn-primary w-full py-3">
+
+            <button type="submit" disabled={loading} className="results-search-btn mt-5">
               <Search className="h-4 w-4" />
               {loading ? "Searching..." : "Search Results"}
             </button>
-          </div>
-        </form>
+          </form>
 
-        <div className="min-h-[320px]">
+          <div className="results-panel p-6 text-center">
+            <div className="relative mx-auto flex h-24 w-24 items-center justify-center">
+              <div
+                className="absolute inset-0 rounded-full blur-xl"
+                style={{ background: "var(--results-accent-soft)" }}
+              />
+              <Trophy className="results-accent relative h-14 w-14" strokeWidth={1.25} />
+              <Sparkles className="absolute -right-1 top-0 h-5 w-5 text-amber-500 dark:text-amber-400" />
+            </div>
+            <p className="results-muted mt-4 text-sm leading-relaxed">
+              Your <span className="results-accent font-bold">Hard Work</span> Today,
+              <br />
+              Your <span className="results-highlight-success font-bold">Success</span> Tomorrow!
+            </p>
+          </div>
+        </aside>
+
+        <div className="min-h-[420px]">
           {loading ? (
-            <div className="kit-card flex min-h-[320px] items-center justify-center">
-              <p style={{ color: "var(--text-secondary)" }}>Searching results...</p>
+            <div className="results-panel flex min-h-[420px] items-center justify-center">
+              <p className="results-muted">Searching results...</p>
             </div>
           ) : !searched ? (
-            <div className="flex h-full min-h-[320px] flex-col items-center justify-center rounded-xl border border-dashed p-8" style={{ borderColor: "var(--border-color)", color: "var(--text-secondary)" }}>
-              <Search className="mb-3 h-12 w-12" style={{ color: "var(--text-subtle)" }} />
-              <p className="font-medium" style={{ color: "var(--text-primary)" }}>Results will appear here</p>
-              <p className="mt-1 text-sm">Search by index number or NIC number to view your A/L results</p>
+            <div className="results-empty-state min-h-[420px]">
+              <Search className="results-subtle mb-4 h-14 w-14" />
+              <p className="text-lg font-medium" style={{ color: "var(--text-primary)" }}>
+                Results will appear here
+              </p>
+              <p className="results-muted mt-2 max-w-sm text-sm">
+                Search by index number or NIC number to view your A/L examination results.
+              </p>
             </div>
           ) : !result ? (
-            <div className="kit-card flex min-h-[320px] items-center justify-center">
-              <p className="text-center" style={{ color: "var(--text-secondary)" }}>
-                No results found for this index or NIC number.
-              </p>
+            <div className="results-panel flex min-h-[420px] items-center justify-center p-8">
+              <p className="results-muted text-center">No results found for this index or NIC number.</p>
             </div>
           ) : (
             <ResultDetail result={result} />
@@ -293,8 +328,8 @@ export function ResultsSearch() {
     <Suspense
       fallback={
         <div className="kit-container">
-          <div className="kit-card flex min-h-[320px] items-center justify-center">
-            <p style={{ color: "var(--text-secondary)" }}>Loading search...</p>
+          <div className="kit-card flex min-h-[400px] items-center justify-center">
+            <p className="results-muted">Loading search...</p>
           </div>
         </div>
       }

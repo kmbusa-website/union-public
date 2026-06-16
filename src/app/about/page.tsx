@@ -1,37 +1,51 @@
-import Image from "next/image";
 import { Target, Eye, Heart, Flag } from "lucide-react";
-import { PageHero } from "@/components/kit/page-hero";
-import { ABOUT_INTRO, ABOUT_VALUES, HERO_CAMPUS_IMAGE, MILESTONES } from "@/lib/brand";
+import { PageIntroHero } from "@/components/kit/page-intro-hero";
+import {
+  ABOUT_HERO_IMAGE,
+  ABOUT_INTRO,
+  ABOUT_VALUES,
+  MILESTONES,
+  ORG_SHORT,
+} from "@/lib/brand";
 
 const icons = [Target, Eye, Heart, Flag];
 
 export default function AboutPage() {
   return (
     <>
-      <PageHero title="About" highlight="KMBUSA" subtitle="Learn about our mission and community." />
+      <PageIntroHero
+        overline={`About ${ORG_SHORT}`}
+        title="About"
+        titleHighlight={ORG_SHORT}
+        lead={ABOUT_INTRO}
+        imageSrc={ABOUT_HERO_IMAGE}
+        imageAlt="Akshaya Hospital — KMBUSA office location"
+        cta={{ href: "#mission-vision", label: "Our Mission & Vision" }}
+        priority
+      />
+
       <div className="kit-page-main">
-        <div className="kit-container pb-16">
-          <div className="grid items-center gap-10 lg:grid-cols-2">
-            <div className="space-y-4" style={{ color: "var(--text-secondary)" }}>
-              {ABOUT_INTRO.map((paragraph) => (
-                <p key={paragraph} className="leading-relaxed">
-                  {paragraph}
-                </p>
-              ))}
-            </div>
-            <div className="relative aspect-[4/3] overflow-hidden rounded-xl shadow-lg">
-              <Image src={HERO_CAMPUS_IMAGE} alt="KMBUSA campus" fill className="object-cover" sizes="50vw" />
-            </div>
+        <div id="mission-vision" className="kit-container scroll-mt-28 pb-16">
+          <div className="mb-10 text-center sm:text-left">
+            <p className="page-intro-overline">What we stand for</p>
+            <h2 className="page-intro-title mt-3 text-3xl sm:text-4xl">
+              Mission, Vision <span className="page-intro-title-accent">&amp; Values</span>
+            </h2>
+            <div className="page-intro-title-rule mx-auto sm:mx-0" aria-hidden />
           </div>
 
-          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {ABOUT_VALUES.map((v, i) => {
               const Icon = icons[i] ?? Target;
               return (
                 <div key={v.title} className="kit-card text-center">
-                  <Icon className="mx-auto h-10 w-10 text-cyan-400" strokeWidth={1.5} />
-                  <h3 className="mt-4 font-semibold" style={{ color: "var(--text-primary)" }}>{v.title}</h3>
-                  <p className="mt-2 text-sm" style={{ color: "var(--text-secondary)" }}>{v.description}</p>
+                  <Icon className="page-intro-title-accent mx-auto h-10 w-10" strokeWidth={1.5} />
+                  <h3 className="mt-4 font-semibold" style={{ color: "var(--text-primary)" }}>
+                    {v.title}
+                  </h3>
+                  <p className="mt-2 text-sm" style={{ color: "var(--text-secondary)" }}>
+                    {v.description}
+                  </p>
                 </div>
               );
             })}
@@ -40,8 +54,10 @@ export default function AboutPage() {
           <div className="mt-10 grid gap-4 sm:grid-cols-3">
             {MILESTONES.map((m) => (
               <div key={m.label} className="kit-card text-center">
-                <p className="text-2xl font-bold text-cyan-400">{m.value}</p>
-                <p className="mt-1 text-sm" style={{ color: "var(--text-secondary)" }}>{m.label}</p>
+                <p className="page-intro-title-accent text-2xl font-bold">{m.value}</p>
+                <p className="mt-1 text-sm" style={{ color: "var(--text-secondary)" }}>
+                  {m.label}
+                </p>
               </div>
             ))}
           </div>
