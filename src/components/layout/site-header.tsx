@@ -1,12 +1,12 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import { Link, usePathname } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 import { Logo } from "@/components/brand/logo";
 import { TopBar } from "@/components/layout/top-bar";
+import { LanguageToggle } from "@/components/shared/language-toggle";
 import { ThemeToggle } from "@/components/shared/theme-toggle";
 
 const links = [
@@ -17,7 +17,7 @@ const links = [
   { href: "/gallery", label: "Gallery" },
   { href: "/results", label: "A/L Results" },
   { href: "/contact", label: "Contact" },
-];
+] as const;
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
@@ -45,6 +45,7 @@ export function SiteHeader() {
           ))}
         </nav>
         <div className="flex items-center gap-2">
+          <LanguageToggle />
           <ThemeToggle />
           <Link href="/contact" className="kit-btn-header hidden lg:inline-flex">
             Get Started
@@ -69,7 +70,10 @@ export function SiteHeader() {
             <Link
               key={l.href}
               href={l.href}
-              className={cn("block py-2 text-sm transition hover:text-blue-500", active(l.href) ? "font-semibold text-blue-500" : "")}
+              className={cn(
+                "block py-2 text-sm transition hover:text-blue-500",
+                active(l.href) ? "font-semibold text-blue-500" : "",
+              )}
               style={{ color: active(l.href) ? undefined : "var(--text-nav)" }}
               onClick={() => setOpen(false)}
             >

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Loader2, Mail, MapPin, Phone } from "lucide-react";
 import { CONTACT, MAP_EMBED_URL, SOCIAL_LINKS } from "@/lib/brand";
 import { SocialIcon } from "@/components/ui/social-icon";
@@ -18,6 +19,7 @@ async function parseJsonResponse(res: Response) {
 }
 
 export function ContactForm() {
+  const t = useTranslations("contact");
   const [form, setForm] = useState({ name: "", email: "", phone: "", subject: "", message: "" });
   const [status, setStatus] = useState<"idle" | "sending" | "ok" | "err">("idle");
   const [error, setError] = useState("");
@@ -27,7 +29,7 @@ export function ContactForm() {
     const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
     if (!accessKey) {
       setStatus("err");
-      setError("Contact form is not configured. Add NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY to .env.local");
+      setError(t("configError"));
       return;
     }
 
@@ -56,22 +58,24 @@ export function ContactForm() {
       const data = await parseJsonResponse(res);
 
       if (!data?.success) {
-        throw new Error(data?.message ?? "Could not send your message. Please try again.");
+        throw new Error(data?.message ?? t("sendError"));
       }
 
       setStatus("ok");
       setForm({ name: "", email: "", phone: "", subject: "", message: "" });
     } catch (err) {
       setStatus("err");
-      setError(err instanceof Error ? err.message : "Failed to send message.");
+      setError(err instanceof Error ? err.message : t("failed"));
     }
   };
+
+  const fields = ["name", "email", "subject"] as const;
 
   return (
     <div className="kit-container py-12">
       <div className="grid gap-8 lg:grid-cols-12">
         <div className="lg:col-span-3">
-          <h2 className="text-sm font-bold uppercase tracking-wider text-blue-400">Get In Touch</h2>
+          <h2 className="text-sm font-bold uppercase tracking-wider text-blue-400">{t("getInTouch")}</h2>
           <ul className="mt-6 space-y-4 text-sm" style={{ color: "var(--text-secondary)" }}>
             <li className="flex gap-3">
               <MapPin className="h-5 w-5 shrink-0 text-blue-400" />
@@ -103,22 +107,24 @@ export function ContactForm() {
           </div>
         </div>
         <form onSubmit={submit} className="kit-card lg:col-span-5">
-          <h2 className="text-lg font-bold" style={{ color: "var(--text-primary)" }}>Send Us a Message</h2>
-          {["name", "email", "subject"].map((f) => (
+          <h2 className="text-lg font-bold" style={{ color: "var(--text-primary)" }}>
+            {t("sendMessage")}
+          </h2>
+          {fields.map((f) => (
             <div key={f} className="mt-4">
-              <label className="kit-label capitalize">{f}</label>
+              <label className="kit-label">{t(f)}</label>
               <input
                 className="kit-input"
                 required
                 type={f === "email" ? "email" : "text"}
-                value={form[f as keyof typeof form]}
+                value={form[f]}
                 onChange={(e) => setForm({ ...form, [f]: e.target.value })}
                 disabled={status === "sending"}
               />
             </div>
           ))}
           <div className="mt-4">
-            <label className="kit-label">Phone</label>
+            <label className="kit-label">{t("phone")}</label>
             <input
               className="kit-input"
               value={form.phone}
@@ -127,7 +133,7 @@ export function ContactForm() {
             />
           </div>
           <div className="mt-4">
-            <label className="kit-label">Message</label>
+            <label className="kit-label">{t("message")}</label>
             <textarea
               className="kit-input"
               rows={5}
@@ -141,21 +147,17 @@ export function ContactForm() {
             {status === "sending" ? (
               <>
                 <Loader2 className="h-4 w-4 animate-spin" />
-                Sending...
+                {t("sending")}
               </>
             ) : (
-              "Send Message"
+              t("submit")
             )}
           </button>
-          {status === "ok" && (
-            <p className="mt-3 text-sm text-emerald-400">
-              Message sent successfully. We will get back to you soon.
-            </p>
-          )}
+          {status === "ok" && <p className="mt-3 text-sm text-emerald-400">{t("success")}</p>}
           {status === "err" && <p className="mt-3 text-sm text-red-400">{error}</p>}
         </form>
         <div className="overflow-hidden rounded-xl lg:col-span-4">
-          <iframe title="Map" src={MAP_EMBED_URL} className="h-full min-h-[360px] w-full border-0" loading="lazy" />
+          <iframe title={t("map")} src={MAP_EMBED_URL} className="h-full min-h-[360px] w-full border-0" loading="lazy" />
         </div>
       </div>
     </div>

@@ -1,12 +1,12 @@
 "use client";
 
 import { Moon, Sun } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 
 export function ThemeToggle() {
   const [dark, setDark] = useState(false);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const saved = localStorage.getItem("theme") ?? "light";
     setDark(saved === "dark");
   }, []);

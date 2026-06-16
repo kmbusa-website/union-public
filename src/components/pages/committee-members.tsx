@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { CommitteeCard } from "@/components/shared/committee-card";
 import type { CommitteeMember, CommitteeTier } from "@/lib/types/committee";
@@ -92,6 +93,8 @@ function parseCsv(text: string): CommitteeMember[] {
 }
 
 export function CommitteeMembers() {
+  const t = useTranslations("committee");
+  const tc = useTranslations("common");
   const [members, setMembers] = useState<CommitteeMember[]>([]);
   const [selectedYear, setSelectedYear] = useState(DEFAULT_YEAR);
   const [loading, setLoading] = useState(true);
@@ -120,7 +123,7 @@ export function CommitteeMembers() {
       } catch (cause) {
         if ((cause as Error).name === "AbortError") return;
         setMembers([]);
-        setError(cause instanceof Error ? cause.message : "Failed to load committee data");
+        setError(cause instanceof Error ? cause.message : t("loadError"));
       } finally {
         setLoading(false);
       }
@@ -155,7 +158,7 @@ export function CommitteeMembers() {
   if (loading) {
     return (
       <div className="kit-container pb-16">
-        <p className="text-center" style={{ color: "var(--text-secondary)" }}>Loading committee information...</p>
+        <p className="text-center" style={{ color: "var(--text-secondary)" }}>{t("loading")}</p>
       </div>
     );
   }
@@ -174,14 +177,14 @@ export function CommitteeMembers() {
     <div className="kit-container pb-16">
       {yearMembers.length === 0 ? (
         <p className="text-center" style={{ color: "var(--text-secondary)" }}>
-          Committee information for {activeYear ?? DEFAULT_YEAR} is not available yet.
+          {t("unavailable", { year: activeYear ?? DEFAULT_YEAR })}
         </p>
       ) : (
         <div className="space-y-12">
           {executives.length > 0 && (
             <section>
               <h2 className="mb-6 text-center text-sm font-bold uppercase tracking-[0.25em] text-amber-400">
-                Executive Committee {activeYear}
+                {t("executive", { year: activeYear })}
               </h2>
               <div className="grid gap-5 lg:grid-cols-3">
                 {executives.map((member) => (
@@ -204,7 +207,7 @@ export function CommitteeMembers() {
           {mentors.length > 0 && (
             <section>
               <h2 className="mb-6 text-center text-sm font-bold uppercase tracking-[0.35em]" style={{ color: "var(--text-primary)" }}>
-                Mentors
+                {t("mentors")}
               </h2>
               <div className="grid gap-4 lg:grid-cols-2">
                 {mentors.map((member) => (
@@ -217,7 +220,7 @@ export function CommitteeMembers() {
           {general.length > 0 && (
             <section>
               <h2 className="mb-6 text-center text-sm font-bold uppercase tracking-[0.35em]" style={{ color: "var(--text-primary)" }}>
-                Members
+                {t("members")}
               </h2>
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                 {general.map((member) => (
@@ -229,14 +232,14 @@ export function CommitteeMembers() {
         </div>
       )}
 
-      <nav className="mt-12 flex items-center justify-center gap-3" aria-label="Committee year">
+      <nav className="mt-12 flex items-center justify-center gap-3" aria-label={t("yearNav")}>
         <button
           type="button"
           onClick={prevYear}
           disabled={years.length === 0 || currentIndex === 0}
           className="flex h-10 w-10 items-center justify-center rounded-lg border transition hover:border-cyan-400/50 hover:text-cyan-400 disabled:cursor-not-allowed disabled:opacity-30"
           style={navBtnBase}
-          aria-label="Previous year"
+          aria-label={tc("previousYear")}
         >
           <ChevronLeft className="h-5 w-5" />
         </button>
@@ -259,7 +262,7 @@ export function CommitteeMembers() {
           disabled={years.length === 0 || currentIndex === years.length - 1}
           className="flex h-10 w-10 items-center justify-center rounded-lg border transition hover:border-cyan-400/50 hover:text-cyan-400 disabled:cursor-not-allowed disabled:opacity-30"
           style={navBtnBase}
-          aria-label="Next year"
+          aria-label={tc("nextYear")}
         >
           <ChevronRight className="h-5 w-5" />
         </button>

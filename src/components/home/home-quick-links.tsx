@@ -1,14 +1,19 @@
-import Link from "next/link";
+"use client";
+
+import { useTranslations } from "next-intl";
 import { BarChart3, CalendarDays, ImageIcon, Users } from "lucide-react";
+import { Link } from "@/i18n/navigation";
 
 const links = [
-  { href: "/events", label: "Events", sub: "View upcoming events", icon: CalendarDays },
-  { href: "/results", label: "A/L Results", sub: "Check your results", icon: BarChart3 },
-  { href: "/gallery", label: "Gallery", sub: "Photo albums", icon: ImageIcon },
-  { href: "/committee", label: "Committee", sub: "Meet the team", icon: Users },
-];
+  { href: "/events", labelKey: "quickEvents", subKey: "quickEventsSub", icon: CalendarDays },
+  { href: "/results", labelKey: "quickResults", subKey: "quickResultsSub", icon: BarChart3 },
+  { href: "/gallery", labelKey: "quickGallery", subKey: "quickGallerySub", icon: ImageIcon },
+  { href: "/committee", labelKey: "quickCommittee", subKey: "quickCommitteeSub", icon: Users },
+] as const;
 
 export function HomeQuickLinks() {
+  const t = useTranslations("home");
+
   return (
     <section className="kit-page-main">
       <div className="kit-container">
@@ -19,8 +24,12 @@ export function HomeQuickLinks() {
                 <item.icon className="h-6 w-6" strokeWidth={1.5} />
               </div>
               <div>
-                <p className="font-semibold" style={{ color: "var(--text-primary)" }}>{item.label}</p>
-                <p className="text-sm" style={{ color: "var(--text-secondary)" }}>{item.sub}</p>
+                <p className="font-semibold" style={{ color: "var(--text-primary)" }}>
+                  {t(item.labelKey)}
+                </p>
+                <p className="text-sm" style={{ color: "var(--text-secondary)" }}>
+                  {t(item.subKey)}
+                </p>
               </div>
             </Link>
           ))}

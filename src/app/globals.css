@@ -109,6 +109,10 @@ body {
   transition: background 0.2s, color 0.2s;
 }
 
+.font-tamil {
+  font-family: var(--font-tamil), var(--font-inter), system-ui, sans-serif;
+}
+
 /* ── Kit: page sections ─────────────────────────────── */
 .kit-dark-band {
   background: linear-gradient(135deg, #0a192f 0%, #050d18 100%);

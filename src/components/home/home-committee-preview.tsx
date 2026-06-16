@@ -1,8 +1,9 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import { ArrowRight } from "lucide-react";
+import { Link } from "@/i18n/navigation";
 import type { CommitteeMember } from "@/lib/types/committee";
 
 const CSV_URL = "/committee/committee.csv";
@@ -72,7 +73,6 @@ function MemberCard({ member }: { member: CommitteeMember }) {
       className="group flex w-44 shrink-0 flex-col overflow-hidden rounded-2xl border transition hover:border-amber-400/30 hover:-translate-y-1 sm:w-48"
       style={{ background: "var(--bg-card)", borderColor: "var(--border-color)" }}
     >
-      {/* Photo */}
       <div className="relative h-48 w-full overflow-hidden sm:h-52">
         {hasPhoto ? (
           <img
@@ -93,7 +93,6 @@ function MemberCard({ member }: { member: CommitteeMember }) {
         <div className="absolute inset-x-0 bottom-0 h-16 bg-linear-to-t from-black/60 to-transparent" />
       </div>
 
-      {/* Info */}
       <div className="px-4 pb-5 pt-2">
         <p className="text-[11px] font-bold uppercase tracking-widest" style={{ color: member.accent }}>
           {member.role}
@@ -107,6 +106,7 @@ function MemberCard({ member }: { member: CommitteeMember }) {
 }
 
 export function HomeCommitteePreview() {
+  const t = useTranslations("home");
   const [members, setMembers] = useState<CommitteeMember[]>([]);
 
   useEffect(() => {
@@ -127,13 +127,12 @@ export function HomeCommitteePreview() {
     <section className="kit-page-main border-t" style={{ borderColor: "var(--border-color)" }}>
       <div className="kit-container">
         <div className="mb-8 text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-amber-500">Leadership</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-amber-500">{t("committeeOverline")}</p>
           <h2 className="mt-2 text-2xl font-extrabold sm:text-3xl" style={{ color: "var(--text-primary)" }}>
-            Our <span className="text-amber-500">Executive Committee</span>
+            {t("committeeTitle")} <span className="text-amber-500">{t("committeeHighlight")}</span>
           </h2>
         </div>
 
-        {/* Infinite marquee */}
         <div className="overflow-hidden">
           <div className="animate-marquee flex gap-6">
             {[...members, ...members].map((m, i) => (
@@ -147,7 +146,7 @@ export function HomeCommitteePreview() {
             href="/committee"
             className="flex items-center gap-2 rounded-full border border-amber-400/40 px-6 py-2.5 text-sm font-semibold text-amber-500 transition hover:bg-amber-400/10"
           >
-            View All Members <ArrowRight className="h-4 w-4" />
+            {t("viewAllMembers")} <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 
 const CSV_URL = "/home/highlights.csv";
 
@@ -46,6 +47,7 @@ function PhotoCard({ item }: { item: Highlight }) {
 }
 
 export function HomeHighlights() {
+  const t = useTranslations("home");
   const [items, setItems] = useState<Highlight[]>([]);
 
   useEffect(() => {
@@ -61,14 +63,13 @@ export function HomeHighlights() {
     <section className="kit-page-main overflow-hidden border-t" style={{ borderColor: "var(--border-color)" }}>
       <div className="kit-container pb-10!">
         <div className="mb-8 text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-cyan-400">Memories</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-cyan-400">{t("highlightsOverline")}</p>
           <h2 className="mt-2 text-2xl font-extrabold sm:text-3xl" style={{ color: "var(--text-primary)" }}>
-            Event <span className="text-cyan-400">Highlights</span>
+            {t("highlightsTitle")} <span className="text-cyan-400">{t("highlightsHighlight")}</span>
           </h2>
         </div>
       </div>
 
-      {/* Infinite marquee row — aligned with container */}
       <div className="mx-auto max-w-7xl">
         <div
           className="overflow-hidden pb-10"

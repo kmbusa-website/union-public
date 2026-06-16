@@ -1,16 +1,19 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
 import { Loader2, Search, X } from "lucide-react";
-import { GALLERY_CATEGORY_API, GALLERY_FILTERS } from "@/lib/brand";
+import { GALLERY_FILTER_API, GALLERY_FILTER_KEYS, type GalleryFilterKey } from "@/lib/gallery-filters";
 import { filterGalleryPhotos, loadGalleryPhotos } from "@/lib/data/gallery";
 import type { GalleryPhoto } from "@/lib/types/api";
 
 export function GalleryGrid() {
+  const t = useTranslations("gallery");
+  const tc = useTranslations("common");
   const [photos, setPhotos] = useState<GalleryPhoto[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [filter, setFilter] = useState("All");
+  const [filter, setFilter] = useState<GalleryFilterKey>("all");
   const [q, setQ] = useState("");
   const [preview, setPreview] = useState<GalleryPhoto | null>(null);
 
@@ -22,9 +25,7 @@ export function GalleryGrid() {
         if (!cancelled) setPhotos(data);
       })
       .catch(() => {
-        if (!cancelled) {
-          setError("Could not load gallery data. Run npm run import:gallery and refresh.");
-        }
+        if (!cancelled) setError(t("loadError"));
       })
       .finally(() => {
         if (!cancelled) setLoading(false);
@@ -36,7 +37,7 @@ export function GalleryGrid() {
   }, []);
 
   const filtered = useMemo(() => {
-    const category = filter === "All" ? undefined : GALLERY_CATEGORY_API[filter];
+    const category = GALLERY_FILTER_API[filter];
     return filterGalleryPhotos(photos, { category, query: q });
   }, [photos, filter, q]);
 
@@ -45,7 +46,7 @@ export function GalleryGrid() {
       <div className="kit-container flex min-h-[280px] items-center justify-center pb-16">
         <p className="flex items-center gap-2" style={{ color: "var(--text-secondary)" }}>
           <Loader2 className="h-4 w-4 animate-spin" />
-          Loading gallery...
+          {t("loading")}
         </p>
       </div>
     );
@@ -63,14 +64,14 @@ export function GalleryGrid() {
     <div className="kit-container pb-16">
       <div className="mb-8 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
         <div className="flex flex-wrap gap-2">
-          {GALLERY_FILTERS.map((f) => (
+          {GALLERY_FILTER_KEYS.map((key) => (
             <button
-              key={f}
+              key={key}
               type="button"
-              onClick={() => setFilter(f)}
-              className={filter === f ? "kit-filter-active" : "kit-filter"}
+              onClick={() => setFilter(key)}
+              className={filter === key ? "kit-filter-active" : "kit-filter"}
             >
-              {f}
+              {t(`filters.${key}`)}
             </button>
           ))}
         </div>
@@ -78,7 +79,7 @@ export function GalleryGrid() {
           <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2" style={{ color: "var(--text-subtle)" }} />
           <input
             className="kit-input pl-10"
-            placeholder="Search gallery..."
+            placeholder={t("searchPlaceholder")}
             value={q}
             onChange={(e) => setQ(e.target.value)}
           />
@@ -87,15 +88,11 @@ export function GalleryGrid() {
 
       {photos.length === 0 ? (
         <div className="text-center" style={{ color: "var(--text-secondary)" }}>
-          <p>No gallery photos yet.</p>
-          <p className="mt-2 text-sm">
-            Add images to <code className="text-xs">public/gallery/</code>, list them in{" "}
-            <code className="text-xs">data/source/gallery.csv</code>, then run{" "}
-            <code className="text-xs">npm run import:gallery</code>.
-          </p>
+          <p>{t("empty")}</p>
+          <p className="mt-2 text-sm">{t("emptyHint")}</p>
         </div>
       ) : filtered.length === 0 ? (
-        <p className="text-center" style={{ color: "var(--text-secondary)" }}>No photos in this category yet.</p>
+        <p className="text-center" style={{ color: "var(--text-secondary)" }}>{t("noCategory")}</p>
       ) : (
         <div className="columns-1 gap-4 sm:columns-2 lg:columns-3">
           {filtered.map((photo) => (
@@ -141,7 +138,7 @@ export function GalleryGrid() {
             type="button"
             className="absolute right-4 top-4 rounded-full bg-white/10 p-2 text-white hover:bg-white/20"
             onClick={() => setPreview(null)}
-            aria-label="Close"
+            aria-label={tc("close")}
           >
             <X className="h-6 w-6" />
           </button>

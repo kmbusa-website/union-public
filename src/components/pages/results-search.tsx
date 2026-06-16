@@ -1,7 +1,9 @@
 "use client";
 
 import { Suspense, useCallback, useEffect, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
+import { useRouter } from "@/i18n/navigation";
 import {
   Award,
   BarChart3,
@@ -53,15 +55,17 @@ function sortSubjects(stream: string | undefined, subjects: SubjectResult[]) {
   });
 }
 
-function displaySubjectName(subject: SubjectResult) {
+function displaySubjectName(subject: SubjectResult, t: ReturnType<typeof useTranslations<"results">>) {
   if (subject.subjectName) return subject.subjectName.toUpperCase();
-  const names: Record<string, string> = {
-    PHY: "PHYSICS",
-    CHE: "CHEMISTRY",
-    MAT: "COMBINED MATHEMATICS",
-    BIO: "BIOLOGY",
+  const code = subject.subjectCode ?? "";
+  if (!code) return "—";
+  const map: Record<string, string> = {
+    PHY: t("subjects.PHY"),
+    CHE: t("subjects.CHE"),
+    MAT: t("subjects.MAT"),
+    BIO: t("subjects.BIO"),
   };
-  return names[subject.subjectCode ?? ""] ?? subject.subjectCode ?? "—";
+  return map[code] ?? code;
 }
 
 function InfoItem({
@@ -96,12 +100,15 @@ function InfoItem({
 }
 
 function ResultDetail({ result }: { result: AlResult }) {
+  const t = useTranslations("results");
   const { zScore, districtRank } = getZScoreMeta(result);
   const subjects = sortSubjects(result.stream, result.subjectResults ?? []);
 
   return (
     <div className="results-panel relative shadow-lg">
-      <span className="results-year-badge absolute right-5 top-5">{result.examYear} Year</span>
+      <span className="results-year-badge absolute right-5 top-5">
+        {t("yearBadge", { year: result.examYear })}
+      </span>
 
       <div
         className="border-b px-6 pb-8 pt-10 text-center"
@@ -113,7 +120,7 @@ function ResultDetail({ result }: { result: AlResult }) {
         <h3 className="mt-5 text-2xl font-bold tracking-tight sm:text-3xl" style={{ color: "var(--text-primary)" }}>
           {result.studentName}
         </h3>
-        <p className="results-accent mt-1 text-sm font-medium">G.C.E. (A/L) Examination</p>
+        <p className="results-accent mt-1 text-sm font-medium">{t("examLabel")}</p>
       </div>
 
       <div
@@ -121,23 +128,23 @@ function ResultDetail({ result }: { result: AlResult }) {
         style={{ borderColor: "var(--border-color)" }}
       >
         <div className="space-y-5">
-          <InfoItem icon={User} label="Name" value={result.studentName} />
-          <InfoItem icon={Hash} label="Index Number" value={result.indexNumber} />
-          <InfoItem icon={IdCard} label="NIC Number" value={result.nicNumber ?? "—"} />
-          {result.district && <InfoItem icon={MapPin} label="District" value={result.district} />}
-          {result.schoolName && <InfoItem icon={School} label="School" value={result.schoolName} />}
+          <InfoItem icon={User} label={t("labels.name")} value={result.studentName} />
+          <InfoItem icon={Hash} label={t("labels.index")} value={result.indexNumber} />
+          <InfoItem icon={IdCard} label={t("labels.nic")} value={result.nicNumber ?? "—"} />
+          {result.district && <InfoItem icon={MapPin} label={t("labels.district")} value={result.district} />}
+          {result.schoolName && <InfoItem icon={School} label={t("labels.school")} value={result.schoolName} />}
         </div>
         <div className="space-y-5">
-          <InfoItem icon={Trophy} label="District Rank" value={districtRank ?? "—"} />
-          <InfoItem icon={TrendingUp} label="Z-Score" value={formatZScore(zScore)} />
-          <InfoItem icon={BookOpen} label="Subject Stream" value={formatStream(result.stream)} highlight />
+          <InfoItem icon={Trophy} label={t("labels.districtRank")} value={districtRank ?? "—"} />
+          <InfoItem icon={TrendingUp} label={t("labels.zScore")} value={formatZScore(zScore)} />
+          <InfoItem icon={BookOpen} label={t("labels.stream")} value={formatStream(result.stream)} highlight />
         </div>
       </div>
 
       <div className="p-6">
         <h4 className="results-accent flex items-center gap-2 text-sm font-bold uppercase tracking-wider">
           <BarChart3 className="h-4 w-4" />
-          Subject Results
+          {t("subjectResults")}
         </h4>
         <ul className="results-subject-list">
           {subjects.map((subject) => (
@@ -146,7 +153,7 @@ function ResultDetail({ result }: { result: AlResult }) {
               className="flex items-center justify-between gap-4 px-4 py-3.5"
             >
               <span className="text-sm font-semibold tracking-wide" style={{ color: "var(--text-primary)" }}>
-                {displaySubjectName(subject)}
+                {displaySubjectName(subject, t)}
               </span>
               <span className="results-grade-badge">{subject.grade ?? "—"}</span>
             </li>
@@ -158,6 +165,7 @@ function ResultDetail({ result }: { result: AlResult }) {
 }
 
 function ResultsSearchForm() {
+  const t = useTranslations("results");
   const router = useRouter();
   const searchParams = useSearchParams();
   const [allResults, setAllResults] = useState<AlResult[]>([]);
@@ -176,7 +184,7 @@ function ResultsSearchForm() {
       })
       .catch(() => {
         if (!cancelled) {
-          setDataError("Could not load results data. Run npm run import:results and refresh.");
+          setDataError(t("dataError"));
         }
       })
       .finally(() => {
@@ -219,7 +227,7 @@ function ResultsSearchForm() {
     return (
       <div className="kit-container pb-16">
         <div className="kit-card flex min-h-[400px] items-center justify-center">
-          <p className="results-muted">Loading results data...</p>
+          <p className="results-muted">{t("loadingData")}</p>
         </div>
       </div>
     );
@@ -230,10 +238,10 @@ function ResultsSearchForm() {
       <div className="kit-container pb-16">
         <div className="kit-card max-w-2xl space-y-3">
           <p className="font-semibold" style={{ color: "var(--text-primary)" }}>
-            No results data loaded
+            {t("noDataTitle")}
           </p>
           <p className="results-muted text-sm">
-            {dataError || "Add your Excel files to data/source/, then run npm run import:results."}
+            {dataError || t("noDataHint")}
           </p>
         </div>
       </div>
@@ -247,13 +255,13 @@ function ResultsSearchForm() {
           <form onSubmit={onSubmit} className="results-panel p-6">
             <h2 className="flex items-center gap-2 text-lg font-bold" style={{ color: "var(--text-primary)" }}>
               <Search className="results-accent h-5 w-5" />
-              Find Your Results
+              {t("findResults")}
             </h2>
-            <p className="results-muted mt-1 text-sm">Enter your index number or NIC to view results.</p>
+            <p className="results-muted mt-1 text-sm">{t("searchHint")}</p>
 
             <div className="mt-6">
               <label className="kit-label" htmlFor="search-query">
-                Index Number or NIC Number
+                {t("indexOrNic")}
               </label>
               <div className="relative mt-1">
                 <User className="results-subtle absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2" />
@@ -268,13 +276,13 @@ function ResultsSearchForm() {
                 />
               </div>
               <p className="results-subtle mt-2 text-xs">
-                {allResults.length} students loaded. Search by exact index or NIC number.
+                {t("studentsLoaded", { count: allResults.length })}
               </p>
             </div>
 
             <button type="submit" disabled={loading} className="results-search-btn mt-5">
               <Search className="h-4 w-4" />
-              {loading ? "Searching..." : "Search Results"}
+              {loading ? t("searching") : t("searchButton")}
             </button>
           </form>
 
@@ -288,9 +296,9 @@ function ResultsSearchForm() {
               <Sparkles className="absolute -right-1 top-0 h-5 w-5 text-amber-500 dark:text-amber-400" />
             </div>
             <p className="results-muted mt-4 text-sm leading-relaxed">
-              Your <span className="results-accent font-bold">Hard Work</span> Today,
+              {t("hardWork")}
               <br />
-              Your <span className="results-highlight-success font-bold">Success</span> Tomorrow!
+              <span className="results-highlight-success font-bold">{t("success")}</span>
             </p>
           </div>
         </aside>
@@ -298,21 +306,21 @@ function ResultsSearchForm() {
         <div className="min-h-[420px]">
           {loading ? (
             <div className="results-panel flex min-h-[420px] items-center justify-center">
-              <p className="results-muted">Searching results...</p>
+              <p className="results-muted">{t("searchingResults")}</p>
             </div>
           ) : !searched ? (
             <div className="results-empty-state min-h-[420px]">
               <Search className="results-subtle mb-4 h-14 w-14" />
               <p className="text-lg font-medium" style={{ color: "var(--text-primary)" }}>
-                Results will appear here
+                {t("placeholderTitle")}
               </p>
               <p className="results-muted mt-2 max-w-sm text-sm">
-                Search by index number or NIC number to view your A/L examination results.
+                {t("placeholderHint")}
               </p>
             </div>
           ) : !result ? (
             <div className="results-panel flex min-h-[420px] items-center justify-center p-8">
-              <p className="results-muted text-center">No results found for this index or NIC number.</p>
+              <p className="results-muted text-center">{t("notFound")}</p>
             </div>
           ) : (
             <ResultDetail result={result} />
@@ -324,12 +332,13 @@ function ResultsSearchForm() {
 }
 
 export function ResultsSearch() {
+  const t = useTranslations("results");
   return (
     <Suspense
       fallback={
         <div className="kit-container">
           <div className="kit-card flex min-h-[400px] items-center justify-center">
-            <p className="results-muted">Loading search...</p>
+            <p className="results-muted">{t("loadingSearch")}</p>
           </div>
         </div>
       }

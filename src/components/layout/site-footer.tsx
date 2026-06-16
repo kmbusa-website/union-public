@@ -1,6 +1,6 @@
 import Image from "next/image";
-import Link from "next/link";
 import { Mail, MapPin, Phone } from "lucide-react";
+import { Link } from "@/i18n/navigation";
 import { FooterNewsletter } from "@/components/layout/footer-newsletter";
 import { SocialIcon } from "@/components/ui/social-icon";
 import {
@@ -28,7 +28,6 @@ export function SiteFooter() {
 
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-12 lg:gap-8">
-          {/* Brand */}
           <div className="lg:col-span-4">
             <div className="flex items-start gap-3">
               <Image
@@ -40,7 +39,9 @@ export function SiteFooter() {
               />
               <div>
                 <p className="text-xl font-bold text-(--gold)">{ORG_SHORT}</p>
-                <p className="mt-1 text-sm font-medium leading-snug" style={{ color: "var(--text-footer-heading)" }}>{ORG_FULL}</p>
+                <p className="mt-1 text-sm font-medium leading-snug" style={{ color: "var(--text-footer-heading)" }}>
+                  {ORG_FULL}
+                </p>
               </div>
             </div>
             <p className="mt-4 max-w-sm text-sm leading-relaxed">{ORG_TAGLINE}</p>
@@ -60,7 +61,6 @@ export function SiteFooter() {
             </div>
           </div>
 
-          {/* Quick Links */}
           <div className="lg:col-span-2">
             <FooterHeading>Quick Links</FooterHeading>
             <ul className="mt-4 space-y-2.5">
@@ -78,7 +78,6 @@ export function SiteFooter() {
             </ul>
           </div>
 
-          {/* Resources */}
           <div className="lg:col-span-2">
             <FooterHeading>Resources</FooterHeading>
             <ul className="mt-4 space-y-2.5">
@@ -96,7 +95,6 @@ export function SiteFooter() {
             </ul>
           </div>
 
-          {/* Contact */}
           <div className="lg:col-span-2">
             <FooterHeading>Contact Us</FooterHeading>
             <ul className="mt-4 space-y-3 text-sm">
@@ -119,7 +117,6 @@ export function SiteFooter() {
             </ul>
           </div>
 
-          {/* Newsletter */}
           <div className="sm:col-span-2 lg:col-span-2">
             <FooterNewsletter />
           </div>

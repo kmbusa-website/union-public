@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 import type { UnionEvent, EventCategory } from "@/lib/types/event";
-import { CATEGORY_LABELS, CATEGORY_COLORS } from "@/lib/types/event";
+import { CATEGORY_COLORS } from "@/lib/types/event";
 
 const CSV_URL = "/events/events.csv";
 const ALL = "all";
@@ -69,8 +70,10 @@ function formatDate(dateStr: string) {
 }
 
 function EventCard({ event, large = false }: { event: UnionEvent; large?: boolean }) {
+  const t = useTranslations("events");
   const [imgFailed, setImgFailed] = useState(false);
   const color = CATEGORY_COLORS[event.category];
+  const categoryLabel = t(`categories.${event.category}`);
   const hasPhoto = Boolean(event.imageUrl?.trim()) && !imgFailed;
 
   const cardStyle = {
@@ -96,11 +99,11 @@ function EventCard({ event, large = false }: { event: UnionEvent; large?: boolea
             <div className="flex items-center gap-2">
               <span className="text-sm font-semibold" style={{ color: "var(--text-secondary)" }}>{formatDate(event.date)}</span>
               <span className="rounded-full px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wide" style={{ backgroundColor: `${color}22`, color }}>
-                {CATEGORY_LABELS[event.category]}
+                {categoryLabel}
               </span>
               {event.featured && (
                 <span className="flex items-center gap-1 text-[11px] font-semibold text-amber-500">
-                  <Star className="h-3 w-3 fill-amber-500" /> Featured
+                  <Star className="h-3 w-3 fill-amber-500" /> {t("featured")}
                 </span>
               )}
             </div>
@@ -126,7 +129,7 @@ function EventCard({ event, large = false }: { event: UnionEvent; large?: boolea
       <div className="flex items-center gap-2">
         <span className="text-xs font-semibold" style={{ color: "var(--text-secondary)" }}>{formatDate(event.date)}</span>
         <span className="rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide" style={{ backgroundColor: `${color}22`, color }}>
-          {CATEGORY_LABELS[event.category]}
+          {categoryLabel}
         </span>
         {event.featured && <Star className="h-3 w-3 fill-amber-500 text-amber-500" />}
       </div>
@@ -138,6 +141,8 @@ function EventCard({ event, large = false }: { event: UnionEvent; large?: boolea
 }
 
 export function EventsList() {
+  const t = useTranslations("events");
+  const tc = useTranslations("common");
   const [events, setEvents] = useState<UnionEvent[]>([]);
   const [selectedYear, setSelectedYear] = useState<number>(0);
   const [activeCategory, setActiveCategory] = useState<EventCategory | typeof ALL>(ALL);
@@ -158,7 +163,7 @@ export function EventsList() {
         setError(null);
       } catch (cause) {
         if ((cause as Error).name === "AbortError") return;
-        setError(cause instanceof Error ? cause.message : "Failed to load events");
+        setError(cause instanceof Error ? cause.message : t("loadError"));
       } finally {
         setLoading(false);
       }
@@ -187,13 +192,13 @@ export function EventsList() {
 
   const navBtnBase: React.CSSProperties = { background: "var(--bg-card)", borderColor: "var(--border-color)", color: "var(--text-secondary)" };
 
-  if (loading) return <div className="kit-container pb-16"><p className="text-center" style={{ color: "var(--text-secondary)" }}>Loading events...</p></div>;
+  if (loading) return <div className="kit-container pb-16"><p className="text-center" style={{ color: "var(--text-secondary)" }}>{t("loading")}</p></div>;
   if (error) return <div className="kit-container pb-16"><p className="text-center" style={{ color: "var(--text-secondary)" }}>{error}</p></div>;
 
   return (
     <div className="kit-container pb-16">
       {yearEvents.length === 0 ? (
-        <p className="text-center" style={{ color: "var(--text-secondary)" }}>No events for {selectedYear}.</p>
+        <p className="text-center" style={{ color: "var(--text-secondary)" }}>{t("empty", { year: selectedYear })}</p>
       ) : (
         <div className="space-y-10">
           {/* Category filter */}
@@ -206,7 +211,7 @@ export function EventsList() {
                 ? { backgroundColor: "#06b6d4", color: "#0a192f" }
                 : { ...navBtnBase, border: "1px solid var(--border-color)" }}
             >
-              All
+              {tc("all")}
             </button>
             {categories.map((cat) => (
               <button
@@ -218,7 +223,7 @@ export function EventsList() {
                   ? { backgroundColor: CATEGORY_COLORS[cat], color: "#0a192f", fontWeight: 700 }
                   : { ...navBtnBase, border: "1px solid var(--border-color)" }}
               >
-                {CATEGORY_LABELS[cat]}
+                {t(`categories.${cat}`)}
               </button>
             ))}
           </div>
@@ -238,14 +243,14 @@ export function EventsList() {
       )}
 
       {/* Year navigation */}
-      <nav className="mt-12 flex items-center justify-center gap-3" aria-label="Events year">
+      <nav className="mt-12 flex items-center justify-center gap-3" aria-label={t("yearNav")}>
         <button
           type="button"
           onClick={() => { const i = Math.max(0, currentIndex - 1); if (years[i] !== undefined) setSelectedYear(years[i]); }}
           disabled={years.length === 0 || currentIndex === 0}
           className="flex h-10 w-10 items-center justify-center rounded-lg border transition hover:border-cyan-400/50 hover:text-cyan-500 disabled:cursor-not-allowed disabled:opacity-30"
           style={navBtnBase}
-          aria-label="Previous year"
+          aria-label={tc("previousYear")}
         >
           <ChevronLeft className="h-5 w-5" />
         </button>
@@ -268,7 +273,7 @@ export function EventsList() {
           disabled={years.length === 0 || currentIndex === years.length - 1}
           className="flex h-10 w-10 items-center justify-center rounded-lg border transition hover:border-cyan-400/50 hover:text-cyan-500 disabled:cursor-not-allowed disabled:opacity-30"
           style={navBtnBase}
-          aria-label="Next year"
+          aria-label={tc("nextYear")}
         >
           <ChevronRight className="h-5 w-5" />
         </button>
