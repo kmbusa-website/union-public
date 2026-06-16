@@ -1,0 +1,37 @@
+[
+  {
+    "id": "pongal-2025-1",
+    "title": "Mathuram Thai Pongal",
+    "category": "EVENTS",
+    "imageUrl": "/events/mathuram pongal 2025-1.jpg",
+    "createdAt": "2025-01-14"
+  },
+  {
+    "id": "pongal-2025-2",
+    "title": "Mathuram Thai Pongal",
+    "category": "EVENTS",
+    "imageUrl": "/events/mathuram pongal 2025-2.jpg",
+    "createdAt": "2025-01-14"
+  },
+  {
+    "id": "office-opening-1",
+    "title": "Office Opening Ceremony",
+    "category": "EVENTS",
+    "imageUrl": "/events/office openbing ceremony -1.jpg",
+    "createdAt": "2024-12-25"
+  },
+  {
+    "id": "pilot-exam-2024",
+    "title": "A/L Pilot Exam",
+    "category": "SEMINARS",
+    "imageUrl": "/events/annual pilot exam 2024-2.jpg",
+    "createdAt": "2024-07-01"
+  },
+  {
+    "id": "course-selection-2024",
+    "title": "University Course Selection",
+    "category": "SEMINARS",
+    "imageUrl": "/events/course selection 2024-1.jpg",
+    "createdAt": "2024-06-01"
+  }
+]

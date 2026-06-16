@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "import:results": "node scripts/import-al-results.mjs",
-    "prebuild": "npm run import:results"
+    "import:gallery": "node scripts/import-gallery.mjs",
+    "prebuild": "npm run import:results && npm run import:gallery"
   },
   "dependencies": {
     "clsx": "^2.1.1",

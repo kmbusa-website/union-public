@@ -1,12 +1,6 @@
 import { Target, Eye, Heart, Flag } from "lucide-react";
 import { PageIntroHero } from "@/components/kit/page-intro-hero";
-import {
-  ABOUT_HERO_IMAGE,
-  ABOUT_INTRO,
-  ABOUT_VALUES,
-  MILESTONES,
-  ORG_SHORT,
-} from "@/lib/brand";
+import { ABOUT_INTRO, ABOUT_VALUES, MILESTONES, ORG_SHORT } from "@/lib/brand";
 
 const icons = [Target, Eye, Heart, Flag];
 
@@ -18,20 +12,16 @@ export default function AboutPage() {
         title="About"
         titleHighlight={ORG_SHORT}
         lead={ABOUT_INTRO}
-        imageSrc={ABOUT_HERO_IMAGE}
-        imageAlt="Akshaya Hospital — KMBUSA office location"
-        cta={{ href: "#mission-vision", label: "Our Mission & Vision" }}
-        priority
       />
 
       <div className="kit-page-main">
         <div id="mission-vision" className="kit-container scroll-mt-28 pb-16">
-          <div className="mb-10 text-center sm:text-left">
+          <div className="mb-10 text-center">
             <p className="page-intro-overline">What we stand for</p>
             <h2 className="page-intro-title mt-3 text-3xl sm:text-4xl">
               Mission, Vision <span className="page-intro-title-accent">&amp; Values</span>
             </h2>
-            <div className="page-intro-title-rule mx-auto sm:mx-0" aria-hidden />
+            <div className="page-intro-title-rule mx-auto" aria-hidden />
           </div>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">

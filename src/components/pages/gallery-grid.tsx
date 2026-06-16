@@ -1,28 +1,63 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { Search, X } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { Loader2, Search, X } from "lucide-react";
 import { GALLERY_CATEGORY_API, GALLERY_FILTERS } from "@/lib/brand";
+import { filterGalleryPhotos, loadGalleryPhotos } from "@/lib/data/gallery";
 import type { GalleryPhoto } from "@/lib/types/api";
 
 export function GalleryGrid() {
+  const [photos, setPhotos] = useState<GalleryPhoto[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
   const [filter, setFilter] = useState("All");
   const [q, setQ] = useState("");
   const [preview, setPreview] = useState<GalleryPhoto | null>(null);
 
-  const photos = useMemo(() => {
-    const keyword = q.trim().toLowerCase();
-    const category = filter === "All" ? undefined : GALLERY_CATEGORY_API[filter];
+  useEffect(() => {
+    let cancelled = false;
 
-    return ([] as GalleryPhoto[]).filter((photo) => {
-      if (category && photo.category !== category) return false;
-      if (!keyword) return true;
-      return (
-        photo.title.toLowerCase().includes(keyword) ||
-        photo.description?.toLowerCase().includes(keyword)
-      );
-    });
-  }, [filter, q]);
+    loadGalleryPhotos()
+      .then((data) => {
+        if (!cancelled) setPhotos(data);
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setError("Could not load gallery data. Run npm run import:gallery and refresh.");
+        }
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const filtered = useMemo(() => {
+    const category = filter === "All" ? undefined : GALLERY_CATEGORY_API[filter];
+    return filterGalleryPhotos(photos, { category, query: q });
+  }, [photos, filter, q]);
+
+  if (loading) {
+    return (
+      <div className="kit-container flex min-h-[280px] items-center justify-center pb-16">
+        <p className="flex items-center gap-2" style={{ color: "var(--text-secondary)" }}>
+          <Loader2 className="h-4 w-4 animate-spin" />
+          Loading gallery...
+        </p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="kit-container pb-16">
+        <p className="text-center" style={{ color: "var(--text-secondary)" }}>{error}</p>
+      </div>
+    );
+  }
 
   return (
     <div className="kit-container pb-16">
@@ -51,10 +86,19 @@ export function GalleryGrid() {
       </div>
 
       {photos.length === 0 ? (
+        <div className="text-center" style={{ color: "var(--text-secondary)" }}>
+          <p>No gallery photos yet.</p>
+          <p className="mt-2 text-sm">
+            Add images to <code className="text-xs">public/gallery/</code>, list them in{" "}
+            <code className="text-xs">data/source/gallery.csv</code>, then run{" "}
+            <code className="text-xs">npm run import:gallery</code>.
+          </p>
+        </div>
+      ) : filtered.length === 0 ? (
         <p className="text-center" style={{ color: "var(--text-secondary)" }}>No photos in this category yet.</p>
       ) : (
         <div className="columns-1 gap-4 sm:columns-2 lg:columns-3">
-          {photos.map((photo) => (
+          {filtered.map((photo) => (
             <button
               key={photo.id}
               type="button"
@@ -76,7 +120,9 @@ export function GalleryGrid() {
                 </p>
                 <p className="font-semibold" style={{ color: "var(--text-primary)" }}>{photo.title}</p>
                 {photo.description && (
-                  <p className="mt-1 line-clamp-2 text-sm" style={{ color: "var(--text-secondary)" }}>{photo.description}</p>
+                  <p className="mt-1 line-clamp-2 text-sm" style={{ color: "var(--text-secondary)" }}>
+                    {photo.description}
+                  </p>
                 )}
               </div>
             </button>
@@ -100,7 +146,8 @@ export function GalleryGrid() {
             <X className="h-6 w-6" />
           </button>
           <div
-            className="max-h-[90vh] max-w-4xl overflow-auto rounded-xl bg-[#0a192f] p-4 shadow-2xl"
+            className="max-h-[90vh] max-w-4xl overflow-auto rounded-xl p-4 shadow-2xl"
+            style={{ background: "var(--bg-card)" }}
             onClick={(e) => e.stopPropagation()}
           >
             <img
@@ -108,10 +155,16 @@ export function GalleryGrid() {
               alt={preview.title}
               className="max-h-[70vh] w-full rounded-lg object-contain"
             />
-            <div className="mt-4 text-white">
-              <p className="text-sm text-amber-400">{preview.category.replace(/_/g, " ")}</p>
-              <h2 className="text-xl font-bold">{preview.title}</h2>
-              {preview.description && <p className="mt-2 text-slate-300">{preview.description}</p>}
+            <div className="mt-4">
+              <p className="text-sm text-cyan-400">{preview.category.replace(/_/g, " ")}</p>
+              <h2 className="text-xl font-bold" style={{ color: "var(--text-primary)" }}>
+                {preview.title}
+              </h2>
+              {preview.description && (
+                <p className="mt-2" style={{ color: "var(--text-secondary)" }}>
+                  {preview.description}
+                </p>
+              )}
             </div>
           </div>
         </div>

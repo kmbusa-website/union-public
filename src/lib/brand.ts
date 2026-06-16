@@ -5,7 +5,6 @@ export const ORG_TAGLINE =
   "Uniting Maths & Bio university students — supporting academic growth, events, and our community.";
 
 export const HERO_CAMPUS_IMAGE = "/hero-campus.jpg";
-export const ABOUT_HERO_IMAGE = "/events/office openbing ceremony -1.jpg";
 export const LOGO_PATH = "/logo.png";
 
 export const CONTACT = {
@@ -56,7 +55,7 @@ export const ABOUT_VALUES = [
 ] as const;
 
 export const MILESTONES = [
-  { value: "2025", label: "Established" },
+  { value: "2024", label: "Established" },
   { value: "50+", label: "Students Impacted" },
   { value: "5+", label: "Annual Events" },
 ] as const;
@@ -64,18 +63,18 @@ export const MILESTONES = [
 export const ABOUT_INTRO =
   `${ORG_SHORT} is a student-led organization dedicated to empowering Maths and Bio students through academic support, leadership, and community engagement.` as const;
 
-export const COMMITTEE_HERO_IMAGE = "/committee/executive-committee-2026.png";
 export const COMMITTEE_INTRO =
   `${ORG_NAME} — leadership and members who guide our union's activities and represent the student community.` as const;
 
-export const EVENTS_HERO_IMAGE = "/events/annual pilot exam 2024-2.jpg";
 export const EVENTS_INTRO =
   "Seminars, cultural events, and union activities over the years." as const;
 
-export const GALLERY_HERO_IMAGE = "/events/mathuram pongal 2025-1.jpg";
 export const GALLERY_INTRO = "Moments from our events and activities." as const;
 
-export const CONTACT_INTRO = "We would love to hear from you." as const;
+export const CONTACT_INTRO =
+  "Have a question, suggestion, or want to get involved?" as const;
+export const CONTACT_INTRO_SECONDARY =
+  "We're here to help and answer any question you might have." as const;
 
 export const GALLERY_FILTERS = [
   "All",

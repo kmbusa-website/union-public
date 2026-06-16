@@ -351,14 +351,38 @@ body {
 .page-intro-hero,
 .about-hero {
   background: var(--bg-surface);
-  border-bottom: 1px solid var(--border-color);
 }
 
 .page-intro-hero-dots,
 .about-hero-dots {
+  position: absolute;
+  top: 0;
+  height: 14rem;
+  width: 14rem;
   background-image: radial-gradient(circle, var(--page-intro-dot) 1.5px, transparent 1.5px);
   background-size: 18px 18px;
-  mask-image: radial-gradient(ellipse at top right, black 20%, transparent 70%);
+}
+
+.page-intro-hero-dots--left {
+  left: 0;
+  mask-image: radial-gradient(ellipse at top left, black 15%, transparent 65%);
+}
+
+.page-intro-hero-dots--right {
+  right: 0;
+  mask-image: radial-gradient(ellipse at top right, black 15%, transparent 65%);
+}
+
+.page-intro-hero-curve {
+  position: absolute;
+  bottom: -1px;
+  left: 50%;
+  z-index: 1;
+  height: 4.5rem;
+  width: 110%;
+  transform: translateX(-50%);
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  background: var(--bg-page);
 }
 
 .page-intro-overline,
@@ -391,35 +415,4 @@ body {
 .about-lead {
   color: var(--text-secondary);
   @apply text-base sm:text-lg;
-}
-
-.page-intro-btn-outline,
-.about-btn-outline {
-  border: 2px solid var(--blue);
-  color: var(--blue);
-  @apply inline-flex items-center gap-2 rounded-lg px-6 py-2.5 text-sm font-semibold transition;
-}
-
-.page-intro-btn-outline:hover,
-.about-btn-outline:hover {
-  background: rgba(37, 99, 235, 0.08);
-}
-
-.dark .page-intro-btn-outline:hover,
-.dark .about-btn-outline:hover {
-  background: rgba(59, 130, 246, 0.15);
-}
-
-.page-intro-image-wrap,
-.about-image-wrap {
-  border-radius: 1.25rem;
-  box-shadow: var(--shadow-card);
-  border: 1px solid var(--border-color);
-}
-
-@media (min-width: 640px) {
-  .page-intro-image-wrap,
-  .about-image-wrap {
-    border-radius: 1.5rem;
-  }
 }
