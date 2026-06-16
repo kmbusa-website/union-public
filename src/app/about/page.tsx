@@ -12,7 +12,7 @@ export default function AboutPage() {
       <div className="kit-page-main">
         <div className="kit-container pb-16">
           <div className="grid items-center gap-10 lg:grid-cols-2">
-            <div className="space-y-4 text-slate-300">
+            <div className="space-y-4" style={{ color: "var(--text-secondary)" }}>
               {ABOUT_INTRO.map((paragraph) => (
                 <p key={paragraph} className="leading-relaxed">
                   {paragraph}
@@ -30,8 +30,8 @@ export default function AboutPage() {
               return (
                 <div key={v.title} className="kit-card text-center">
                   <Icon className="mx-auto h-10 w-10 text-cyan-400" strokeWidth={1.5} />
-                  <h3 className="mt-4 font-semibold text-white">{v.title}</h3>
-                  <p className="mt-2 text-sm text-slate-400">{v.description}</p>
+                  <h3 className="mt-4 font-semibold" style={{ color: "var(--text-primary)" }}>{v.title}</h3>
+                  <p className="mt-2 text-sm" style={{ color: "var(--text-secondary)" }}>{v.description}</p>
                 </div>
               );
             })}
@@ -41,7 +41,7 @@ export default function AboutPage() {
             {MILESTONES.map((m) => (
               <div key={m.label} className="kit-card text-center">
                 <p className="text-2xl font-bold text-cyan-400">{m.value}</p>
-                <p className="mt-1 text-sm text-slate-400">{m.label}</p>
+                <p className="mt-1 text-sm" style={{ color: "var(--text-secondary)" }}>{m.label}</p>
               </div>
             ))}
           </div>

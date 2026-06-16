@@ -5,19 +5,12 @@ import { Building2, GraduationCap, Users } from "lucide-react";
 import { COMMITTEE_TIER_LABELS, type CommitteeMember } from "@/lib/types/committee";
 
 function getInitials(name: string) {
-  return name
-    .split(/\s+/)
-    .filter(Boolean)
-    .slice(0, 2)
-    .map((part) => part[0])
-    .join("")
-    .toUpperCase();
+  return name.split(/\s+/).filter(Boolean).slice(0, 2).map((p) => p[0]).join("").toUpperCase();
 }
 
 function MemberPhoto({ member, size }: { member: CommitteeMember; size: "md" | "lg" }) {
   const [imageFailed, setImageFailed] = useState(false);
   const dims = size === "lg" ? "h-28 w-24" : "h-24 w-20";
-  const initials = getInitials(member.name);
   const hasPhoto = Boolean(member.photoUrl?.trim());
 
   return (
@@ -35,11 +28,11 @@ function MemberPhoto({ member, size }: { member: CommitteeMember; size: "md" | "
         />
       ) : (
         <div
-          className="flex h-full w-full items-center justify-center bg-slate-900 text-lg font-bold text-white"
-          style={{ background: `linear-gradient(135deg, ${member.accent}44, #0f172a)` }}
+          className="flex h-full w-full items-center justify-center text-lg font-bold"
+          style={{ background: `linear-gradient(135deg, ${member.accent}44, #0f172a)`, color: "#ffffff" }}
           aria-label={member.name}
         >
-          {initials}
+          {getInitials(member.name)}
         </div>
       )}
     </div>
@@ -49,7 +42,7 @@ function MemberPhoto({ member, size }: { member: CommitteeMember; size: "md" | "
 function MemberDetails({ member, showRole }: { member: CommitteeMember; showRole?: boolean }) {
   return (
     <div className="min-w-0 flex-1">
-      <h3 className="text-base font-bold leading-tight text-white sm:text-lg">{member.name}</h3>
+      <h3 className="text-base font-bold leading-tight sm:text-lg" style={{ color: "var(--text-primary)" }}>{member.name}</h3>
       <span
         className="mt-1.5 inline-block rounded-full px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wide"
         style={{ backgroundColor: `${member.accent}22`, color: member.accent }}
@@ -57,13 +50,13 @@ function MemberDetails({ member, showRole }: { member: CommitteeMember; showRole
         {COMMITTEE_TIER_LABELS[member.tier]}
       </span>
       {showRole && (
-        <p className="mt-1 text-xs font-medium uppercase tracking-wider text-slate-400">{member.role}</p>
+        <p className="mt-1 text-xs font-medium uppercase tracking-wider" style={{ color: "var(--text-secondary)" }}>{member.role}</p>
       )}
-      <p className="mt-2 flex items-start gap-2 text-xs text-slate-400 sm:text-sm">
+      <p className="mt-2 flex items-start gap-2 text-xs sm:text-sm" style={{ color: "var(--text-secondary)" }}>
         <GraduationCap className="mt-0.5 h-4 w-4 shrink-0" style={{ color: member.accent }} />
         <span>{member.faculty}</span>
       </p>
-      <p className="mt-1 flex items-start gap-2 text-xs text-slate-400 sm:text-sm">
+      <p className="mt-1 flex items-start gap-2 text-xs sm:text-sm" style={{ color: "var(--text-secondary)" }}>
         <Building2 className="mt-0.5 h-4 w-4 shrink-0" style={{ color: member.accent }} />
         <span>{member.university}</span>
       </p>
@@ -75,8 +68,12 @@ export function CommitteeCard({ member, featured = false }: { member: CommitteeM
   if (featured) {
     return (
       <article
-        className="group relative overflow-hidden rounded-2xl border border-white/10 bg-[#0c1527] p-5 transition hover:border-white/20"
-        style={{ boxShadow: `inset 0 0 0 1px ${member.accent}18` }}
+        className="group relative overflow-hidden rounded-2xl border p-5 transition hover:shadow-md"
+        style={{
+          background: "var(--bg-card)",
+          borderColor: "var(--border-color)",
+          boxShadow: `inset 0 0 0 1px ${member.accent}18`,
+        }}
       >
         <div
           className="pointer-events-none absolute -right-8 -top-8 h-36 w-36 rounded-full opacity-60 blur-2xl transition group-hover:opacity-80"
@@ -86,8 +83,8 @@ export function CommitteeCard({ member, featured = false }: { member: CommitteeM
           <MemberPhoto member={member} size="lg" />
           <MemberDetails member={member} showRole />
           <div
-            className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 sm:flex"
-            style={{ color: member.accent }}
+            className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-full border sm:flex"
+            style={{ borderColor: "var(--border-color)", background: "var(--bg-surface)", color: member.accent }}
           >
             <Users className="h-5 w-5" />
           </div>
@@ -99,8 +96,12 @@ export function CommitteeCard({ member, featured = false }: { member: CommitteeM
 
   return (
     <article
-      className="group relative overflow-hidden rounded-2xl border border-white/10 bg-[#0c1527] p-4 transition hover:border-white/20"
-      style={{ boxShadow: `inset 0 0 0 1px ${member.accent}14` }}
+      className="group relative overflow-hidden rounded-2xl border p-4 transition hover:shadow-md"
+      style={{
+        background: "var(--bg-card)",
+        borderColor: "var(--border-color)",
+        boxShadow: `inset 0 0 0 1px ${member.accent}14`,
+      }}
     >
       <div className="flex gap-4">
         <MemberPhoto member={member} size="md" />

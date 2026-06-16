@@ -4,9 +4,9 @@ import { EventsList } from "@/components/pages/events-list";
 export default function EventsPage() {
   return (
     <>
-      <PageHero title="Upcoming" highlight="Events" subtitle="Workshops, seminars, and community gatherings." />
+      <PageHero title="Our" highlight="Events" subtitle="Seminars, cultural events, and union activities over the years." />
       <div className="kit-page-main">
-        <EventsList events={[]} />
+        <EventsList />
       </div>
     </>
   );

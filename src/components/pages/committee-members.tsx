@@ -155,7 +155,7 @@ export function CommitteeMembers() {
   if (loading) {
     return (
       <div className="kit-container pb-16">
-        <p className="text-center text-slate-400">Loading committee information...</p>
+        <p className="text-center" style={{ color: "var(--text-secondary)" }}>Loading committee information...</p>
       </div>
     );
   }
@@ -163,15 +163,17 @@ export function CommitteeMembers() {
   if (error) {
     return (
       <div className="kit-container pb-16">
-        <p className="text-center text-slate-400">{error}</p>
+        <p className="text-center" style={{ color: "var(--text-secondary)" }}>{error}</p>
       </div>
     );
   }
 
+  const navBtnBase: React.CSSProperties = { background: "var(--bg-card)", borderColor: "var(--border-color)", color: "var(--text-secondary)" };
+
   return (
     <div className="kit-container pb-16">
       {yearMembers.length === 0 ? (
-        <p className="text-center text-slate-400">
+        <p className="text-center" style={{ color: "var(--text-secondary)" }}>
           Committee information for {activeYear ?? DEFAULT_YEAR} is not available yet.
         </p>
       ) : (
@@ -201,7 +203,7 @@ export function CommitteeMembers() {
 
           {mentors.length > 0 && (
             <section>
-              <h2 className="mb-6 text-center text-sm font-bold uppercase tracking-[0.35em] text-white">
+              <h2 className="mb-6 text-center text-sm font-bold uppercase tracking-[0.35em]" style={{ color: "var(--text-primary)" }}>
                 Mentors
               </h2>
               <div className="grid gap-4 lg:grid-cols-2">
@@ -214,7 +216,7 @@ export function CommitteeMembers() {
 
           {general.length > 0 && (
             <section>
-              <h2 className="mb-6 text-center text-sm font-bold uppercase tracking-[0.35em] text-white">
+              <h2 className="mb-6 text-center text-sm font-bold uppercase tracking-[0.35em]" style={{ color: "var(--text-primary)" }}>
                 Members
               </h2>
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -232,32 +234,31 @@ export function CommitteeMembers() {
           type="button"
           onClick={prevYear}
           disabled={years.length === 0 || currentIndex === 0}
-          className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/15 text-slate-300 transition hover:border-cyan-400/50 hover:text-cyan-400 disabled:cursor-not-allowed disabled:opacity-30"
+          className="flex h-10 w-10 items-center justify-center rounded-lg border transition hover:border-cyan-400/50 hover:text-cyan-400 disabled:cursor-not-allowed disabled:opacity-30"
+          style={navBtnBase}
           aria-label="Previous year"
         >
           <ChevronLeft className="h-5 w-5" />
         </button>
-
         {years.map((year) => (
           <button
             key={year}
             type="button"
             onClick={() => setSelectedYear(year)}
-            className={
-              activeYear === year
-                ? "rounded-lg bg-cyan-500 px-5 py-2 text-sm font-bold text-[#0a192f]"
-                : "rounded-lg border border-white/15 px-5 py-2 text-sm font-semibold text-slate-400 transition hover:border-white/30 hover:text-white"
-            }
+            className="rounded-lg px-5 py-2 text-sm font-semibold transition"
+            style={activeYear === year
+              ? { backgroundColor: "#06b6d4", color: "#0a192f", fontWeight: 700 }
+              : { ...navBtnBase, border: "1px solid var(--border-color)" }}
           >
             {year}
           </button>
         ))}
-
         <button
           type="button"
           onClick={nextYear}
           disabled={years.length === 0 || currentIndex === years.length - 1}
-          className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/15 text-slate-300 transition hover:border-cyan-400/50 hover:text-cyan-400 disabled:cursor-not-allowed disabled:opacity-30"
+          className="flex h-10 w-10 items-center justify-center rounded-lg border transition hover:border-cyan-400/50 hover:text-cyan-400 disabled:cursor-not-allowed disabled:opacity-30"
+          style={navBtnBase}
           aria-label="Next year"
         >
           <ChevronRight className="h-5 w-5" />

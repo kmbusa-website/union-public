@@ -72,7 +72,7 @@ export function ContactForm() {
       <div className="grid gap-8 lg:grid-cols-12">
         <div className="lg:col-span-3">
           <h2 className="text-sm font-bold uppercase tracking-wider text-blue-400">Get In Touch</h2>
-          <ul className="mt-6 space-y-4 text-sm text-slate-300">
+          <ul className="mt-6 space-y-4 text-sm" style={{ color: "var(--text-secondary)" }}>
             <li className="flex gap-3">
               <MapPin className="h-5 w-5 shrink-0 text-blue-400" />
               {CONTACT.location}
@@ -83,7 +83,7 @@ export function ContactForm() {
             </li>
             <li className="flex gap-3">
               <Mail className="h-5 w-5 shrink-0 text-blue-400" />
-              <a href={`mailto:${CONTACT.email}`} className="hover:text-white">
+              <a href={`mailto:${CONTACT.email}`} className="hover:text-blue-400">
                 {CONTACT.email}
               </a>
             </li>
@@ -93,7 +93,8 @@ export function ContactForm() {
               <a
                 key={l.label}
                 href={l.href}
-                className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 text-slate-400 hover:border-blue-400 hover:text-blue-400"
+                className="flex h-9 w-9 items-center justify-center rounded-lg border transition hover:border-blue-400 hover:text-blue-400"
+                style={{ borderColor: "var(--border-color)", color: "var(--text-secondary)" }}
                 aria-label={l.label}
               >
                 <SocialIcon name={l.icon} className="h-4 w-4" />
@@ -102,7 +103,7 @@ export function ContactForm() {
           </div>
         </div>
         <form onSubmit={submit} className="kit-card lg:col-span-5">
-          <h2 className="text-lg font-bold text-white">Send Us a Message</h2>
+          <h2 className="text-lg font-bold" style={{ color: "var(--text-primary)" }}>Send Us a Message</h2>
           {["name", "email", "subject"].map((f) => (
             <div key={f} className="mt-4">
               <label className="kit-label capitalize">{f}</label>

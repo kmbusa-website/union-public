@@ -89,36 +89,36 @@ function ResultDetail({ result }: { result: AlResult }) {
   });
 
   return (
-    <div className="overflow-hidden rounded-xl border border-white/10 bg-[#0c1527] shadow-lg shadow-black/20">
-      <div className="border-b border-white/10 bg-gradient-to-b from-cyan-500/10 to-transparent px-6 py-8 text-center">
+    <div className="overflow-hidden rounded-xl border shadow-lg" style={{ background: "var(--bg-card)", borderColor: "var(--border-color)" }}>
+      <div className="border-b bg-linear-to-b from-cyan-500/10 to-transparent px-6 py-8 text-center" style={{ borderColor: "var(--border-color)" }}>
         <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-cyan-500/15">
           <Award className="h-9 w-9 text-cyan-400" strokeWidth={1.5} />
         </div>
-        <h3 className="mt-4 text-2xl font-bold tracking-tight text-white">{result.studentName}</h3>
+        <h3 className="mt-4 text-2xl font-bold tracking-tight" style={{ color: "var(--text-primary)" }}>{result.studentName}</h3>
       </div>
 
       <div className="px-6 py-5">
-        <dl className="divide-y divide-white/10">
+        <dl className="divide-y" style={{ borderColor: "var(--border-color)" }}>
           {infoRows.map((row) => (
             <div key={row.label} className="flex items-center justify-between gap-4 py-3 text-sm">
-              <dt className="font-medium text-slate-400">{row.label}</dt>
-              <dd className="text-right font-semibold text-white">{row.value}</dd>
+              <dt className="font-medium" style={{ color: "var(--text-secondary)" }}>{row.label}</dt>
+              <dd className="text-right font-semibold" style={{ color: "var(--text-primary)" }}>{row.value}</dd>
             </div>
           ))}
         </dl>
 
-        <div className="mt-6 overflow-hidden rounded-lg border border-white/10">
+        <div className="mt-6 overflow-hidden rounded-lg border" style={{ borderColor: "var(--border-color)" }}>
           <table className="w-full text-sm">
             <thead>
-              <tr className="bg-white/5 text-left">
+              <tr className="text-left" style={{ background: "var(--bg-surface)" }}>
                 <th className="px-4 py-3 font-semibold text-cyan-400">Subject</th>
                 <th className="px-4 py-3 text-right font-semibold text-cyan-400">Result</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-white/10">
+            <tbody style={{ borderColor: "var(--border-color)" }}>
               {subjects.map((subject) => (
-                <tr key={subject.subjectCode ?? subject.subjectName}>
-                  <td className="px-4 py-3 font-medium text-slate-200">
+                <tr key={subject.subjectCode ?? subject.subjectName} className="border-t" style={{ borderColor: "var(--border-color)" }}>
+                  <td className="px-4 py-3 font-medium" style={{ color: "var(--text-primary)" }}>
                     {displaySubjectName(subject)}
                   </td>
                   <td className="px-4 py-3 text-right">
@@ -203,7 +203,7 @@ function ResultsSearchForm() {
     return (
       <div className="kit-container pb-16">
         <div className="kit-card flex min-h-[320px] items-center justify-center">
-          <p className="text-slate-400">Loading results data...</p>
+          <p style={{ color: "var(--text-secondary)" }}>Loading results data...</p>
         </div>
       </div>
     );
@@ -213,12 +213,12 @@ function ResultsSearchForm() {
     return (
       <div className="kit-container pb-16">
         <div className="kit-card max-w-2xl space-y-3">
-          <p className="font-semibold text-white">No results data loaded</p>
-          <p className="text-sm text-slate-400">
+          <p className="font-semibold" style={{ color: "var(--text-primary)" }}>No results data loaded</p>
+          <p className="text-sm" style={{ color: "var(--text-secondary)" }}>
             {dataError ||
               "Add your Excel sheet to data/source/al-results.xlsx, then run npm run import:results."}
           </p>
-          <ol className="list-decimal space-y-1 pl-5 text-sm text-slate-400">
+          <ol className="list-decimal space-y-1 pl-5 text-sm" style={{ color: "var(--text-secondary)" }}>
             <li>Copy data/source/al-results-template.csv as a starting point</li>
             <li>Paste all ~360 student rows from your sheet</li>
             <li>Save as data/source/al-results.xlsx (or .csv)</li>
@@ -233,8 +233,8 @@ function ResultsSearchForm() {
     <div className="kit-container pb-16">
       <div className="grid gap-8 lg:grid-cols-[minmax(280px,360px)_1fr]">
         <form onSubmit={onSubmit} method="post" className="kit-card h-fit lg:sticky lg:top-8">
-          <h2 className="text-lg font-bold text-white">Check Your Results</h2>
-          <p className="mt-1 text-sm text-slate-400">
+          <h2 className="text-lg font-bold" style={{ color: "var(--text-primary)" }}>Check Your Results</h2>
+          <p className="mt-1 text-sm" style={{ color: "var(--text-secondary)" }}>
             Enter your index number or NIC number to view the A/L results.
           </p>
           <div className="mt-6 space-y-4">
@@ -252,7 +252,7 @@ function ResultsSearchForm() {
                 placeholder="7364523 or 200572500152"
               />
             </div>
-            <p className="text-xs text-slate-500">
+            <p className="text-xs" style={{ color: "var(--text-subtle)" }}>
               {allResults.length} students loaded. Search by exact index or NIC number.
             </p>
             <button type="submit" disabled={loading} className="kit-btn-primary w-full py-3">
@@ -265,17 +265,17 @@ function ResultsSearchForm() {
         <div className="min-h-[320px]">
           {loading ? (
             <div className="kit-card flex min-h-[320px] items-center justify-center">
-              <p className="text-slate-400">Searching results...</p>
+              <p style={{ color: "var(--text-secondary)" }}>Searching results...</p>
             </div>
           ) : !searched ? (
-            <div className="flex h-full min-h-[320px] flex-col items-center justify-center rounded-xl border border-dashed border-white/15 bg-white/5 p-8 text-slate-400">
-              <Search className="mb-3 h-12 w-12 text-slate-500" />
-              <p className="font-medium text-slate-300">Results will appear here</p>
-              <p className="mt-1 text-sm text-slate-400">Search by index number or NIC number to view your A/L results</p>
+            <div className="flex h-full min-h-[320px] flex-col items-center justify-center rounded-xl border border-dashed p-8" style={{ borderColor: "var(--border-color)", color: "var(--text-secondary)" }}>
+              <Search className="mb-3 h-12 w-12" style={{ color: "var(--text-subtle)" }} />
+              <p className="font-medium" style={{ color: "var(--text-primary)" }}>Results will appear here</p>
+              <p className="mt-1 text-sm">Search by index number or NIC number to view your A/L results</p>
             </div>
           ) : !result ? (
             <div className="kit-card flex min-h-[320px] items-center justify-center">
-              <p className="text-center text-slate-400">
+              <p className="text-center" style={{ color: "var(--text-secondary)" }}>
                 No results found for this index or NIC number.
               </p>
             </div>
@@ -294,7 +294,7 @@ export function ResultsSearch() {
       fallback={
         <div className="kit-container">
           <div className="kit-card flex min-h-[320px] items-center justify-center">
-            <p className="text-slate-400">Loading search...</p>
+            <p style={{ color: "var(--text-secondary)" }}>Loading search...</p>
           </div>
         </div>
       }

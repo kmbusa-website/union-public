@@ -17,7 +17,7 @@ export function FooterNewsletter() {
   return (
     <div>
       <h3 className="footer-heading">Newsletter</h3>
-      <p className="mt-3 text-sm leading-relaxed text-slate-400">
+      <p className="mt-3 text-sm leading-relaxed" style={{ color: "var(--text-footer)" }}>
         Subscribe to get the latest updates and announcements.
       </p>
       <form onSubmit={handleSubmit} className="mt-4 flex">
@@ -28,7 +28,12 @@ export function FooterNewsletter() {
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Enter your email"
           disabled={sent}
-          className="min-w-0 flex-1 rounded-l-lg border border-slate-600 bg-[#0d1117] px-3 py-2.5 text-sm text-white placeholder:text-slate-500 focus:border-[var(--gold)] focus:outline-none"
+          className="min-w-0 flex-1 rounded-l-lg border px-3 py-2.5 text-sm transition focus:outline-none"
+          style={{
+            background: "var(--bg-card)",
+            borderColor: "var(--border-footer)",
+            color: "var(--text-primary)",
+          }}
         />
         <button
           type="submit"
@@ -38,7 +43,7 @@ export function FooterNewsletter() {
           <Send className="h-4 w-4" />
         </button>
       </form>
-      {sent && <p className="mt-2 text-xs text-emerald-400">Thanks for subscribing!</p>}
+      {sent && <p className="mt-2 text-xs text-emerald-500">Thanks for subscribing!</p>}
     </div>
   );
 }

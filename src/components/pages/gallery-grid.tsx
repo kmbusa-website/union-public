@@ -40,7 +40,7 @@ export function GalleryGrid() {
           ))}
         </div>
         <div className="relative max-w-xs">
-          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2" style={{ color: "var(--text-subtle)" }} />
           <input
             className="kit-input pl-10"
             placeholder="Search gallery..."
@@ -51,7 +51,7 @@ export function GalleryGrid() {
       </div>
 
       {photos.length === 0 ? (
-        <p className="text-center text-slate-400">No photos in this category yet.</p>
+        <p className="text-center" style={{ color: "var(--text-secondary)" }}>No photos in this category yet.</p>
       ) : (
         <div className="columns-1 gap-4 sm:columns-2 lg:columns-3">
           {photos.map((photo) => (
@@ -59,9 +59,10 @@ export function GalleryGrid() {
               key={photo.id}
               type="button"
               onClick={() => setPreview(photo)}
-              className="group mb-4 w-full break-inside-avoid overflow-hidden rounded-xl border border-white/10 bg-[#0c1527] text-left shadow-lg transition hover:-translate-y-0.5 hover:border-white/20"
+              className="group mb-4 w-full break-inside-avoid overflow-hidden rounded-xl border text-left shadow-lg transition hover:-translate-y-0.5"
+              style={{ background: "var(--bg-card)", borderColor: "var(--border-color)" }}
             >
-              <div className="relative aspect-[4/3] w-full bg-[#0a192f]">
+              <div className="relative aspect-[4/3] w-full" style={{ background: "var(--bg-surface)" }}>
                 <img
                   src={photo.imageUrl}
                   alt={photo.title}
@@ -73,9 +74,9 @@ export function GalleryGrid() {
                 <p className="text-xs font-semibold uppercase tracking-wide text-cyan-400">
                   {photo.category.replace(/_/g, " ")}
                 </p>
-                <p className="font-semibold text-white">{photo.title}</p>
+                <p className="font-semibold" style={{ color: "var(--text-primary)" }}>{photo.title}</p>
                 {photo.description && (
-                  <p className="mt-1 line-clamp-2 text-sm text-slate-400">{photo.description}</p>
+                  <p className="mt-1 line-clamp-2 text-sm" style={{ color: "var(--text-secondary)" }}>{photo.description}</p>
                 )}
               </div>
             </button>

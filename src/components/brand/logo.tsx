@@ -8,8 +8,8 @@ export function Logo({ className }: { className?: string }) {
     <Link href="/" className={cn("flex items-center gap-3", className)}>
       <Image src={LOGO_PATH} alt={ORG_SHORT} width={48} height={48} className="h-11 w-11 rounded-full object-contain" priority />
       <div className="hidden leading-tight sm:block">
-        <span className="block text-sm font-bold text-white">{ORG_SHORT}</span>
-        <span className="block max-w-[200px] text-[10px] text-slate-400">{ORG_NAME}</span>
+        <span className="block text-sm font-bold" style={{ color: "var(--text-nav-active)" }}>{ORG_SHORT}</span>
+        <span className="block max-w-[200px] text-[10px]" style={{ color: "var(--text-nav)" }}>{ORG_NAME}</span>
       </div>
     </Link>
   );

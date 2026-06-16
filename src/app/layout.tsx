@@ -15,7 +15,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={inter.variable} suppressHydrationWarning>
+      <head>
+        {/* Apply saved theme before first paint to avoid flash */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){var t=localStorage.getItem('theme')??"light";document.documentElement.classList.toggle('dark',t==='dark');})();`,
+          }}
+        />
+      </head>
       <body className="flex min-h-screen flex-col font-sans antialiased">
         <SiteHeader />
         <main className="flex-1">{children}</main>

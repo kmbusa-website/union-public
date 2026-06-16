@@ -19,8 +19,8 @@ export function HomeQuickLinks() {
                 <item.icon className="h-6 w-6" strokeWidth={1.5} />
               </div>
               <div>
-                <p className="font-semibold text-white">{item.label}</p>
-                <p className="text-sm text-slate-400">{item.sub}</p>
+                <p className="font-semibold" style={{ color: "var(--text-primary)" }}>{item.label}</p>
+                <p className="text-sm" style={{ color: "var(--text-secondary)" }}>{item.sub}</p>
               </div>
             </Link>
           ))}

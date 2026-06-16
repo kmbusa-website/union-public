@@ -15,15 +15,16 @@ import {
 } from "@/lib/brand";
 
 function FooterHeading({ children }: { children: React.ReactNode }) {
-  return (
-    <h3 className="footer-heading">{children}</h3>
-  );
+  return <h3 className="footer-heading">{children}</h3>;
 }
 
 export function SiteFooter() {
   return (
-    <footer className="bg-[#0a0a0a] text-slate-300">
-      <div className="h-1 w-full bg-[var(--gold)]" />
+    <footer
+      className="transition-colors"
+      style={{ background: "var(--bg-footer)", color: "var(--text-footer)" }}
+    >
+      <div className="h-1 w-full bg-(--gold)" />
 
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-12 lg:gap-8">
@@ -38,11 +39,11 @@ export function SiteFooter() {
                 className="h-14 w-14 shrink-0 rounded-full object-contain"
               />
               <div>
-                <p className="text-xl font-bold text-[var(--gold)]">{ORG_SHORT}</p>
-                <p className="mt-1 text-sm font-medium leading-snug text-white">{ORG_FULL}</p>
+                <p className="text-xl font-bold text-(--gold)">{ORG_SHORT}</p>
+                <p className="mt-1 text-sm font-medium leading-snug" style={{ color: "var(--text-footer-heading)" }}>{ORG_FULL}</p>
               </div>
             </div>
-            <p className="mt-4 max-w-sm text-sm leading-relaxed text-slate-400">{ORG_TAGLINE}</p>
+            <p className="mt-4 max-w-sm text-sm leading-relaxed">{ORG_TAGLINE}</p>
             <div className="mt-5 flex flex-wrap gap-2">
               {FOOTER_SOCIAL.map((item) => (
                 <a
@@ -65,7 +66,11 @@ export function SiteFooter() {
             <ul className="mt-4 space-y-2.5">
               {FOOTER_QUICK_LINKS.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-sm text-slate-300 transition hover:text-[var(--gold)]">
+                  <Link
+                    href={link.href}
+                    className="text-sm transition hover:text-(--gold)"
+                    style={{ color: "var(--text-footer)" }}
+                  >
                     {link.label}
                   </Link>
                 </li>
@@ -79,7 +84,11 @@ export function SiteFooter() {
             <ul className="mt-4 space-y-2.5">
               {FOOTER_RESOURCES.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-sm text-slate-300 transition hover:text-[var(--gold)]">
+                  <Link
+                    href={link.href}
+                    className="text-sm transition hover:text-(--gold)"
+                    style={{ color: "var(--text-footer)" }}
+                  >
                     {link.label}
                   </Link>
                 </li>
@@ -92,19 +101,19 @@ export function SiteFooter() {
             <FooterHeading>Contact Us</FooterHeading>
             <ul className="mt-4 space-y-3 text-sm">
               <li className="flex gap-3">
-                <Phone className="mt-0.5 h-4 w-4 shrink-0 text-[var(--gold)]" />
-                <a href={`tel:${CONTACT.phone.replace(/\s/g, "")}`} className="hover:text-white">
+                <Phone className="mt-0.5 h-4 w-4 shrink-0 text-(--gold)" />
+                <a href={`tel:${CONTACT.phone.replace(/\s/g, "")}`} className="transition hover:text-(--gold)">
                   {CONTACT.phone}
                 </a>
               </li>
               <li className="flex gap-3">
-                <Mail className="mt-0.5 h-4 w-4 shrink-0 text-[var(--gold)]" />
-                <a href={`mailto:${CONTACT.email}`} className="hover:text-white">
+                <Mail className="mt-0.5 h-4 w-4 shrink-0 text-(--gold)" />
+                <a href={`mailto:${CONTACT.email}`} className="transition hover:text-(--gold)">
                   {CONTACT.email}
                 </a>
               </li>
               <li className="flex gap-3">
-                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[var(--gold)]" />
+                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-(--gold)" />
                 <span className="leading-snug">{CONTACT.location}</span>
               </li>
             </ul>
@@ -117,8 +126,8 @@ export function SiteFooter() {
         </div>
       </div>
 
-      <div className="border-t border-slate-800">
-        <p className="px-4 py-5 text-center text-xs text-slate-500 sm:text-sm">
+      <div className="border-t" style={{ borderColor: "var(--border-footer)", background: "var(--bg-footer-bottom)" }}>
+        <p className="px-4 py-5 text-center text-xs sm:text-sm" style={{ color: "var(--text-footer)" }}>
           © {new Date().getFullYear()} {ORG_FULL}. All rights reserved.
         </p>
       </div>
