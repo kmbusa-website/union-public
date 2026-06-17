@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useCallback, useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
@@ -171,10 +171,9 @@ function ResultsSearchForm() {
   const [allResults, setAllResults] = useState<AlResult[]>([]);
   const [dataLoading, setDataLoading] = useState(true);
   const [dataError, setDataError] = useState("");
-  const [query, setQuery] = useState("");
-  const [results, setResults] = useState<AlResult[]>([]);
+  const [query, setQuery] = useState(() => searchParams.get("query") ?? "");
   const [loading, setLoading] = useState(false);
-  const [searched, setSearched] = useState(false);
+  const [submittedQuery, setSubmittedQuery] = useState(() => searchParams.get("query") ?? "");
 
   useEffect(() => {
     let cancelled = false;
@@ -193,35 +192,20 @@ function ResultsSearchForm() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [t]);
 
-  const runSearch = useCallback((value: string, dataset: AlResult[]) => {
-    const trimmed = value.trim();
-    if (!trimmed) return;
-    setSearched(true);
-    setResults(searchAlResults(dataset, trimmed));
-  }, []);
-
-  const urlQuery = searchParams.get("query") ?? "";
-
-  useEffect(() => {
-    if (dataLoading || allResults.length === 0) return;
-    setQuery((prev) => (prev === urlQuery ? prev : urlQuery));
-    if (urlQuery) runSearch(urlQuery, allResults);
-  }, [urlQuery, allResults, dataLoading, runSearch]);
+  const searched = submittedQuery.trim().length > 0;
+  const result = searched ? searchAlResults(allResults, submittedQuery)[0] : undefined;
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const trimmed = query.trim();
     if (!trimmed) return;
     setLoading(true);
-    setSearched(true);
-    setResults(searchAlResults(allResults, trimmed));
+    setSubmittedQuery(trimmed);
     router.replace(`/results?query=${encodeURIComponent(trimmed)}`);
     setLoading(false);
   };
-
-  const result = results[0];
 
   if (dataLoading) {
     return (
@@ -250,8 +234,23 @@ function ResultsSearchForm() {
 
   return (
     <div className="kit-container pb-16">
-      <div className="grid gap-8 lg:grid-cols-[minmax(300px,360px)_1fr] lg:items-start">
-        <aside className="space-y-6 lg:sticky lg:top-24">
+      <div className="mb-4 grid gap-3 md:mb-6 lg:grid-cols-[150px_minmax(0,1fr)] lg:items-center">
+        <div className="flex min-h-[120px] items-center justify-center p-1 text-center md:min-h-[150px]">
+          <div className="relative flex h-20 w-20 items-center justify-center md:h-24 md:w-24">
+            <Trophy className="results-accent relative h-12 w-12 md:h-14 md:w-14" strokeWidth={1.25} />
+            <Sparkles className="absolute -right-1 top-0 h-4 w-4 text-amber-500 dark:text-amber-400 md:h-5 md:w-5" />
+          </div>
+        </div>
+
+        <div className="flex min-h-[120px] items-center justify-center px-1 sm:px-3 md:min-h-[150px] lg:px-6">
+          <p className="text-center text-base leading-tight sm:text-lg sm:leading-relaxed">
+            <span className="results-muted">{t("hardWork")} </span>
+            <span className="results-highlight-success font-bold">{t("success")}</span>
+          </p>
+        </div>
+      </div>
+
+      <div className="space-y-8">
           <form onSubmit={onSubmit} className="results-panel p-6">
             <h2 className="flex items-center gap-2 text-lg font-bold" style={{ color: "var(--text-primary)" }}>
               <Search className="results-accent h-5 w-5" />
@@ -263,47 +262,25 @@ function ResultsSearchForm() {
               <label className="kit-label" htmlFor="search-query">
                 {t("indexOrNic")}
               </label>
-              <div className="relative mt-1">
-                <User className="results-subtle absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2" />
+              <div className="mt-1 grid gap-3 sm:grid-cols-[minmax(0,1fr)_auto]">
                 <input
                   id="search-query"
                   name="query"
-                  className="kit-input pl-10"
+                  className="kit-input"
                   required
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   placeholder="200572507152"
                 />
+                <button type="submit" disabled={loading} className="results-search-btn px-6">
+                  <Search className="h-4 w-4" />
+                  {loading ? t("searching") : t("searchButton")}
+                </button>
               </div>
-              <p className="results-subtle mt-2 text-xs">
-                {t("studentsLoaded", { count: allResults.length })}
-              </p>
             </div>
-
-            <button type="submit" disabled={loading} className="results-search-btn mt-5">
-              <Search className="h-4 w-4" />
-              {loading ? t("searching") : t("searchButton")}
-            </button>
           </form>
 
-          <div className="results-panel p-6 text-center">
-            <div className="relative mx-auto flex h-24 w-24 items-center justify-center">
-              <div
-                className="absolute inset-0 rounded-full blur-xl"
-                style={{ background: "var(--results-accent-soft)" }}
-              />
-              <Trophy className="results-accent relative h-14 w-14" strokeWidth={1.25} />
-              <Sparkles className="absolute -right-1 top-0 h-5 w-5 text-amber-500 dark:text-amber-400" />
-            </div>
-            <p className="results-muted mt-4 text-sm leading-relaxed">
-              {t("hardWork")}
-              <br />
-              <span className="results-highlight-success font-bold">{t("success")}</span>
-            </p>
-          </div>
-        </aside>
-
-        <div className="min-h-[420px]">
+          <div className="min-h-[420px]">
           {loading ? (
             <div className="results-panel flex min-h-[420px] items-center justify-center">
               <p className="results-muted">{t("searchingResults")}</p>
@@ -325,7 +302,7 @@ function ResultsSearchForm() {
           ) : (
             <ResultDetail result={result} />
           )}
-        </div>
+          </div>
       </div>
     </div>
   );
