@@ -94,7 +94,7 @@ export function HomeHighlights() {
       <div className="mx-auto max-w-7xl">
         <div
           ref={scrollerRef}
-          className="overflow-x-auto pb-10 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className="overflow-x-auto pb-10 scrollbar-none [&::-webkit-scrollbar]:hidden"
           style={{
             maskImage: "linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%)",
             WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%)",

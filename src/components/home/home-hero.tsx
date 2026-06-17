@@ -15,7 +15,7 @@ export function HomeHero() {
   return (
     <section className="relative min-h-[85vh] overflow-hidden">
       <Image src={HERO_CAMPUS_IMAGE} alt={tb("orgShort")} fill className="object-cover" priority sizes="100vw" />
-      <div className="absolute inset-0 bg-gradient-to-r from-[#0a192f]/95 via-[#0a192f]/75 to-[#0a192f]/40" />
+      <div className="absolute inset-0 bg-linear-to-r from-[#0a192f]/95 via-[#0a192f]/75 to-[#0a192f]/40" />
       <div className="relative mx-auto flex min-h-[85vh] max-w-7xl flex-col justify-center px-4 py-20 sm:px-6 lg:flex-row lg:items-center lg:gap-12 lg:px-8">
         <div className="max-w-2xl">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-300">

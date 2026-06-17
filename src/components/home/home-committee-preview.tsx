@@ -152,7 +152,7 @@ export function HomeCommitteePreview() {
           </h2>
         </div>
 
-        <div ref={scrollerRef} className="overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div ref={scrollerRef} className="overflow-x-auto pb-2 scrollbar-none [&::-webkit-scrollbar]:hidden">
           <div className="flex gap-6 px-1">
             {[...members, ...members].map((m, i) => (
               <MemberCard key={`${m.id}-${i}`} member={m} />
