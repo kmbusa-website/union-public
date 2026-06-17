@@ -1,217 +1,230 @@
 {
-  "metadata": {
-    "title": "KMBUSA — Kilinochchi Maths Bio University Students' Association",
-    "description": "Official website of Kilinochchi Maths Bio University Students' Association (KMBUSA)"
-  },
-  "brand": {
-    "orgName": "Kilinochchi Maths Bio University Students' Association",
-    "orgShort": "KMBUSA",
-    "tagline": "Uniting Maths & Bio university students — supporting academic growth, events, and our community."
-  },
-  "nav": {
-    "home": "Home",
-    "about": "About",
-    "committee": "Committee",
-    "events": "Events",
-    "gallery": "Gallery",
-    "results": "A/L Results",
-    "contact": "Contact",
-    "getStarted": "Get Started",
-    "menu": "Menu"
-  },
-  "language": {
-    "en": "English",
-    "ta": "தமிழ்",
-    "switch": "Switch language"
-  },
-  "common": {
-    "followUs": "Follow Us:",
-    "loading": "Loading...",
-    "goHome": "Go home",
-    "notFound": "Page not found",
-    "previousYear": "Previous year",
-    "nextYear": "Next year",
-    "all": "All",
-    "close": "Close"
-  },
-  "footer": {
-    "quickLinks": "Quick Links",
-    "resources": "Resources",
-    "contactUs": "Contact Us",
-    "newsletter": "Newsletter",
-    "newsletterDesc": "Subscribe to get the latest updates and announcements.",
-    "emailPlaceholder": "Enter your email",
-    "subscribe": "Subscribe",
-    "subscribed": "Thanks for subscribing!",
-    "rights": "All rights reserved.",
-    "aboutUs": "About Us"
-  },
-  "home": {
-    "welcome": "Welcome to {org}",
-    "heroLine1": "EMPOWERING STUDENTS,",
-    "heroLine2": "BUILDING",
-    "heroHighlight": "FUTURE LEADERS",
-    "exploreEvents": "Explore Events",
-    "viewResults": "View Results",
-    "statsMembers": "Active Members",
-    "statsPrograms": "Academic Programs",
-    "statsEvents": "Events Conducted",
-    "quickEvents": "Events",
-    "quickEventsSub": "View upcoming events",
-    "quickResults": "A/L Results",
-    "quickResultsSub": "Check your results",
-    "quickGallery": "Gallery",
-    "quickGallerySub": "Photo albums",
-    "quickCommittee": "Committee",
-    "quickCommitteeSub": "Meet the team",
-    "highlightsOverline": "Memories",
-    "highlightsTitle": "Event",
-    "highlightsHighlight": "Highlights",
-    "committeeOverline": "Leadership",
-    "committeeTitle": "Our",
-    "committeeHighlight": "Executive Committee",
-    "viewAllMembers": "View All Members"
-  },
-  "about": {
-    "overline": "About {org}",
-    "title": "About",
-    "titleHighlight": "KMBUSA",
-    "intro": "KMBUSA is a student-led organization dedicated to empowering Maths and Bio students through academic support, leadership, and community engagement.",
-    "standFor": "What we stand for",
-    "missionTitle": "Mission, Vision",
-    "missionHighlight": "& Values",
-    "values": {
-      "mission": {
-        "title": "Our Mission",
-        "description": "Unite Maths & Bio students and advance academic excellence across our community."
-      },
-      "vision": {
-        "title": "Our Vision",
-        "description": "A thriving student body leading with integrity, innovation, and compassion."
-      },
-      "values": {
-        "title": "Our Values",
-        "description": "Collaboration, inclusivity, academic integrity, and service to society."
-      },
-      "goals": {
-        "title": "Our Goals",
-        "description": "Support members through events, resources, guidance, and representation."
-      }
-    },
-    "milestones": {
-      "established": "Established",
-      "students": "Students Impacted",
-      "annualEvents": "Annual Events"
-    }
-  },
-  "committee": {
-    "overline": "Leadership",
-    "title": "Executive",
-    "titleHighlight": "Committee",
-    "intro": "Kilinochchi Maths Bio University Students' Association — leadership and members who guide our union's activities and represent the student community.",
-    "loading": "Loading committee information...",
-    "unavailable": "Committee information for {year} is not available yet.",
-    "executive": "Executive Committee {year}",
-    "mentors": "Mentors",
-    "members": "Members",
-    "yearNav": "Committee year",
-    "loadError": "Failed to load committee data"
-  },
-  "events": {
-    "overline": "Activities",
-    "title": "Our",
-    "titleHighlight": "Events",
-    "intro": "Seminars, cultural events, and union activities over the years.",
-    "loading": "Loading events...",
-    "empty": "No events for {year}.",
-    "featured": "Featured",
-    "yearNav": "Events year",
-    "loadError": "Failed to load events",
-    "categories": {
-      "meeting": "Meeting",
-      "seminar": "Seminar",
-      "cultural": "Cultural",
-      "ceremony": "Ceremony",
-      "sports": "Sports"
-    }
-  },
-  "gallery": {
-    "overline": "Memories",
-    "title": "Photo",
-    "titleHighlight": "Gallery",
-    "intro": "Moments from our events and activities.",
-    "loading": "Loading gallery...",
-    "loadError": "Could not load gallery data. Run npm run import:gallery and refresh.",
-    "empty": "No gallery photos yet.",
-    "emptyHint": "Add images to public/gallery/, list them in data/source/gallery.csv, then run npm run import:gallery.",
-    "noCategory": "No photos in this category yet.",
-    "searchPlaceholder": "Search gallery...",
-    "filters": {
-      "all": "All",
-      "academic": "Academic",
-      "sports": "Sports",
-      "events": "Events",
-      "seminars": "Seminars",
-      "communityService": "Community Service"
-    }
-  },
-  "contact": {
-    "overline": "We'd love to hear from you",
-    "title": "Contact",
-    "titleHighlight": "Us",
-    "intro": "Have a question, suggestion, or want to get involved?",
-    "introSecondary": "We're here to help and answer any question you might have.",
-    "getInTouch": "Get In Touch",
-    "sendMessage": "Send Us a Message",
-    "name": "Name",
-    "email": "Email",
-    "phone": "Phone",
-    "subject": "Subject",
-    "message": "Message",
-    "sending": "Sending...",
-    "submit": "Send Message",
-    "success": "Message sent successfully. We will get back to you soon.",
-    "configError": "Contact form is not configured. Add NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY to .env.local",
-    "sendError": "Could not send your message. Please try again.",
-    "failed": "Failed to send message.",
-    "map": "Map"
-  },
-  "results": {
-    "findResults": "Find Your Results",
-    "searchHint": "Enter your index number or NIC to view results.",
-    "indexOrNic": "Index Number or NIC Number",
-    "studentsLoaded": "{count} students loaded. Search by exact index or NIC number.",
-    "searching": "Searching...",
-    "searchButton": "Search Results",
-    "loadingData": "Loading results data...",
-    "loadingSearch": "Loading search...",
-    "noDataTitle": "No results data loaded",
-    "noDataHint": "Add your Excel files to data/source/, then run npm run import:results.",
-    "dataError": "Could not load results data. Run npm run import:results and refresh.",
-    "hardWork": "Your Hard Work Today,",
-    "success": "Your Success Tomorrow!",
-    "searchingResults": "Searching results...",
-    "placeholderTitle": "Results will appear here",
-    "placeholderHint": "Search by index number or NIC number to view your A/L examination results.",
-    "notFound": "No results found for this index or NIC number.",
-    "yearBadge": "{year} Year",
-    "examLabel": "G.C.E. (A/L) Examination",
-    "subjectResults": "Subject Results",
-    "labels": {
-      "name": "Name",
-      "index": "Index Number",
-      "nic": "NIC Number",
-      "district": "District",
-      "school": "School",
-      "districtRank": "District Rank",
-      "zScore": "Z-Score",
-      "stream": "Subject Stream"
-    },
-    "subjects": {
-      "PHY": "PHYSICS",
-      "CHE": "CHEMISTRY",
-      "MAT": "COMBINED MATHEMATICS",
-      "BIO": "BIOLOGY"
-    }
-  }
+    "metadata":  {
+                     "title":  "KMBUSA \u2014 Kilinochchi Maths Bio University Students\u0027 Association",
+                     "description":  "Official website of Kilinochchi Maths Bio University Students\u0027 Association (KMBUSA)"
+                 },
+    "brand":  {
+                  "orgName":  "Kilinochchi Maths Bio University Students\u0027 Association",
+                  "orgShort":  "KMBUSA",
+                  "tagline":  "Uniting Maths \u0026 Bio university students \u2014 supporting academic growth, events, and our community."
+              },
+    "nav":  {
+                "home":  "Home",
+                "about":  "About",
+                "committee":  "Committee",
+                "events":  "Events",
+                "gallery":  "Gallery",
+                "results":  "A/L Results",
+                "contact":  "Contact",
+                "getStarted":  "Get Started",
+                "menu":  "Menu"
+            },
+    "language":  {
+                     "en":  "English",
+                     "ta":  "Ã Â®Â¤Ã Â®Â®Ã Â®Â¿Ã Â®Â´Ã Â¯Â",
+                     "switch":  "Switch language"
+                 },
+    "common":  {
+                   "followUs":  "Follow Us:",
+                   "loading":  "Loading...",
+                   "goHome":  "Go home",
+                   "notFound":  "Page not found",
+                   "previousYear":  "Previous year",
+                   "nextYear":  "Next year",
+                   "all":  "All",
+                   "close":  "Close"
+               },
+    "footer":  {
+                   "quickLinks":  "Quick Links",
+                   "resources":  "Resources",
+                   "contactUs":  "Contact Us",
+                   "newsletter":  "Newsletter",
+                   "newsletterDesc":  "Subscribe to get the latest updates and announcements.",
+                   "emailPlaceholder":  "Enter your email",
+                   "subscribe":  "Subscribe",
+                   "subscribed":  "Thanks for subscribing!",
+                   "rights":  "All rights reserved.",
+                   "aboutUs":  "About Us"
+               },
+    "home":  {
+                 "welcome":  "Welcome to {org}",
+                 "heroLine1":  "EMPOWERING STUDENTS,",
+                 "heroLine2":  "BUILDING",
+                 "heroHighlight":  "FUTURE LEADERS",
+                 "exploreEvents":  "Explore Events",
+                 "viewResults":  "View Results",
+                 "statsMembers":  "Active Members",
+                 "statsPrograms":  "Academic Programs",
+                 "statsEvents":  "Events Conducted",
+                 "quickEvents":  "Events",
+                 "quickEventsSub":  "View upcoming events",
+                 "quickResults":  "A/L Results",
+                 "quickResultsSub":  "Check your results",
+                 "quickGallery":  "Gallery",
+                 "quickGallerySub":  "Photo albums",
+                 "quickCommittee":  "Committee",
+                 "quickCommitteeSub":  "Meet the team",
+                 "highlightsOverline":  "Memories",
+                 "highlightsTitle":  "Event",
+                 "highlightsHighlight":  "Highlights",
+                 "committeeOverline":  "Leadership",
+                 "committeeTitle":  "Our",
+                 "committeeHighlight":  "Executive Committee",
+                 "viewAllMembers":  "View All Members"
+             },
+    "about":  {
+                  "overline":  "About {org}",
+                  "title":  "About",
+                  "titleHighlight":  "KMBUSA",
+                  "intro":  "KMBUSA is a student-led organization dedicated to empowering Maths and Bio students through academic support, leadership, and community engagement.",
+                  "standFor":  "What we stand for",
+                  "missionTitle":  "Mission, Vision",
+                  "missionHighlight":  "\u0026 Values",
+                  "values":  {
+                                 "mission":  {
+                                                 "title":  "Our Mission",
+                                                 "description":  "Unite Maths \u0026 Bio students and advance academic excellence across our community."
+                                             },
+                                 "vision":  {
+                                                "title":  "Our Vision",
+                                                "description":  "A thriving student body leading with integrity, innovation, and compassion."
+                                            },
+                                 "values":  {
+                                                "title":  "Our Values",
+                                                "description":  "Collaboration, inclusivity, academic integrity, and service to society."
+                                            },
+                                 "goals":  {
+                                               "title":  "Our Goals",
+                                               "description":  "Support members through events, resources, guidance, and representation."
+                                           }
+                             },
+                  "milestones":  {
+                                     "established":  "Established",
+                                     "students":  "Students Impacted",
+                                     "annualEvents":  "Annual Events"
+                                 }
+              },
+    "committee":  {
+                      "overline":  "Leadership",
+                      "title":  "Executive",
+                      "titleHighlight":  "Committee",
+                      "intro":  "Kilinochchi Maths Bio University Students\u0027 Association \u2014 leadership and members who guide our union\u0027s activities and represent the student community.",
+                      "loading":  "Loading committee information...",
+                      "unavailable":  "Committee information for {year} is not available yet.",
+                      "executive":  "Executive Committee {year}",
+                      "mentors":  "Mentors",
+                      "members":  "Members",
+                      "yearNav":  "Committee year",
+                      "loadError":  "Failed to load committee data"
+                  },
+    "events":  {
+                   "overline":  "Activities",
+                   "title":  "Our",
+                   "titleHighlight":  "Events",
+                   "intro":  "Seminars, cultural events, and union activities over the years.",
+                   "loading":  "Loading events...",
+                   "empty":  "No events for {year}.",
+                   "featured":  "Featured",
+                   "yearNav":  "Events year",
+                   "loadError":  "Failed to load events",
+                   "categories":  {
+                                      "meeting":  "Meeting",
+                                      "seminar":  "Seminar",
+                                      "cultural":  "Cultural",
+                                      "ceremony":  "Ceremony",
+                                      "sports":  "Sports"
+                                  },
+                   "emptyCatalog":  "No event records were found in the local files.",
+                   "detailsOverline":  "Event Details",
+                   "detailsIntro":  "A closer look at this event and its photos.",
+                   "photosHeading":  "Event Photos",
+                   "allPhotos":  "Photos",
+                   "photoCount":  "photos",
+                   "noPhotos":  "No photos are available for this event yet.",
+                   "backToEvents":  "Back to events"
+               },
+    "gallery":  {
+                    "overline":  "Memories",
+                    "title":  "Photo",
+                    "titleHighlight":  "Gallery",
+                    "intro":  "Moments from our events and activities.",
+                    "loading":  "Loading gallery...",
+                    "loadError":  "Could not load gallery data. Run npm run import:gallery and refresh.",
+                    "empty":  "No gallery photos yet.",
+                    "noCategory":  "No photos in this category yet.",
+                    "searchPlaceholder":  "Search gallery...",
+                    "filters":  {
+                                    "all":  "All",
+                                    "academic":  "Academic",
+                                    "sports":  "Sports",
+                                    "events":  "Events",
+                                    "seminars":  "Seminars",
+                                    "communityService":  "Community Service",
+                                    "meeting":  "Meeting",
+                                    "seminar":  "Seminar",
+                                    "cultural":  "Cultural",
+                                    "ceremony":  "Ceremony"
+                                },
+                    "emptyHint":  "Create one folder per event inside public/events/ (for example public/events/annual-meeting-2024/) and list the event in public/events/events.csv.",
+                    "viewEvent":  "View event"
+                },
+    "contact":  {
+                    "overline":  "We\u0027d love to hear from you",
+                    "title":  "Contact",
+                    "titleHighlight":  "Us",
+                    "intro":  "Have a question, suggestion, or want to get involved?",
+                    "introSecondary":  "We\u0027re here to help and answer any question you might have.",
+                    "getInTouch":  "Get In Touch",
+                    "sendMessage":  "Send Us a Message",
+                    "name":  "Name",
+                    "email":  "Email",
+                    "phone":  "Phone",
+                    "subject":  "Subject",
+                    "message":  "Message",
+                    "sending":  "Sending...",
+                    "submit":  "Send Message",
+                    "success":  "Message sent successfully. We will get back to you soon.",
+                    "configError":  "Contact form is not configured. Add NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY to .env.local",
+                    "sendError":  "Could not send your message. Please try again.",
+                    "failed":  "Failed to send message.",
+                    "map":  "Map"
+                },
+    "results":  {
+                    "findResults":  "Find Your Results",
+                    "searchHint":  "Enter your index number or NIC to view results.",
+                    "indexOrNic":  "Index Number or NIC Number",
+                    "studentsLoaded":  "{count} students loaded. Search by exact index or NIC number.",
+                    "searching":  "Searching...",
+                    "searchButton":  "Search Results",
+                    "loadingData":  "Loading results data...",
+                    "loadingSearch":  "Loading search...",
+                    "noDataTitle":  "No results data loaded",
+                    "noDataHint":  "Add your Excel files to data/source/, then run npm run import:results.",
+                    "dataError":  "Could not load results data. Run npm run import:results and refresh.",
+                    "hardWork":  "Your Hard Work Today,",
+                    "success":  "Your Success Tomorrow!",
+                    "searchingResults":  "Searching results...",
+                    "placeholderTitle":  "Results will appear here",
+                    "placeholderHint":  "Search by index number or NIC number to view your A/L examination results.",
+                    "notFound":  "No results found for this index or NIC number.",
+                    "yearBadge":  "{year} Year",
+                    "examLabel":  "G.C.E. (A/L) Examination",
+                    "subjectResults":  "Subject Results",
+                    "labels":  {
+                                   "name":  "Name",
+                                   "index":  "Index Number",
+                                   "nic":  "NIC Number",
+                                   "district":  "District",
+                                   "school":  "School",
+                                   "districtRank":  "District Rank",
+                                   "zScore":  "Z-Score",
+                                   "stream":  "Subject Stream"
+                               },
+                    "subjects":  {
+                                     "PHY":  "PHYSICS",
+                                     "CHE":  "CHEMISTRY",
+                                     "MAT":  "COMBINED MATHEMATICS",
+                                     "BIO":  "BIOLOGY"
+                                 }
+                }
 }

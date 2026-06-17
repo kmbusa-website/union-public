@@ -1,11 +1,13 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { PageIntroHero } from "@/components/kit/page-intro-hero";
 import { EventsList } from "@/components/pages/events-list";
+import { loadEvents } from "@/lib/data/events";
 
 export default async function EventsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("events");
+  const events = await loadEvents();
 
   return (
     <>
@@ -16,7 +18,7 @@ export default async function EventsPage({ params }: { params: Promise<{ locale:
         lead={t("intro")}
       />
       <div id="events-list" className="kit-page-main scroll-mt-28">
-        <EventsList />
+        <EventsList events={events} />
       </div>
     </>
   );

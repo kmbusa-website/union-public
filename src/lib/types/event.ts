@@ -9,6 +9,7 @@ export interface UnionEvent {
   description: string;
   imageUrl: string;
   featured: boolean;
+  folderName?: string;
 }
 
 export const CATEGORY_LABELS: Record<EventCategory, string> = {

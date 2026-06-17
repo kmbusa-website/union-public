@@ -16,6 +16,7 @@ export interface GalleryPhoto {
   category: string;
   imageUrl: string;
   createdAt: string;
+  eventSlug?: string;
 }
 
 export interface SubjectResult {
