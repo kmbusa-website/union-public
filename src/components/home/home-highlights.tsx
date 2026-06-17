@@ -1,7 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
+import { ArrowRight } from "lucide-react";
+import { Link } from "@/i18n/navigation";
 
 const CSV_URL = "/home/highlights.csv";
 
@@ -49,6 +51,25 @@ function PhotoCard({ item }: { item: Highlight }) {
 export function HomeHighlights() {
   const t = useTranslations("home");
   const [items, setItems] = useState<Highlight[]>([]);
+  const scrollerRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const scroller = scrollerRef.current;
+    if (!scroller || items.length === 0) return;
+
+    const step = 0.6;
+    const timer = window.setInterval(() => {
+      const halfWidth = scroller.scrollWidth / 2;
+      if (halfWidth <= 0) return;
+
+      scroller.scrollLeft += step;
+      if (scroller.scrollLeft >= halfWidth) {
+        scroller.scrollLeft -= halfWidth;
+      }
+    }, 16);
+
+    return () => window.clearInterval(timer);
+  }, [items]);
 
   useEffect(() => {
     fetch(CSV_URL, { cache: "no-store" })
@@ -72,17 +93,27 @@ export function HomeHighlights() {
 
       <div className="mx-auto max-w-7xl">
         <div
-          className="overflow-hidden pb-10"
+          ref={scrollerRef}
+          className="overflow-x-auto pb-10 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           style={{
             maskImage: "linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%)",
             WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%)",
           }}
         >
-          <div className="animate-marquee flex gap-4">
+          <div className="flex gap-4 px-4">
             {[...items, ...items].map((item, i) => (
               <PhotoCard key={`${item.id}-${i}`} item={item} />
             ))}
           </div>
+        </div>
+
+        <div className="flex justify-center pb-2">
+          <Link
+            href="/events"
+            className="flex items-center gap-2 rounded-full border border-cyan-400/40 px-6 py-2.5 text-sm font-semibold text-cyan-400 transition hover:bg-cyan-400/10"
+          >
+            View All Events <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
       </div>
     </section>

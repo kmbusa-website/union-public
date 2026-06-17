@@ -28,15 +28,15 @@ export const FOOTER_RESOURCES = [
 ] as const;
 
 export const FOOTER_SOCIAL = [
-  { label: "Facebook", href: "https://facebook.com", icon: "facebook" as const, color: "bg-[#1877F2]" },
-  { label: "Instagram", href: "https://instagram.com", icon: "instagram" as const, color: "bg-gradient-to-br from-[#f58529] via-[#dd2a7b] to-[#8134af]" },
+  { label: "Facebook", href: "https://web.facebook.com/profile.php?id=61566333822162", icon: "facebook" as const, color: "bg-[#1877F2]" },
+  { label: "Instagram", href: "https://www.instagram.com/k.m.b.u.s.a/", icon: "instagram" as const, color: "bg-gradient-to-br from-[#f58529] via-[#dd2a7b] to-[#8134af]" },
   { label: "Email", href: `mailto:${CONTACT.email}`, icon: "email" as const, color: "bg-[#7c3aed]" },
   { label: "YouTube", href: "https://youtube.com", icon: "youtube" as const, color: "bg-[#FF0000]" },
 ] as const;
 
 export const SOCIAL_LINKS = [
-  { label: "Facebook", href: "https://facebook.com", icon: "facebook" as const },
-  { label: "Instagram", href: "https://instagram.com", icon: "instagram" as const },
+  { label: "Facebook", href: "https://web.facebook.com/profile.php?id=61566333822162", icon: "facebook" as const },
+  { label: "Instagram", href: "https://www.instagram.com/k.m.b.u.s.a/", icon: "instagram" as const },
   { label: "YouTube", href: "https://youtube.com", icon: "youtube" as const },
   { label: "X", href: "https://x.com", icon: "x" as const },
 ] as const;

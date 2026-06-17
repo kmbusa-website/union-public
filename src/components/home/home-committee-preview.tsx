@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { ArrowRight } from "lucide-react";
 import { Link } from "@/i18n/navigation";
@@ -108,6 +108,25 @@ function MemberCard({ member }: { member: CommitteeMember }) {
 export function HomeCommitteePreview() {
   const t = useTranslations("home");
   const [members, setMembers] = useState<CommitteeMember[]>([]);
+  const scrollerRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const scroller = scrollerRef.current;
+    if (!scroller || members.length === 0) return;
+
+    const step = 0.6;
+    const timer = window.setInterval(() => {
+      const halfWidth = scroller.scrollWidth / 2;
+      if (halfWidth <= 0) return;
+
+      scroller.scrollLeft += step;
+      if (scroller.scrollLeft >= halfWidth) {
+        scroller.scrollLeft -= halfWidth;
+      }
+    }, 16);
+
+    return () => window.clearInterval(timer);
+  }, [members]);
 
   useEffect(() => {
     fetch(CSV_URL, { cache: "no-store" })
@@ -133,8 +152,8 @@ export function HomeCommitteePreview() {
           </h2>
         </div>
 
-        <div className="overflow-hidden">
-          <div className="animate-marquee flex gap-6">
+        <div ref={scrollerRef} className="overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="flex gap-6 px-1">
             {[...members, ...members].map((m, i) => (
               <MemberCard key={`${m.id}-${i}`} member={m} />
             ))}
