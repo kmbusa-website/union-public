@@ -9,7 +9,8 @@
     "lint": "eslint",
     "import:results": "node scripts/import-al-results.mjs",
     "import:gallery": "node scripts/import-gallery.mjs",
-    "prebuild": "npm run import:results && npm run import:gallery"
+    "import:events": "node scripts/import-events.mjs",
+    "prebuild": "npm run import:results && npm run import:gallery && npm run import:events"
   },
   "dependencies": {
     "clsx": "^2.1.1",

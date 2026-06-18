@@ -1,0 +1,286 @@
+{
+  "events": [
+    {
+      "id": "annual-meeting-2024",
+      "title": "Annual Meeting & 1st Union Selection",
+      "year": 2024,
+      "date": "2024-03-01",
+      "category": "meeting",
+      "description": "",
+      "imageUrl": "/events/annual%20meeting%202024/annual%20meeting%202024.jpg",
+      "featured": false,
+      "folderName": "annual meeting 2024",
+      "photoFiles": [
+        "annual meeting 2024.jpg",
+        "annual meeting 2024-2.jpg",
+        "annual meeting 2024-3.jpg"
+      ]
+    },
+    {
+      "id": "course-seminar-2024",
+      "title": "University Course Selection Seminar",
+      "year": 2024,
+      "date": "2024-06-01",
+      "category": "seminar",
+      "description": "",
+      "imageUrl": "/events/course%20selection%202024/course%20selection%202024.jpg",
+      "featured": false,
+      "folderName": "course selection 2024",
+      "photoFiles": [
+        "course selection 2024.jpg",
+        "course selection 2024-1.jpg",
+        "course selection 2024-2.jpg",
+        "course selection 2024-3.jpg"
+      ]
+    },
+    {
+      "id": "al-pilot-2024",
+      "title": "A/L Pilot Exam",
+      "year": 2024,
+      "date": "2024-07-01",
+      "category": "seminar",
+      "description": "",
+      "imageUrl": "/events/annual%20pilot%20exam%202024/annual%20pilot%20exam%202024.jpg",
+      "featured": true,
+      "folderName": "annual pilot exam 2024",
+      "photoFiles": [
+        "annual pilot exam 2024.jpg",
+        "annual pilot exam 2024-1.jpg",
+        "annual pilot exam 2024-2.jpg",
+        "annual pilot exam 2024-3.jpg",
+        "annual pilot exam 2024-4.jpg",
+        "annual pilot exam 2024-5.jpg"
+      ]
+    },
+    {
+      "id": "ol-seminar-2024",
+      "title": "O/L Seminar",
+      "year": 2024,
+      "date": "2024-09-01",
+      "category": "seminar",
+      "description": "",
+      "imageUrl": "/events/Ezhumin%20OL%20Seminar%202024/Ezhumin%20OL%20Seminar%202024.jpg",
+      "featured": false,
+      "folderName": "Ezhumin OL Seminar 2024",
+      "photoFiles": [
+        "Ezhumin OL Seminar 2024.jpg",
+        "Ezhumin OL Seminar 2024-1.jpg",
+        "Ezhumin OL Seminar 2024-10.jpg",
+        "Ezhumin OL Seminar 2024-2.jpg",
+        "Ezhumin OL Seminar 2024-3.jpg",
+        "Ezhumin OL Seminar 2024-4.jpg",
+        "Ezhumin OL Seminar 2024-5.jpg",
+        "Ezhumin OL Seminar 2024-6.jpg",
+        "Ezhumin OL Seminar 2024-7.jpg",
+        "Ezhumin OL Seminar 2024-8.jpg",
+        "Ezhumin OL Seminar 2024-9.jpg"
+      ]
+    },
+    {
+      "id": "office-opening",
+      "title": "Office Opening Ceremony",
+      "year": 2024,
+      "date": "2024-04-01",
+      "category": "ceremony",
+      "description": "",
+      "imageUrl": "/events/office%20opening%20ceremony%202024/office%20opening%20ceremony%202024.jpg",
+      "featured": false,
+      "folderName": "office opening ceremony 2024",
+      "photoFiles": [
+        "office opening ceremony 2024.jpg",
+        "office opening ceremony -2.jpg",
+        "office opening ceremony -3.jpg",
+        "office opening ceremony -4.jpg",
+        "office opening ceremony -5.jpg",
+        "office opening ceremony -6.jpg"
+      ]
+    },
+    {
+      "id": "pongal-2025",
+      "title": "Mathuram Thai Pongal",
+      "year": 2025,
+      "date": "2025-01-14",
+      "category": "cultural",
+      "description": "",
+      "imageUrl": "/events/mathuram%20pongal%202025/mathuram%20pongal%202025.jpg",
+      "featured": true,
+      "folderName": "mathuram pongal 2025",
+      "photoFiles": [
+        "mathuram pongal 2025.jpg",
+        "mathuram pongal 2025-1.jpg",
+        "mathuram pongal 2025-2.jpg",
+        "mathuram pongal 2025-3.jpg",
+        "mathuram pongal 2025-4.jpg",
+        "mathuram pongal 2025-5.jpg",
+        "mathuram pongal 2025-6.jpg"
+      ]
+    },
+    {
+      "id": "course-seminar-2025",
+      "title": "University Course Selection Seminar",
+      "year": 2025,
+      "date": "2025-06-01",
+      "category": "seminar",
+      "description": "",
+      "imageUrl": "/events/course%20selection%202025/course%20selection%202025.jpg",
+      "featured": false,
+      "folderName": "course selection 2025",
+      "photoFiles": [
+        "course selection 2025.jpg",
+        "course selection 2024-4.jpg",
+        "course selection 2025-1.jpg",
+        "course selection 2025-2.jpg",
+        "course selection 2025-3.jpg",
+        "course selection 2025-4.jpg",
+        "course selection 2025-5.jpg"
+      ]
+    },
+    {
+      "id": "al-pilot-2025",
+      "title": "A/L Pilot Exam",
+      "year": 2025,
+      "date": "2025-07-01",
+      "category": "seminar",
+      "description": "",
+      "imageUrl": "/events/annual%20pilot%20exam%202025/annual%20pilot%20exam%202025.jpg",
+      "featured": false,
+      "folderName": "annual pilot exam 2025",
+      "photoFiles": [
+        "annual pilot exam 2025.jpg"
+      ]
+    },
+    {
+      "id": "annual-meeting-2025",
+      "title": "Annual Meeting & 2nd Union Selection",
+      "year": 2025,
+      "date": "2025-03-01",
+      "category": "meeting",
+      "description": "",
+      "imageUrl": "/events/annual%20meeting%202025/annual%20meeting%202025.jpg",
+      "featured": false,
+      "folderName": "annual meeting 2025",
+      "photoFiles": [
+        "annual meeting 2025.jpg",
+        "annual meeting 2025-1.jpg",
+        "annual meeting 2025-2.jpg",
+        "annual meeting 2025-3.jpg",
+        "annual meeting 2025-4.jpg",
+        "annual meeting 2025-5.jpg"
+      ]
+    },
+    {
+      "id": "ol-seminar-2025",
+      "title": "Ezhumin O/L Seminar",
+      "year": 2025,
+      "date": "2025-09-01",
+      "category": "seminar",
+      "description": "",
+      "imageUrl": "/events/Ezhumin%20OL%20Seminar%202025/Ezhumin%20OL%20Seminar%202025.jpg",
+      "featured": false,
+      "folderName": "Ezhumin OL Seminar 2025",
+      "photoFiles": [
+        "Ezhumin OL Seminar 2025.jpg",
+        "Ezhumin OL Seminar 2025-1.jpg",
+        "Ezhumin OL Seminar 2025-10.jpg",
+        "Ezhumin OL Seminar 2025-11.jpg",
+        "Ezhumin OL Seminar 2025-2.jpg",
+        "Ezhumin OL Seminar 2025-3.jpg",
+        "Ezhumin OL Seminar 2025-4.jpg",
+        "Ezhumin OL Seminar 2025-5.jpg",
+        "Ezhumin OL Seminar 2025-6.jpg",
+        "Ezhumin OL Seminar 2025-7.jpg",
+        "Ezhumin OL Seminar 2025-8.jpg",
+        "Ezhumin OL Seminar 2025-9.jpg"
+      ]
+    },
+    {
+      "id": "pongal-2026",
+      "title": "Mathuram Thai Pongal",
+      "year": 2026,
+      "date": "2026-01-14",
+      "category": "cultural",
+      "description": "",
+      "imageUrl": "/events/mathuram%20pongal%202026/mathuram%20pongal%202026.jpg",
+      "featured": false,
+      "folderName": "mathuram pongal 2026",
+      "photoFiles": [
+        "mathuram pongal 2026.jpg",
+        "KMBUSA pongal 1st collection photos (2).png",
+        "mathuram pongal 2026-1.png",
+        "mathuram pongal 2026-10.png",
+        "mathuram pongal 2026-11.png",
+        "mathuram pongal 2026-12.png",
+        "mathuram pongal 2026-13.png",
+        "mathuram pongal 2026-14.png",
+        "mathuram pongal 2026-15.png",
+        "mathuram pongal 2026-16.png",
+        "mathuram pongal 2026-2.png",
+        "mathuram pongal 2026-3.png",
+        "mathuram pongal 2026-5.png",
+        "mathuram pongal 2026-6.png",
+        "mathuram pongal 2026-7.png",
+        "mathuram pongal 2026-8.png",
+        "mathuram pongal 2026-9.png"
+      ]
+    },
+    {
+      "id": "cricket-2026",
+      "title": "Annual Cricket Friendship Match",
+      "year": 2026,
+      "date": "2026-02-01",
+      "category": "sports",
+      "description": "",
+      "imageUrl": "/events/Annual%20Cricket%20Friendship%20Match%202026/Annual%20Cricket%20Friendship%20Match%202026.jpg",
+      "featured": true,
+      "folderName": "Annual Cricket Friendship Match 2026",
+      "photoFiles": [
+        "Annual Cricket Friendship Match 2026.jpg",
+        "Annual Cricket Friendship Match 2026-1.jpg",
+        "Annual Cricket Friendship Match 2026-2.JPG",
+        "Annual Cricket Friendship Match 2026-3.JPG",
+        "Annual Cricket Friendship Match 2026-4.JPG",
+        "Annual Cricket Friendship Match 2026-5.JPG",
+        "Annual Cricket Friendship Match 2026-6.JPG",
+        "Annual Cricket Friendship Match 2026-7.JPG"
+      ]
+    },
+    {
+      "id": "course-seminar-2026",
+      "title": "University Course Selection Seminar",
+      "year": 2026,
+      "date": "2026-06-01",
+      "category": "seminar",
+      "description": "",
+      "imageUrl": "/events/course%20selection%202026/course%20selection%202026.jpeg",
+      "featured": false,
+      "folderName": "course selection 2026",
+      "photoFiles": [
+        "course selection 2026.jpeg",
+        "course selection 2026-1.png",
+        "course selection 2026-10.png",
+        "course selection 2026-2.png",
+        "course selection 2026-3.png",
+        "course selection 2026-4.png",
+        "course selection 2026-5.png",
+        "course selection 2026-6.png",
+        "course selection 2026-7.png",
+        "course selection 2026-8.png",
+        "course selection 2026-9.png"
+      ]
+    },
+    {
+      "id": "al-pilot-2026",
+      "title": "A/L Pilot Exam",
+      "year": 2026,
+      "date": "2026-07-01",
+      "category": "seminar",
+      "description": "",
+      "imageUrl": "/events/annual%20pilot%20exam%202026/annual%20pilot%20exam%202026.jpg",
+      "featured": false,
+      "folderName": "annual pilot exam 2026",
+      "photoFiles": [
+        "annual pilot exam 2026.jpg"
+      ]
+    }
+  ]
+}
