@@ -533,6 +533,15 @@ html[lang="ta"] .latin-text {
   font-style: normal;
 }
 
+html[lang="ta"] .site-footer {
+  font-style: italic;
+}
+
+html[lang="ta"] .site-footer .latin-text,
+html[lang="ta"] .site-footer .not-italic {
+  font-style: normal;
+}
+
 .btn-sm-primary {
   @apply inline-flex items-center justify-center rounded-lg bg-[var(--blue)] px-4 py-2 text-xs font-semibold text-white transition hover:bg-[var(--blue-light)];
 }
