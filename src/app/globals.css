@@ -134,6 +134,7 @@ body {
 
 .font-tamil {
   font-family: var(--font-tamil), var(--font-inter), system-ui, sans-serif;
+  font-style: italic;
 }
 
 /* ── Kit: page sections ─────────────────────────────── */
@@ -311,12 +312,12 @@ body {
   margin-left: auto;
   margin-right: auto;
   display: flex;
-  height: 4.25rem;
+  min-height: 4.25rem;
   max-width: 80rem;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: 0 1rem;
+  padding: 0.5rem 1rem;
 }
 
 @media (min-width: 1024px) {
@@ -494,6 +495,42 @@ body {
   transform: translateX(-50%);
   border-radius: 9999px;
   background: var(--gold);
+}
+
+/* Tamil header: smaller type */
+html[lang="ta"] .site-header .nav-link {
+  font-size: 0.6875rem;
+  padding: 0.35rem 0.45rem;
+  line-height: 1.35;
+}
+
+html[lang="ta"] .site-header .site-nav-links {
+  gap: 0.05rem;
+}
+
+html[lang="ta"] .site-header .site-mobile-nav-link {
+  font-size: 0.8125rem;
+}
+
+html[lang="ta"] .site-header .site-logo-org {
+  font-size: 8px;
+}
+
+html[lang="ta"] .site-header .site-logo-short {
+  font-size: 0.75rem;
+}
+
+html[lang="ta"] .site-header .site-topbar {
+  font-size: 0.6875rem;
+}
+
+html[lang="ta"] .site-header .lang-toggle {
+  font-size: 0.625rem;
+}
+
+/* Keep Latin-only blocks upright on Tamil pages */
+html[lang="ta"] .latin-text {
+  font-style: normal;
 }
 
 .btn-sm-primary {
@@ -807,21 +844,108 @@ body {
 .home-hero-main {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, var(--hero-from) 0%, var(--hero-to) 100%);
+  min-height: 28rem;
+  background: var(--navy);
 }
 
-.home-hero-panel-left {
-  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 55%, #0d2847 100%);
-}
-
-.home-hero-panel-right {
+.home-hero-content {
   position: relative;
-  min-height: 22rem;
+  z-index: 10;
+  display: grid;
+  min-height: 28rem;
+  grid-template-columns: 1fr;
 }
 
 @media (min-width: 1024px) {
-  .home-hero-panel-right {
+  .home-hero-main,
+  .home-hero-content {
+    min-height: 32rem;
+  }
+
+  .home-hero-content {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1280px) {
+  .home-hero-main,
+  .home-hero-content {
     min-height: 36rem;
+  }
+}
+
+.home-hero-banner-image {
+  z-index: 0;
+}
+
+.home-hero-panel-left {
+  background: transparent;
+}
+
+.home-hero-panel-right {
+  background: transparent;
+}
+
+.home-hero-badge-dot--gold {
+  background: var(--gold);
+}
+
+.home-hero-tagline-row {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+}
+
+.home-hero-tagline-icon {
+  display: flex;
+  height: 4.25rem;
+  width: 4.25rem;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 9999px;
+  border: 2px solid var(--gold);
+  background: rgba(255, 255, 255, 0.95);
+  padding: 0.35rem;
+}
+
+.home-hero-tagline-rule {
+  width: 3px;
+  flex-shrink: 0;
+  align-self: stretch;
+  min-height: 3.5rem;
+  border-radius: 9999px;
+  background: var(--gold);
+}
+
+.home-hero-stats-bar {
+  position: relative;
+  z-index: 20;
+  width: 100%;
+}
+
+.home-hero-stats {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 1fr;
+  overflow: hidden;
+  border-radius: 0;
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(8, 18, 38, 0.95);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+@media (min-width: 640px) {
+  .home-hero-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .home-hero-stats {
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
@@ -866,79 +990,15 @@ body {
 }
 
 .home-hero-wave {
-  position: absolute;
-  bottom: -1px;
-  left: 50%;
-  z-index: 10;
-  height: 5rem;
-  width: 110%;
-  transform: translateX(-50%);
-  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
-  background: var(--bg-page);
-}
-
-.home-hero-stats-section {
-  position: relative;
-  z-index: 20;
-  margin-top: -3.25rem;
-  padding: 0 1rem 3rem;
-  background: var(--bg-page);
-}
-
-@media (min-width: 640px) {
-  .home-hero-stats-section {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .home-hero-stats-section {
-    margin-top: -3.75rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
-}
-
-.home-hero-stats {
-  display: grid;
-  grid-template-columns: 1fr;
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 72rem;
-  overflow: hidden;
-  border-radius: 1.25rem;
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  box-shadow:
-    0 1px 2px rgba(15, 23, 42, 0.04),
-    0 12px 32px rgba(15, 23, 42, 0.08);
-}
-
-@media (min-width: 640px) {
-  .home-hero-stats {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 1024px) {
-  .home-hero-stats {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-.dark .home-hero-stats {
-  box-shadow:
-    0 1px 2px rgba(0, 0, 0, 0.2),
-    0 16px 40px rgba(0, 0, 0, 0.35);
+  display: none;
 }
 
 .home-hero-stat {
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding: 1.35rem 1.5rem;
-  border-bottom: 1px solid var(--border-color);
+  padding: 1.15rem 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .home-hero-stat:last-child {
@@ -947,16 +1007,16 @@ body {
 
 @media (min-width: 640px) {
   .home-hero-stat {
-    padding: 1.65rem 1.75rem;
+    padding: 1.35rem 1.5rem;
     border-bottom: none;
   }
 
   .home-hero-stat:nth-child(odd) {
-    border-right: 1px solid var(--border-color);
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
   }
 
   .home-hero-stat:nth-child(-n + 2) {
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   }
 
   .home-hero-stat:nth-child(3),
@@ -968,15 +1028,15 @@ body {
 @media (min-width: 1024px) {
   .home-hero-stat {
     justify-content: center;
-    padding: 1.85rem 1.5rem;
+    padding: 1.5rem 1.25rem;
     border-bottom: none;
-    border-right: 1px solid var(--border-color);
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
   }
 
   .home-hero-stat:nth-child(odd),
   .home-hero-stat:nth-child(-n + 2) {
     border-bottom: none;
-    border-right: 1px solid var(--border-color);
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
   }
 
   .home-hero-stat:last-child {
@@ -986,21 +1046,15 @@ body {
 
 .home-hero-stat-icon {
   display: flex;
-  height: 3.25rem;
-  width: 3.25rem;
+  height: 3rem;
+  width: 3rem;
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  border-radius: 0.875rem;
-  background: var(--blue-muted);
-  color: var(--blue);
-  border: 1px solid var(--blue-muted-border);
-}
-
-.dark .home-hero-stat-icon {
-  background: rgb(var(--blue-rgb) / 0.12);
-  border-color: rgb(var(--blue-rgb) / 0.28);
+  border-radius: 0.75rem;
+  background: rgba(30, 74, 179, 0.25);
   color: #8fb0e8;
+  border: 1px solid rgba(30, 74, 179, 0.4);
 }
 
 .home-hero-stat-copy {
@@ -1008,27 +1062,26 @@ body {
 }
 
 .home-hero-stat-value {
-  font-size: 1.625rem;
+  font-size: 1.5rem;
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: -0.02em;
   font-variant-numeric: tabular-nums;
-  color: var(--text-primary);
+  color: #ffffff;
 }
 
 @media (min-width: 1024px) {
   .home-hero-stat-value {
-    font-size: 1.75rem;
+    font-size: 1.625rem;
   }
 }
 
 .home-hero-stat-label {
-  margin-top: 0.35rem;
-  font-size: 0.8125rem;
+  margin-top: 0.2rem;
+  font-size: 0.8rem;
   font-weight: 500;
-  line-height: 1.35;
-  letter-spacing: 0.01em;
-  color: var(--text-secondary);
+  line-height: 1.3;
+  color: rgba(226, 232, 240, 0.72);
 }
 
 .home-hero-btn-join {

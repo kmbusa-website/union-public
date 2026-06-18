@@ -4,7 +4,8 @@ export const ORG_FULL = `${ORG_NAME} (${ORG_SHORT})`;
 export const ORG_TAGLINE =
   "KMBUSA is more than a student association—it is a community of future innovators, leaders, and professionals. We strive to inspire excellence in education, foster meaningful friendships, and create opportunities that empower every member to achieve their full potential. Together, we learn, grow, and build a brighter future for our society.";
 
-export const HERO_CAMPUS_IMAGE = "/hero-campus.jpg";
+export const HERO_CAMPUS_IMAGE = "/hero-background.png";
+export const HERO_BANNER_IMAGE = "/hero-banner.png";
 export const LOGO_PATH = "/logo.png";
 
 export const CONTACT = {

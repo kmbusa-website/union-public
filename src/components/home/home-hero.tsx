@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { CalendarDays, GraduationCap, Handshake, Medal, BarChart3, Users } from "lucide-react";
 import { Link } from "@/i18n/navigation";
-import { HERO_CAMPUS_IMAGE, LOGO_PATH, ORG_SHORT, STATS } from "@/lib/brand";
+import { HERO_BANNER_IMAGE, LOGO_PATH, ORG_SHORT, STATS } from "@/lib/brand";
 
 const statKeys = ["statsMembers", "statsPrograms", "statsEvents", "statsGoal"] as const;
 
@@ -15,57 +15,71 @@ const statIcons = {
   medal: Medal,
 } as const;
 
+function HeroTitleLines({ text, className }: { text: string; className: string }) {
+  return (
+    <>
+      {text.split("\n").map((line) => (
+        <span key={line} className={`block ${className}`}>
+          {line}
+        </span>
+      ))}
+    </>
+  );
+}
+
 export function HomeHero() {
   const locale = useLocale();
   const t = useTranslations("home");
-  const tb = useTranslations("brand");
   const titleSize =
     locale === "ta"
-      ? "text-[1.45rem] min-[400px]:text-2xl sm:text-3xl lg:text-[2.15rem] xl:text-4xl"
-      : "text-[1.65rem] min-[400px]:text-3xl sm:text-4xl lg:text-[2.65rem] xl:text-5xl";
+      ? "text-[1.3rem] min-[400px]:text-xl sm:text-2xl lg:text-[1.75rem] xl:text-[2rem]"
+      : "text-[1.65rem] min-[400px]:text-3xl sm:text-4xl lg:text-[2.35rem] xl:text-[2.75rem]";
 
   return (
     <section className="home-hero">
-      <div className="home-hero-main relative lg:grid lg:min-h-[34rem] lg:grid-cols-2 xl:min-h-[38rem]">
-        {/* Left — copy */}
-        <div className="home-hero-panel-left relative z-10 flex flex-col justify-center px-6 py-16 sm:px-10 lg:px-12 lg:py-20 xl:px-16">
-          <div className="mx-auto w-full max-w-xl lg:mx-0 lg:max-w-lg xl:max-w-xl">
-            <div className="mb-6 flex justify-start lg:hidden">
-              <div className="home-hero-logo-ring home-hero-logo-ring--mobile rounded-full bg-white p-1">
-                <Image
-                  src={LOGO_PATH}
-                  alt={tb("orgShort")}
-                  width={72}
-                  height={72}
-                  className="rounded-full object-contain"
-                  priority
-                />
-              </div>
-            </div>
+      <div className="home-hero-main">
+        <Image
+          src={HERO_BANNER_IMAGE}
+          alt="KMBUSA"
+          fill
+          className="home-hero-banner-image object-cover object-left"
+          priority
+          sizes="100vw"
+        />
 
-            <h1
-              className={`max-w-full font-extrabold leading-[1.2] tracking-tight text-white ${titleSize}`}
-            >
-              {t("heroLine1")}
-              <br />
-              <span className="text-[var(--gold)]">{t("heroLine2")}</span>
+        <div className="home-hero-content">
+          <div className="home-hero-panel-left flex flex-col justify-center px-6 py-12 sm:px-10 sm:py-14 lg:px-12 lg:py-10 xl:px-14">
+            <h1 className={`max-w-full font-extrabold leading-[1.12] tracking-tight ${titleSize}`}>
+              <HeroTitleLines text={t("heroLine1")} className="text-white" />
+              <HeroTitleLines text={t("heroLine2")} className="text-[var(--gold)]" />
             </h1>
 
             <div className="mt-6 flex justify-start">
               <div className="home-hero-badge">
                 <span className="home-hero-badge-line" aria-hidden />
-                <span className="home-hero-badge-dot" aria-hidden />
-                <span>{ORG_SHORT}</span>
-                <span className="home-hero-badge-dot" aria-hidden />
+                <span className="home-hero-badge-dot home-hero-badge-dot--gold" aria-hidden />
+                <span className="not-italic">{ORG_SHORT}</span>
+                <span className="home-hero-badge-dot home-hero-badge-dot--gold" aria-hidden />
                 <span className="home-hero-badge-line" aria-hidden />
               </div>
             </div>
 
-            <p className="mt-6 max-w-md text-base leading-relaxed text-slate-200 sm:text-lg">
-              {t("heroTagline")}
-            </p>
+            <div className="home-hero-tagline-row mt-8 max-w-md">
+              <div className="home-hero-tagline-icon">
+                <Image
+                  src={LOGO_PATH}
+                  alt=""
+                  width={56}
+                  height={56}
+                  className="h-full w-full rounded-full object-contain"
+                  aria-hidden
+                />
+              </div>
+              <span className="home-hero-tagline-rule" aria-hidden />
+              <p className="text-sm leading-relaxed text-slate-100 sm:text-base">{t("heroTagline")}</p>
+            </div>
 
-            <div className="mt-8 flex flex-wrap gap-4">
+            <div className="mt-8 flex flex-wrap gap-3 sm:gap-4">
               <Link href="/events" className="kit-btn-primary">
                 <Users className="h-4 w-4" />
                 {t("exploreActivities")}
@@ -80,39 +94,12 @@ export function HomeHero() {
               </Link>
             </div>
           </div>
-        </div>
 
-        {/* Right — campus / hospital image */}
-        <div className="home-hero-panel-right relative">
-          <Image
-            src={HERO_CAMPUS_IMAGE}
-            alt={tb("orgShort")}
-            fill
-            className="object-cover"
-            priority
-            sizes="(min-width: 1024px) 50vw, 100vw"
-          />
-          <div className="absolute inset-0 bg-linear-to-r from-[var(--navy)]/80 via-[var(--navy)]/25 to-transparent lg:from-[var(--navy)]/70 lg:via-transparent" />
+          <div className="home-hero-panel-right hidden lg:block" aria-hidden />
         </div>
-
-        {/* Center logo — desktop */}
-        <div className="pointer-events-none absolute left-1/2 top-[42%] z-20 hidden -translate-x-1/2 -translate-y-1/2 lg:block">
-          <div className="home-hero-logo-ring rounded-full bg-white p-1.5">
-            <Image
-              src={LOGO_PATH}
-              alt={tb("orgShort")}
-              width={200}
-              height={200}
-              className="rounded-full object-contain"
-              priority
-            />
-          </div>
-        </div>
-
-        <div className="home-hero-wave" aria-hidden />
       </div>
 
-      <div className="home-hero-stats-section">
+      <div className="home-hero-stats-bar">
         <div className="home-hero-stats">
           {STATS.map((stat, i) => {
             const Icon = statIcons[stat.icon];
@@ -122,7 +109,7 @@ export function HomeHero() {
                   <Icon className="h-5 w-5" strokeWidth={1.75} />
                 </div>
                 <div className="home-hero-stat-copy">
-                  <p className="home-hero-stat-value">{stat.value}</p>
+                  <p className="home-hero-stat-value not-italic">{stat.value}</p>
                   <p className="home-hero-stat-label">{t(statKeys[i])}</p>
                 </div>
               </div>

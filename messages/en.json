@@ -18,7 +18,9 @@
     "results": "PILOT Exam Result",
     "contact": "Contact",
     "getStarted": "Get Started",
-    "menu": "Menu"
+    "menu": "Menu",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
   },
   "language": {
     "en": "English",
@@ -45,12 +47,13 @@
     "subscribe": "Subscribe",
     "subscribed": "Thanks for subscribing!",
     "rights": "All rights reserved.",
-    "aboutUs": "About Us"
+    "aboutUs": "About Us",
+    "description": "KMBUSA is more than a student association—it is a community of future innovators, leaders, and professionals. We strive to inspire excellence in education, foster meaningful friendships, and create opportunities that empower every member to achieve their full potential. Together, we learn, grow, and build a brighter future for our society."
   },
   "home": {
     "welcome": "Welcome to {org}",
-    "heroLine1": "KILINOCHCHI MATHS BIO",
-    "heroLine2": "UNIVERSITY STUDENTS' ASSOCIATION",
+    "heroLine1": "KILINOCHCHI MATHS\nBIO",
+    "heroLine2": "UNIVERSITY\nSTUDENTS'\nASSOCIATION",
     "heroTagline": "Empowering students through education, leadership and community service.",
     "exploreActivities": "Explore Activities",
     "joinUs": "Join Us",
@@ -74,7 +77,8 @@
     "committeeOverline": "Leadership",
     "committeeTitle": "Our",
     "committeeHighlight": "Executive Committee",
-    "viewAllMembers": "View All Members"
+    "viewAllMembers": "View All Members",
+    "viewAllEvents": "View All Events"
   },
   "about": {
     "overline": "About {org}",

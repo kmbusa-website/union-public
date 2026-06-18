@@ -17,7 +17,7 @@ export function LanguageToggle() {
 
   return (
     <div
-      className="flex items-center rounded-lg border p-0.5 text-xs font-semibold shadow-sm"
+      className="lang-toggle flex items-center rounded-lg border p-0.5 text-xs font-semibold shadow-sm"
       style={{ borderColor: "var(--border-header)", background: "var(--bg-card)" }}
       role="group"
       aria-label="Language"
@@ -29,6 +29,7 @@ export function LanguageToggle() {
           onClick={() => switchLocale(code)}
           className={cn(
             "rounded-md px-2.5 py-1 transition",
+            code === "en" && "latin-text",
             locale === code ? "bg-[var(--blue)] text-white" : "hover:text-blue-500",
           )}
           style={locale === code ? undefined : { color: "var(--text-nav)" }}

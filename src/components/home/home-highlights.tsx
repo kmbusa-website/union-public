@@ -112,7 +112,7 @@ export function HomeHighlights() {
             href="/events"
             className="flex items-center gap-2 rounded-full border border-cyan-400/40 px-6 py-2.5 text-sm font-semibold text-cyan-400 transition hover:bg-cyan-400/10"
           >
-            View All Events <ArrowRight className="h-4 w-4" />
+            {t("viewAllEvents")} <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       </div>

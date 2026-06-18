@@ -2,8 +2,10 @@
 
 import { useState } from "react";
 import { Send } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export function FooterNewsletter() {
+  const t = useTranslations("footer");
   const [email, setEmail] = useState("");
   const [sent, setSent] = useState(false);
 
@@ -16,9 +18,9 @@ export function FooterNewsletter() {
 
   return (
     <div>
-      <h3 className="footer-heading">Newsletter</h3>
+      <h3 className="footer-heading">{t("newsletter")}</h3>
       <p className="mt-3 text-sm leading-relaxed" style={{ color: "var(--text-footer)" }}>
-        Subscribe to get the latest updates and announcements.
+        {t("newsletterDesc")}
       </p>
       <form onSubmit={handleSubmit} className="mt-4 flex">
         <input
@@ -26,7 +28,7 @@ export function FooterNewsletter() {
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="Enter your email"
+          placeholder={t("emailPlaceholder")}
           disabled={sent}
           className="min-w-0 flex-1 rounded-l-lg border px-3 py-2.5 text-sm transition focus:outline-none"
           style={{
@@ -38,12 +40,12 @@ export function FooterNewsletter() {
         <button
           type="submit"
           className="flex shrink-0 items-center justify-center rounded-r-lg bg-[var(--blue-light)] px-3.5 text-white transition hover:bg-[var(--blue)]"
-          aria-label="Subscribe"
+          aria-label={t("subscribe")}
         >
           <Send className="h-4 w-4" />
         </button>
       </form>
-      {sent && <p className="mt-2 text-xs text-emerald-500">Thanks for subscribing!</p>}
+      {sent && <p className="mt-2 text-xs text-emerald-500">{t("subscribed")}</p>}
     </div>
   );
 }

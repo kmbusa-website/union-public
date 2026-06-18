@@ -2,6 +2,7 @@
 
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 import { Logo } from "@/components/brand/logo";
@@ -10,17 +11,18 @@ import { LanguageToggle } from "@/components/shared/language-toggle";
 import { ThemeToggle } from "@/components/shared/theme-toggle";
 
 const links = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/committee", label: "Committee" },
-  { href: "/events", label: "Events" },
-  { href: "/pastpapers", label: "Past Papers" },
-  { href: "/gallery", label: "Gallery" },
-  { href: "/results", label: "PILOT Exam Result" },
-  { href: "/contact", label: "Contact" },
+  { href: "/", key: "home" },
+  { href: "/about", key: "about" },
+  { href: "/committee", key: "committee" },
+  { href: "/events", key: "events" },
+  { href: "/pastpapers", key: "pastpapers" },
+  { href: "/gallery", key: "gallery" },
+  { href: "/results", key: "results" },
+  { href: "/contact", key: "contact" },
 ] as const;
 
 export function SiteHeader() {
+  const t = useTranslations("nav");
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const active = (href: string) =>
@@ -41,7 +43,7 @@ export function SiteHeader() {
                 href={l.href}
                 className={cn("nav-link", active(l.href) && "nav-link-active")}
               >
-                {l.label}
+                {t(l.key)}
               </Link>
             ))}
           </nav>
@@ -53,7 +55,7 @@ export function SiteHeader() {
               type="button"
               className="site-nav-menu-btn"
               onClick={() => setOpen(!open)}
-              aria-label={open ? "Close menu" : "Open menu"}
+              aria-label={open ? t("closeMenu") : t("openMenu")}
               aria-expanded={open}
             >
               {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -73,7 +75,7 @@ export function SiteHeader() {
                 )}
                 onClick={() => setOpen(false)}
               >
-                {l.label}
+                {t(l.key)}
               </Link>
             ))}
           </nav>
