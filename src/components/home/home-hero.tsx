@@ -25,7 +25,20 @@ export function HomeHero() {
         {/* Left — copy */}
         <div className="home-hero-panel-left relative z-10 flex flex-col justify-center px-6 py-16 sm:px-10 lg:px-12 lg:py-20 xl:px-16">
           <div className="mx-auto w-full max-w-xl lg:mx-0 lg:max-w-lg xl:max-w-xl">
-            <h1 className="text-3xl font-extrabold leading-[1.1] tracking-tight text-white sm:text-4xl lg:text-[2.65rem] xl:text-5xl">
+            <div className="mb-6 flex justify-start lg:hidden">
+              <div className="home-hero-logo-ring home-hero-logo-ring--mobile rounded-full bg-white p-1">
+                <Image
+                  src={LOGO_PATH}
+                  alt={tb("orgShort")}
+                  width={72}
+                  height={72}
+                  className="rounded-full object-contain"
+                  priority
+                />
+              </div>
+            </div>
+
+            <h1 className="max-w-full text-[1.65rem] font-extrabold leading-[1.15] tracking-tight text-white min-[400px]:text-3xl sm:text-4xl lg:text-[2.65rem] xl:text-5xl">
               {t("heroLine1")}
               <br />
               <span className="text-[var(--gold)]">{t("heroLine2")}</span>
@@ -79,20 +92,6 @@ export function HomeHero() {
               alt={tb("orgShort")}
               width={200}
               height={200}
-              className="rounded-full object-contain"
-              priority
-            />
-          </div>
-        </div>
-
-        {/* Mobile logo */}
-        <div className="absolute right-6 top-8 z-20 lg:hidden">
-          <div className="home-hero-logo-ring rounded-full bg-white p-1">
-            <Image
-              src={LOGO_PATH}
-              alt={tb("orgShort")}
-              width={88}
-              height={88}
               className="rounded-full object-contain"
               priority
             />

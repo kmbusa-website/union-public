@@ -37,14 +37,12 @@ export const FOOTER_SOCIAL = [
 export const SOCIAL_LINKS = [
   { label: "Facebook", href: "https://web.facebook.com/profile.php?id=61566333822162", icon: "facebook" as const },
   { label: "Instagram", href: "https://www.instagram.com/k.m.b.u.s.a/", icon: "instagram" as const },
-  { label: "YouTube", href: "https://youtube.com", icon: "youtube" as const },
-  { label: "X", href: "https://x.com", icon: "x" as const },
 ] as const;
 
 export const STATS = [
-  { value: "350+", label: "Active Members", icon: "users" as const },
-  { value: "15+", label: "Academic Programs", icon: "graduation" as const },
-  { value: "25+", label: "Events Conducted", icon: "calendar" as const },
+  { value: "100+", label: "Active Members", icon: "users" as const },
+  { value: "2+", label: "Academic Programs", icon: "graduation" as const },
+  { value: "3+", label: "Events Conducted", icon: "calendar" as const },
   { value: "1 Goal", label: "Student Empowerment", icon: "medal" as const },
 ] as const;
 

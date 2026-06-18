@@ -17,8 +17,8 @@ export function LanguageToggle() {
 
   return (
     <div
-      className="flex items-center rounded-lg border p-0.5 text-xs font-semibold"
-      style={{ borderColor: "var(--border-header)" }}
+      className="flex items-center rounded-lg border p-0.5 text-xs font-semibold shadow-sm"
+      style={{ borderColor: "var(--border-header)", background: "var(--bg-card)" }}
       role="group"
       aria-label="Language"
     >
