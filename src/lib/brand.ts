@@ -43,8 +43,9 @@ export const SOCIAL_LINKS = [
 
 export const STATS = [
   { value: "350+", label: "Active Members", icon: "users" as const },
-  { value: "15+", label: "Academic Programs", icon: "book" as const },
+  { value: "15+", label: "Academic Programs", icon: "graduation" as const },
   { value: "25+", label: "Events Conducted", icon: "calendar" as const },
+  { value: "1 Goal", label: "Student Empowerment", icon: "medal" as const },
 ] as const;
 
 export const ABOUT_VALUES = [
