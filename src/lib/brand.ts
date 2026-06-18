@@ -22,7 +22,7 @@ export const FOOTER_QUICK_LINKS = [
 ] as const;
 
 export const FOOTER_RESOURCES = [
-  { href: "/results", label: "A/L Results" },
+  { href: "/results", label: "PILOT Exam Result" },
   { href: "/gallery", label: "Gallery" },
   { href: "/events", label: "Events" },
 ] as const;

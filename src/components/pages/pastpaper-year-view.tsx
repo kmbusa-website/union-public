@@ -1,18 +1,11 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import type { PastPaper } from "@/lib/types/pastpaper";
 
 type PastPaperFilter = "all" | "mathematics" | "biology" | "physics" | "chemistry";
-
-const FILTER_LABELS: Record<PastPaperFilter, string> = {
-  all: "All",
-  mathematics: "Mathematics",
-  biology: "Biology",
-  physics: "Physics",
-  chemistry: "Chemistry",
-};
 
 function paperBadgeColor(paperType: string) {
   if (paperType === "Pure" || paperType === "Applied" || paperType === "Applied Scheme") return "text-[var(--blue)]";
@@ -37,30 +30,32 @@ function matchesFilter(paper: PastPaper, filter: PastPaperFilter) {
 }
 
 export function PastPaperYearView({ year, papers }: { year: number; papers: PastPaper[] }) {
+  const t = useTranslations("pastpapers");
   const [filter, setFilter] = useState<PastPaperFilter>("all");
 
   const filtered = useMemo(() => papers.filter((paper) => matchesFilter(paper, filter)), [papers, filter]);
+  const filterKeys: PastPaperFilter[] = ["all", "mathematics", "biology", "physics", "chemistry"];
 
   return (
     <div className="kit-container pb-16">
       <div className="mb-6 flex items-center justify-between gap-4">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[var(--blue)]">Year</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[var(--blue)]">{t("yearLabel")}</p>
           <h2 className="mt-1 text-2xl font-bold" style={{ color: "var(--text-primary)" }}>
-            {year} Papers
+            {t("papersHeading", { year })}
           </h2>
         </div>
         <Link
-          href="/exams/pastpapers"
+          href="/pastpapers"
           className="rounded-full border px-4 py-2 text-sm font-semibold transition hover:border-[var(--blue)] hover:text-[var(--blue)]"
           style={{ borderColor: "var(--border-color)", color: "var(--text-primary)" }}
         >
-          Back to years
+          {t("backToYears")}
         </Link>
       </div>
 
       <div className="mb-6 flex flex-wrap gap-2">
-        {(Object.keys(FILTER_LABELS) as PastPaperFilter[]).map((key) => (
+        {filterKeys.map((key) => (
           <button
             key={key}
             type="button"
@@ -72,14 +67,14 @@ export function PastPaperYearView({ year, papers }: { year: number; papers: Past
                 : { backgroundColor: "var(--bg-card)", border: "1px solid var(--border-color)", color: "var(--text-secondary)" }
             }
           >
-            {FILTER_LABELS[key]}
+            {t(`filters.${key}`)}
           </button>
         ))}
       </div>
 
       {filtered.length === 0 ? (
         <div className="rounded-3xl border p-8 text-center" style={{ background: "var(--bg-card)", borderColor: "var(--border-color)" }}>
-          <p style={{ color: "var(--text-secondary)" }}>No papers found for this subject.</p>
+          <p style={{ color: "var(--text-secondary)" }}>{t("noSubjectPapers")}</p>
         </div>
       ) : (
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
@@ -113,11 +108,11 @@ export function PastPaperYearView({ year, papers }: { year: number; papers: Past
                   rel="noreferrer"
                   className="mt-4 inline-flex items-center justify-center rounded-full border border-[var(--blue)]/40 px-4 py-2 text-sm font-semibold text-[var(--blue)] transition hover:bg-[var(--blue)]/10"
                 >
-                  Open PDF
+                  {t("openPdf")}
                 </a>
               ) : (
                 <span className="mt-4 inline-flex items-center justify-center rounded-full border border-dashed border-[var(--border-color)] px-4 py-2 text-sm font-semibold" style={{ color: "var(--text-subtle)" }}>
-                  Add link in CSV
+                  {t("addLinkCsv")}
                 </span>
               )}
             </article>

@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useTranslations } from "next-intl";
-import { CalendarDays, GraduationCap, Handshake, Medal, Users } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
+import { CalendarDays, GraduationCap, Handshake, Medal, BarChart3, Users } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { HERO_CAMPUS_IMAGE, LOGO_PATH, ORG_SHORT, STATS } from "@/lib/brand";
 
@@ -16,8 +16,13 @@ const statIcons = {
 } as const;
 
 export function HomeHero() {
+  const locale = useLocale();
   const t = useTranslations("home");
   const tb = useTranslations("brand");
+  const titleSize =
+    locale === "ta"
+      ? "text-[1.45rem] min-[400px]:text-2xl sm:text-3xl lg:text-[2.15rem] xl:text-4xl"
+      : "text-[1.65rem] min-[400px]:text-3xl sm:text-4xl lg:text-[2.65rem] xl:text-5xl";
 
   return (
     <section className="home-hero">
@@ -38,7 +43,9 @@ export function HomeHero() {
               </div>
             </div>
 
-            <h1 className="max-w-full text-[1.65rem] font-extrabold leading-[1.15] tracking-tight text-white min-[400px]:text-3xl sm:text-4xl lg:text-[2.65rem] xl:text-5xl">
+            <h1
+              className={`max-w-full font-extrabold leading-[1.2] tracking-tight text-white ${titleSize}`}
+            >
               {t("heroLine1")}
               <br />
               <span className="text-[var(--gold)]">{t("heroLine2")}</span>
@@ -66,6 +73,10 @@ export function HomeHero() {
               <Link href="/contact" className="home-hero-btn-join">
                 <Handshake className="h-4 w-4" />
                 {t("joinUs")}
+              </Link>
+              <Link href="/results" className="kit-btn-primary">
+                <BarChart3 className="h-4 w-4" />
+                {t("viewResults")}
               </Link>
             </div>
           </div>

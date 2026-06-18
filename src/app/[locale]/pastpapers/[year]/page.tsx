@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { PageIntroHero } from "@/components/kit/page-intro-hero";
-import { loadPastPaperYears, loadPastPapersByYear } from "@/lib/data/pastpapers";
-import { setRequestLocale } from "next-intl/server";
 import { PastPaperYearView } from "@/components/pages/pastpaper-year-view";
+import { loadPastPaperYears, loadPastPapersByYear } from "@/lib/data/pastpapers";
 
 export async function generateStaticParams() {
   const years = await loadPastPaperYears();
@@ -12,6 +12,7 @@ export async function generateStaticParams() {
 export default async function PastPaperYearPage({ params }: { params: Promise<{ locale: string; year: string }> }) {
   const { locale, year } = await params;
   setRequestLocale(locale);
+  const t = await getTranslations("pastpapers");
   const numericYear = Number(year);
   if (!Number.isFinite(numericYear)) {
     notFound();
@@ -27,9 +28,9 @@ export default async function PastPaperYearPage({ params }: { params: Promise<{ 
   return (
     <>
       <PageIntroHero
-        overline="Exams"
+        overline={t("overline")}
         title={`${numericYear}`}
-        titleHighlight="Past Papers"
+        titleHighlight={t("yearTitleHighlight")}
         lead=""
       />
       <div className="kit-page-main">

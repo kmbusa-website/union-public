@@ -56,16 +56,16 @@ function sortSubjects(stream: string | undefined, subjects: SubjectResult[]) {
 }
 
 function displaySubjectName(subject: SubjectResult, t: ReturnType<typeof useTranslations<"results">>) {
-  if (subject.subjectName) return subject.subjectName.toUpperCase();
   const code = subject.subjectCode ?? "";
-  if (!code) return "—";
   const map: Record<string, string> = {
     PHY: t("subjects.PHY"),
     CHE: t("subjects.CHE"),
     MAT: t("subjects.MAT"),
     BIO: t("subjects.BIO"),
   };
-  return map[code] ?? code;
+  if (code && map[code]) return map[code];
+  if (subject.subjectName) return subject.subjectName.toUpperCase();
+  return code || "—";
 }
 
 function InfoItem({

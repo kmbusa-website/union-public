@@ -6,7 +6,6 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { ThemeInit } from "@/components/shared/theme-init";
 import { routing, type Locale } from "@/i18n/routing";
-import { themeBootstrapScript } from "@/lib/theme";
 import "../globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -50,7 +49,6 @@ export default async function LocaleLayout({
     >
       <head>
         <meta charSet="utf-8" />
-        <script dangerouslySetInnerHTML={{ __html: themeBootstrapScript }} />
       </head>
       <body
         className={`flex min-h-screen flex-col antialiased ${locale === "ta" ? "font-tamil" : "font-sans"}`}

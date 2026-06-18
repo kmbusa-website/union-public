@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { PageIntroHero } from "@/components/kit/page-intro-hero";
-import { loadSchemeYears, loadSchemesByYear } from "@/lib/data/schemes";
-import { setRequestLocale } from "next-intl/server";
 import { SchemeYearView } from "@/components/pages/scheme-year-view";
+import { loadSchemeYears, loadSchemesByYear } from "@/lib/data/schemes";
 
 export async function generateStaticParams() {
   const years = await loadSchemeYears();
@@ -12,6 +12,7 @@ export async function generateStaticParams() {
 export default async function SchemeYearPage({ params }: { params: Promise<{ locale: string; year: string }> }) {
   const { locale, year } = await params;
   setRequestLocale(locale);
+  const t = await getTranslations("schemes");
   const numericYear = Number(year);
   if (!Number.isFinite(numericYear)) {
     notFound();
@@ -27,9 +28,9 @@ export default async function SchemeYearPage({ params }: { params: Promise<{ loc
   return (
     <>
       <PageIntroHero
-        overline="Exams"
+        overline={t("overline")}
         title={`${numericYear}`}
-        titleHighlight="Schemes"
+        titleHighlight={t("yearTitleHighlight")}
         lead=""
       />
 
