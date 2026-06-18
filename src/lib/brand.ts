@@ -2,7 +2,7 @@ export const ORG_NAME = "Kilinochchi Maths Bio University Students' Association"
 export const ORG_SHORT = "KMBUSA";
 export const ORG_FULL = `${ORG_NAME} (${ORG_SHORT})`;
 export const ORG_TAGLINE =
-  "Uniting Maths & Bio university students — supporting academic growth, events, and our community.";
+  "KMBUSA is more than a student association—it is a community of future innovators, leaders, and professionals. We strive to inspire excellence in education, foster meaningful friendships, and create opportunities that empower every member to achieve their full potential. Together, we learn, grow, and build a brighter future for our society.";
 
 export const HERO_CAMPUS_IMAGE = "/hero-campus.jpg";
 export const LOGO_PATH = "/logo.png";

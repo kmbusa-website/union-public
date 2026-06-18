@@ -44,7 +44,7 @@ export function SiteFooter() {
                 </p>
               </div>
             </div>
-            <p className="mt-4 max-w-sm text-sm leading-relaxed">{ORG_TAGLINE}</p>
+            <p className="mt-4 max-w-md text-sm leading-relaxed">{ORG_TAGLINE}</p>
             <div className="mt-5 flex flex-wrap gap-2">
               {FOOTER_SOCIAL.map((item) => (
                 <a

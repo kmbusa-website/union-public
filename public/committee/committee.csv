@@ -1,6 +1,7 @@
 year,id,name,role,tier,faculty,university,photoUrl,accent
-2025,sec-2025,G. GEETHASANCHCHARAN,Secretary,executive,Faculty of Engineering,University of Moratuwa,https://drive.google.com/thumbnail?id=15Nt83D0aJLsxQsPT0X4fsITzjOEj60Vf&sz=w400,#22d3ee
 2025,pres-2025,S. RIXSAN,President,executive,Faculty of Architecture,University of Moratuwa,https://drive.google.com/thumbnail?id=1vY2ek3AjUeC5b4sq7nZgZFzYEScg_UOc&sz=w400,#fbbf24
+
+2025,sec-2025,G. GEETHASANCHCHARAN,Secretary,executive,Faculty of Engineering,University of Moratuwa,https://drive.google.com/thumbnail?id=15Nt83D0aJLsxQsPT0X4fsITzjOEj60Vf&sz=w400,#22d3ee
 2025,treas-2025,A. THARMITHA,Treasurer,executive,Faculty of Agriculture,University of Ruhuna,,#f472b6
 2025,vp-2025,V. IYNKARAN,Vice President,roles,Faculty of Engineering,University of Ruhuna,https://drive.google.com/thumbnail?id=1t81XFSQFhiOMdYTw5-bWuJnaH01sy9hH&sz=w400,#a78bfa
 2025,vsec-2025,K. BRAVIN,Vice Secretary,roles,Faculty of Engineering,University of Ruhuna,https://drive.google.com/thumbnail?id=1EJDNPuG1dYohj0FEI7CrKm8yk8GCDSy4&sz=w400,#34d399
@@ -16,8 +17,8 @@ year,id,name,role,tier,faculty,university,photoUrl,accent
 2025,mem-2025-varunan,S. VARUNAN,Member,members,Faculty of Engineering,University of Moratuwa,https://drive.google.com/thumbnail?id=1kckl6tkXZbtqHjtRAIeKtHBwUjW941WM&sz=w400,#fb923c
 2025,mem-2025-mathangi,M. MATHANGI,Member,members,Faculty of Medicine,University of Jaffna,https://drive.google.com/thumbnail?id=16tCF2sB8Jf_ptHOXGj3VCFNCJm4dmmFc&sz=w400,#60a5fa
 2025,mem-2025-jorishems,J. ORISHEMS,Member,members,Faculty of Medicine,Eastern University of Sri Lanka,https://drive.google.com/thumbnail?id=1W9eq247iFUx9ejaexwYzIxCr4hcLe6b5&sz=w400,#e879f9
-2026,sec-2026,S. SARANKAN,Secretary,executive,Faculty of Medicine,University of Sri Jayewardenepura,https://drive.google.com/thumbnail?id=1D3TIl5NSacVO5dT6Z-swP_YLITd_Wma1&sz=w400,#22d3ee
 2026,pres-2026,V. IYNKARAN,President,executive,Faculty of Engineering,University of Ruhuna,https://drive.google.com/thumbnail?id=1fJ2h45Zd5CNgUTfvUcBDyoPde1Qdddq2&sz=w400,#fbbf24
+2026,sec-2026,S. SARANKAN,Secretary,executive,Faculty of Medicine,University of Sri Jayewardenepura,https://drive.google.com/thumbnail?id=1D3TIl5NSacVO5dT6Z-swP_YLITd_Wma1&sz=w400,#22d3ee
 2026,treas-2026,M. MATHANGI,Treasurer,executive,Faculty of Medicine,University of Jaffna,https://drive.google.com/thumbnail?id=1XjV2BspFtQ82wXaIhTlr9DFFlmfJ9Hyd&sz=w400,#f472b6
 2026,vp-2026,L. THANUDSHAN,Vice President,roles,Faculty of Engineering,University of Jaffna,https://drive.google.com/thumbnail?id=1AAxyFSVyn1qNQX-eMlmGrfrmADAsusNg&sz=w400,#a78bfa
 2026,vsec-2026,M. SRIVAXSHANA,Vice Secretary,roles,Faculty of Engineering,University of Ruhuna,https://drive.google.com/thumbnail?id=1hj1f0O_2EP_JktuRMNzE757L_kMeZ0x3&sz=w400,#34d399
