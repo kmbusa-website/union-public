@@ -10,7 +10,7 @@ export const LOGO_PATH = "/logo.png";
 export const CONTACT = {
   location: "AKSHAYA HOSPITAL, 2ND FLOOR",
   email: "kmbusasl@gmail.com",
-  phone: "+94 77 123 4567",
+  phone: "+94 77 624 0570",
 } as const;
 
 export const FOOTER_QUICK_LINKS = [
