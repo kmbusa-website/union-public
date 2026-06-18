@@ -43,6 +43,9 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} className={`${inter.variable} ${notoTamil.variable}`} suppressHydrationWarning>
+      <head>
+        <meta charSet="utf-8" />
+      </head>
       <body
         className={`flex min-h-screen flex-col antialiased ${locale === "ta" ? "font-tamil" : "font-sans"}`}
         style={{ fontFamily: locale === "ta" ? "var(--font-tamil), var(--font-inter), system-ui, sans-serif" : undefined }}
