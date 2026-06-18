@@ -74,7 +74,7 @@ export function ContactForm() {
   return (
     <div className="kit-container py-12">
       <div className="grid gap-8 lg:grid-cols-12">
-        <div className="lg:col-span-3">
+        <div className="lg:col-span-4">
           <h2 className="text-sm font-bold uppercase tracking-wider text-blue-400">{t("getInTouch")}</h2>
           <ul className="mt-6 space-y-4 text-sm" style={{ color: "var(--text-secondary)" }}>
             <li className="flex gap-3">
@@ -97,6 +97,8 @@ export function ContactForm() {
               <a
                 key={l.label}
                 href={l.href}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex h-9 w-9 items-center justify-center rounded-lg border transition hover:border-blue-400 hover:text-blue-400"
                 style={{ borderColor: "var(--border-color)", color: "var(--text-secondary)" }}
                 aria-label={l.label}
@@ -106,7 +108,7 @@ export function ContactForm() {
             ))}
           </div>
         </div>
-        <form onSubmit={submit} className="kit-card lg:col-span-5">
+        <form onSubmit={submit} className="kit-card lg:col-span-8">
           <h2 className="text-lg font-bold" style={{ color: "var(--text-primary)" }}>
             {t("sendMessage")}
           </h2>
@@ -156,9 +158,15 @@ export function ContactForm() {
           {status === "ok" && <p className="mt-3 text-sm text-emerald-400">{t("success")}</p>}
           {status === "err" && <p className="mt-3 text-sm text-red-400">{error}</p>}
         </form>
-        <div className="overflow-hidden rounded-xl lg:col-span-4">
-          <iframe title={t("map")} src={MAP_EMBED_URL} className="h-full min-h-[360px] w-full border-0" loading="lazy" />
-        </div>
+      </div>
+
+      <div className="mt-8 overflow-hidden rounded-xl border" style={{ borderColor: "var(--border-color)" }}>
+        <iframe
+          title={t("map")}
+          src={MAP_EMBED_URL}
+          className="h-[min(420px,55vw)] min-h-[280px] w-full border-0"
+          loading="lazy"
+        />
       </div>
     </div>
   );

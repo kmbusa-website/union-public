@@ -15,8 +15,8 @@ const FILTER_LABELS: Record<PastPaperFilter, string> = {
 };
 
 function paperBadgeColor(paperType: string) {
-  if (paperType === "Pure" || paperType === "Applied" || paperType === "Applied Scheme") return "text-cyan-400";
-  if (paperType === "Structure" || paperType === "Essay") return "text-amber-400";
+  if (paperType === "Pure" || paperType === "Applied" || paperType === "Applied Scheme") return "text-[var(--blue)]";
+  if (paperType === "Structure" || paperType === "Essay") return "text-[var(--blue)]";
   if (paperType === "MCQ") return "text-emerald-400";
   return "text-violet-400";
 }
@@ -45,14 +45,14 @@ export function PastPaperYearView({ year, papers }: { year: number; papers: Past
     <div className="kit-container pb-16">
       <div className="mb-6 flex items-center justify-between gap-4">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-cyan-400">Year</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[var(--blue)]">Year</p>
           <h2 className="mt-1 text-2xl font-bold" style={{ color: "var(--text-primary)" }}>
             {year} Papers
           </h2>
         </div>
         <Link
           href="/exams/pastpapers"
-          className="rounded-full border px-4 py-2 text-sm font-semibold transition hover:border-cyan-400 hover:text-cyan-400"
+          className="rounded-full border px-4 py-2 text-sm font-semibold transition hover:border-[var(--blue)] hover:text-[var(--blue)]"
           style={{ borderColor: "var(--border-color)", color: "var(--text-primary)" }}
         >
           Back to years
@@ -68,7 +68,7 @@ export function PastPaperYearView({ year, papers }: { year: number; papers: Past
             className="rounded-full px-4 py-2 text-sm font-semibold transition"
             style={
               filter === key
-                ? { backgroundColor: "#06b6d4", color: "#0a192f" }
+                ? { backgroundColor: "var(--blue)", color: "#ffffff" }
                 : { backgroundColor: "var(--bg-card)", border: "1px solid var(--border-color)", color: "var(--text-secondary)" }
             }
           >
@@ -111,7 +111,7 @@ export function PastPaperYearView({ year, papers }: { year: number; papers: Past
                   href={paper.url}
                   target="_blank"
                   rel="noreferrer"
-                  className="mt-4 inline-flex items-center justify-center rounded-full border border-cyan-400/40 px-4 py-2 text-sm font-semibold text-cyan-400 transition hover:bg-cyan-400/10"
+                  className="mt-4 inline-flex items-center justify-center rounded-full border border-[var(--blue)]/40 px-4 py-2 text-sm font-semibold text-[var(--blue)] transition hover:bg-[var(--blue)]/10"
                 >
                   Open PDF
                 </a>

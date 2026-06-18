@@ -10,7 +10,7 @@ export function PageHero({ title, highlight, subtitle }: PageHeroProps) {
       <div className="kit-container !py-0">
         <h1 className="kit-page-hero-title">
           {title}
-          {highlight && <span className="text-blue-400"> {highlight}</span>}
+          {highlight && <span className="text-[var(--blue)]"> {highlight}</span>}
         </h1>
         {subtitle && <p className="kit-page-hero-sub">{subtitle}</p>}
       </div>

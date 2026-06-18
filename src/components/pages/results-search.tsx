@@ -234,53 +234,48 @@ function ResultsSearchForm() {
 
   return (
     <div className="kit-container pb-16">
-      <div className="mb-4 grid gap-3 md:mb-6 lg:grid-cols-[150px_minmax(0,1fr)] lg:items-center">
-        <div className="flex min-h-[120px] items-center justify-center p-1 text-center md:min-h-[150px]">
-          <div className="relative flex h-20 w-20 items-center justify-center md:h-24 md:w-24">
-            <Trophy className="results-accent relative h-12 w-12 md:h-14 md:w-14" strokeWidth={1.25} />
-            <Sparkles className="absolute -right-1 top-0 h-4 w-4 text-amber-500 dark:text-amber-400 md:h-5 md:w-5" />
-          </div>
+      <div className="results-hero">
+        <div className="results-trophy-wrap">
+          <Trophy className="h-11 w-11" strokeWidth={1.5} />
+          <Sparkles className="absolute -right-0.5 -top-0.5 h-5 w-5 text-amber-500" />
         </div>
-
-        <div className="flex min-h-[120px] items-center justify-center px-1 sm:px-3 md:min-h-[150px] lg:px-6">
-          <p className="text-center text-base leading-tight sm:text-lg sm:leading-relaxed">
-            <span className="results-muted">{t("hardWork")} </span>
-            <span className="results-highlight-success font-bold">{t("success")}</span>
-          </p>
-        </div>
+        <p className="results-hero-text">
+          <span className="results-muted">{t("hardWork")} </span>
+          <span className="results-highlight-success font-bold">{t("success")}</span>
+        </p>
       </div>
 
-      <div className="space-y-8">
-          <form onSubmit={onSubmit} className="results-panel p-6">
-            <h2 className="flex items-center gap-2 text-lg font-bold" style={{ color: "var(--text-primary)" }}>
-              <Search className="results-accent h-5 w-5" />
-              {t("findResults")}
-            </h2>
-            <p className="results-muted mt-1 text-sm">{t("searchHint")}</p>
+      <div className="mx-auto max-w-3xl space-y-6">
+        <form onSubmit={onSubmit} className="results-search-card">
+          <h2 className="flex items-center gap-2 text-lg font-bold" style={{ color: "var(--text-primary)" }}>
+            <Search className="results-search-icon h-5 w-5" />
+            {t("findResults")}
+          </h2>
+          <p className="results-muted mt-1 text-sm">{t("searchHint")}</p>
 
-            <div className="mt-6">
-              <label className="kit-label" htmlFor="search-query">
-                {t("indexOrNic")}
-              </label>
-              <div className="mt-1 grid gap-3 sm:grid-cols-[minmax(0,1fr)_auto]">
-                <input
-                  id="search-query"
-                  name="query"
-                  className="kit-input"
-                  required
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  placeholder="200572507152"
-                />
-                <button type="submit" disabled={loading} className="results-search-btn px-6">
-                  <Search className="h-4 w-4" />
-                  {loading ? t("searching") : t("searchButton")}
-                </button>
-              </div>
+          <div className="mt-5">
+            <label className="results-field-label" htmlFor="search-query">
+              {t("indexOrNic")}
+            </label>
+            <div className="results-search-row">
+              <input
+                id="search-query"
+                name="query"
+                className="results-search-input"
+                required
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="200572507152"
+              />
+              <button type="submit" disabled={loading} className="results-search-btn">
+                <Search className="h-4 w-4" />
+                {loading ? t("searching") : t("searchButton")}
+              </button>
             </div>
-          </form>
+          </div>
+        </form>
 
-          <div className="min-h-[420px]">
+        <div className="min-h-[380px]">
           {loading ? (
             <div className="results-panel flex min-h-[420px] items-center justify-center">
               <p className="results-muted">{t("searchingResults")}</p>
@@ -302,7 +297,7 @@ function ResultsSearchForm() {
           ) : (
             <ResultDetail result={result} />
           )}
-          </div>
+        </div>
       </div>
     </div>
   );

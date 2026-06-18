@@ -50,8 +50,8 @@ export function SiteFooter() {
                 <a
                   key={item.label}
                   href={item.href}
-                  target={item.icon === "email" ? undefined : "_blank"}
-                  rel={item.icon === "email" ? undefined : "noopener noreferrer"}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className={`flex h-9 w-9 items-center justify-center rounded-full text-white shadow-md transition hover:scale-105 ${item.color}`}
                   aria-label={item.label}
                 >

@@ -27,22 +27,28 @@ export const FOOTER_RESOURCES = [
   { href: "/events", label: "Events" },
 ] as const;
 
+export const FACEBOOK_URL = "https://web.facebook.com/profile.php?id=61566333822162";
+export const INSTAGRAM_URL = "https://www.instagram.com/k.m.b.u.s.a/";
+
 export const FOOTER_SOCIAL = [
-  { label: "Facebook", href: "https://web.facebook.com/profile.php?id=61566333822162", icon: "facebook" as const, color: "bg-[#1877F2]" },
-  { label: "Instagram", href: "https://www.instagram.com/k.m.b.u.s.a/", icon: "instagram" as const, color: "bg-gradient-to-br from-[#f58529] via-[#dd2a7b] to-[#8134af]" },
-  { label: "Email", href: `mailto:${CONTACT.email}`, icon: "email" as const, color: "bg-[#7c3aed]" },
-  { label: "YouTube", href: "https://youtube.com", icon: "youtube" as const, color: "bg-[#FF0000]" },
+  { label: "Facebook", href: FACEBOOK_URL, icon: "facebook" as const, color: "bg-[#1877F2]" },
+  {
+    label: "Instagram",
+    href: INSTAGRAM_URL,
+    icon: "instagram" as const,
+    color: "bg-gradient-to-br from-[#f58529] via-[#dd2a7b] to-[#8134af]",
+  },
 ] as const;
 
 export const SOCIAL_LINKS = [
-  { label: "Facebook", href: "https://web.facebook.com/profile.php?id=61566333822162", icon: "facebook" as const },
-  { label: "Instagram", href: "https://www.instagram.com/k.m.b.u.s.a/", icon: "instagram" as const },
+  { label: "Facebook", href: FACEBOOK_URL, icon: "facebook" as const },
+  { label: "Instagram", href: INSTAGRAM_URL, icon: "instagram" as const },
 ] as const;
 
 export const STATS = [
   { value: "100+", label: "Active Members", icon: "users" as const },
   { value: "2+", label: "Academic Programs", icon: "graduation" as const },
-  { value: "3+", label: "Events Conducted", icon: "calendar" as const },
+  { value: "10+", label: "Events Conducted", icon: "calendar" as const },
   { value: "1 Goal", label: "Student Empowerment", icon: "medal" as const },
 ] as const;
 

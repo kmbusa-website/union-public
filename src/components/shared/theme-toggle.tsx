@@ -2,30 +2,30 @@
 
 import { Moon, Sun } from "lucide-react";
 import { useLayoutEffect, useState } from "react";
+import { applyTheme, readStoredTheme, storeTheme, type ThemeMode } from "@/lib/theme";
 
 export function ThemeToggle() {
-  const [dark, setDark] = useState(false);
+  const [theme, setTheme] = useState<ThemeMode>("dark");
 
   useLayoutEffect(() => {
-    const saved = localStorage.getItem("theme") ?? "light";
-    setDark(saved === "dark");
+    setTheme(readStoredTheme());
   }, []);
 
   function toggle() {
-    const next = !dark;
-    setDark(next);
-    localStorage.setItem("theme", next ? "dark" : "light");
-    document.documentElement.classList.toggle("dark", next);
+    const next: ThemeMode = theme === "light" ? "dark" : "light";
+    setTheme(next);
+    storeTheme(next);
+    applyTheme(next);
   }
 
   return (
     <button
       type="button"
       onClick={toggle}
-      aria-label="Toggle theme"
+      aria-label={theme === "light" ? "Switch to dark theme" : "Switch to light theme"}
       className="header-icon-btn"
     >
-      {dark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+      {theme === "light" ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
     </button>
   );
 }

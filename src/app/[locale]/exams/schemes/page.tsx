@@ -21,7 +21,7 @@ export default async function SchemesPage({ params }: { params: Promise<{ locale
         <div className="kit-container pb-16">
           <div className="mb-6 flex items-center justify-between gap-4">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-amber-500">Schemes</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[var(--blue)]">Schemes</p>
               <h2 className="mt-1 text-2xl font-bold" style={{ color: "var(--text-primary)" }}>
                 Choose a year
               </h2>
@@ -41,7 +41,7 @@ export default async function SchemesPage({ params }: { params: Promise<{ locale
                   className="overflow-hidden rounded-3xl border p-6 shadow-lg transition hover:-translate-y-0.5"
                   style={{ background: "var(--bg-card)", borderColor: "var(--border-color)" }}
                 >
-                  <p className="text-xs font-semibold uppercase tracking-[0.25em] text-amber-500">Year</p>
+                  <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[var(--blue)]">Year</p>
                   <h3 className="mt-3 text-3xl font-extrabold" style={{ color: "var(--text-primary)" }}>
                     {year}
                   </h3>

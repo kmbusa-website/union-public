@@ -4,7 +4,7 @@ import { Link } from "@/i18n/navigation";
 import type { PastPaper } from "@/lib/types/pastpaper";
 
 function paperBadgeColor(paperType: string) {
-  if (paperType === "Scheme" || paperType === "Applied Scheme") return "text-amber-400";
+  if (paperType === "Scheme" || paperType === "Applied Scheme") return "text-[var(--blue)]";
   return "text-violet-400";
 }
 
@@ -13,14 +13,14 @@ export function SchemeYearView({ year, papers }: { year: number; papers: PastPap
     <div className="kit-container pb-16">
       <div className="mb-6 flex items-center justify-between gap-4">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-amber-500">Year</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[var(--blue)]">Year</p>
           <h2 className="mt-1 text-2xl font-bold" style={{ color: "var(--text-primary)" }}>
             {year} Schemes
           </h2>
         </div>
         <Link
           href="/exams/schemes"
-          className="rounded-full border px-4 py-2 text-sm font-semibold transition hover:border-amber-400 hover:text-amber-400"
+          className="rounded-full border px-4 py-2 text-sm font-semibold transition hover:border-[var(--blue)] hover:text-[var(--blue)]"
           style={{ borderColor: "var(--border-color)", color: "var(--text-primary)" }}
         >
           Back to years
@@ -61,7 +61,7 @@ export function SchemeYearView({ year, papers }: { year: number; papers: PastPap
                   href={paper.url}
                   target="_blank"
                   rel="noreferrer"
-                  className="mt-4 inline-flex items-center justify-center rounded-full border border-amber-400/40 px-4 py-2 text-sm font-semibold text-amber-400 transition hover:bg-amber-400/10"
+                  className="mt-4 inline-flex items-center justify-center rounded-full border border-[var(--blue)]/40 px-4 py-2 text-sm font-semibold text-[var(--blue)] transition hover:bg-[var(--blue)]/10"
                 >
                   Open PDF
                 </a>

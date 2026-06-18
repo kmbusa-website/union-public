@@ -1,11 +1,15 @@
 "use client";
 
 import { useLayoutEffect } from "react";
+import { applyTheme, readStoredTheme } from "@/lib/theme";
+
+if (typeof window !== "undefined") {
+  applyTheme(readStoredTheme());
+}
 
 export function ThemeInit() {
   useLayoutEffect(() => {
-    const theme = localStorage.getItem("theme") ?? "light";
-    document.documentElement.classList.toggle("dark", theme === "dark");
+    applyTheme(readStoredTheme());
   }, []);
 
   return null;
