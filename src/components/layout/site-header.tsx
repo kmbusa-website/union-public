@@ -2,6 +2,7 @@
 
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 import { Logo } from "@/components/brand/logo";
@@ -10,79 +11,83 @@ import { LanguageToggle } from "@/components/shared/language-toggle";
 import { ThemeToggle } from "@/components/shared/theme-toggle";
 
 const links = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/committee", label: "Committee" },
-  { href: "/events", label: "Events" },
-  { href: "/exams", label: "Exams" },
-  { href: "/gallery", label: "Gallery" },
-  { href: "/results", label: "A/L Results" },
-  { href: "/contact", label: "Contact" },
+  { href: "/", key: "home" },
+  { href: "/about", key: "about" },
+  { href: "/committee", key: "committee" },
+  { href: "/events", key: "events" },
+  { href: "/exams", key: "pastpapers" },
+  { href: "/gallery", key: "gallery" },
+  { href: "/results", key: "results" },
+  { href: "/contact", key: "contact" },
 ] as const;
 
 export function SiteHeader() {
+  const t = useTranslations("nav");
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
-  const active = (href: string) =>
-    href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
+  const active = (href: string) => {
+    if (href === "/") return pathname === "/";
+    if (href === "/exams") {
+      return pathname === "/exams" || pathname === "/pastpapers" || pathname.startsWith("/pastpapers/");
+    }
+    return pathname === href || pathname.startsWith(`${href}/`);
+  };
 
   return (
-    <header
-      className="sticky top-0 z-50 border-b transition-colors"
-      style={{ background: "var(--bg-header)", borderColor: "var(--border-header)" }}
-    >
+    <header className="site-header">
       <TopBar />
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 lg:px-8">
-        <Logo />
-        <nav className="hidden items-center gap-4 xl:flex">
-          {links.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              className={cn("nav-link", active(l.href) && "nav-link-active")}
-            >
-              {l.label}
-            </Link>
-          ))}
-        </nav>
-        <div className="flex items-center gap-2">
-          <LanguageToggle />
-          <ThemeToggle />
-          <Link href="/contact" className="kit-btn-header hidden lg:inline-flex">
-            Get Started
-          </Link>
+      <div className="site-header-accent" aria-hidden />
+      <div className="site-nav-bar">
+        <div className="site-nav-inner">
+          <Logo />
+
+          <div className="site-nav-main">
+            <nav className="site-nav-links" aria-label="Main">
+              {links.map((l) => (
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  className={cn("nav-link", active(l.href) && "nav-link-active")}
+                >
+                  {t(l.key)}
+                </Link>
+              ))}
+            </nav>
+
+            <div className="site-nav-actions">
+              <LanguageToggle />
+              <ThemeToggle />
+              <button
+                type="button"
+                className="site-nav-menu-btn"
+                onClick={() => setOpen(!open)}
+                aria-label={open ? t("closeMenu") : t("openMenu")}
+                aria-expanded={open}
+              >
+                {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              </button>
+            </div>
+          </div>
         </div>
-        <button
-          type="button"
-          className="xl:hidden transition"
-          style={{ color: "var(--text-nav)" }}
-          onClick={() => setOpen(!open)}
-          aria-label="Menu"
-        >
-          {open ? <X /> : <Menu />}
-        </button>
+
+        {open && (
+          <nav className="site-mobile-nav" aria-label="Mobile">
+            {links.map((l) => (
+              <Link
+                key={l.href}
+                href={l.href}
+                className={cn(
+                  "site-mobile-nav-link",
+                  active(l.href) && "site-mobile-nav-link--active",
+                )}
+                onClick={() => setOpen(false)}
+              >
+                {t(l.key)}
+              </Link>
+            ))}
+          </nav>
+        )}
       </div>
-      {open && (
-        <nav
-          className="border-t px-4 py-4 xl:hidden"
-          style={{ borderColor: "var(--border-header)" }}
-        >
-          {links.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              className={cn(
-                "block py-2 text-sm transition hover:text-blue-500",
-                active(l.href) ? "font-semibold text-blue-500" : "",
-              )}
-              style={{ color: active(l.href) ? undefined : "var(--text-nav)" }}
-              onClick={() => setOpen(false)}
-            >
-              {l.label}
-            </Link>
-          ))}
-        </nav>
-      )}
     </header>
   );
 }
