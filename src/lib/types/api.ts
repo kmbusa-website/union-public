@@ -39,5 +39,6 @@ export interface AlResult {
   district?: string;
   schoolName?: string;
   nicNumber?: string;
+  districtRank?: string;
   subjectResults: SubjectResult[];
 }

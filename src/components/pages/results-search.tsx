@@ -9,12 +9,10 @@ import {
   BarChart3,
   BookOpen,
   Hash,
-  IdCard,
   MapPin,
   School,
   Search,
   Sparkles,
-  TrendingUp,
   Trophy,
   User,
 } from "lucide-react";
@@ -29,20 +27,6 @@ const SUBJECT_ORDER: Record<string, string[]> = {
 function formatStream(stream?: string) {
   if (!stream) return "—";
   return stream.replace(/_/g, " ");
-}
-
-function formatZScore(value?: number) {
-  if (value == null) return "—";
-  return value.toFixed(4);
-}
-
-function getZScoreMeta(result: AlResult) {
-  const withZ = result.subjectResults?.find((s) => (s.zScore ?? s.zscore) != null);
-  return {
-    zScore: withZ?.zScore ?? withZ?.zscore,
-    districtRank: withZ?.districtRank,
-    islandRank: withZ?.islandRank,
-  };
 }
 
 function sortSubjects(stream: string | undefined, subjects: SubjectResult[]) {
@@ -101,7 +85,6 @@ function InfoItem({
 
 function ResultDetail({ result }: { result: AlResult }) {
   const t = useTranslations("results");
-  const { zScore, districtRank } = getZScoreMeta(result);
   const subjects = sortSubjects(result.stream, result.subjectResults ?? []);
 
   return (
@@ -130,13 +113,11 @@ function ResultDetail({ result }: { result: AlResult }) {
         <div className="space-y-5">
           <InfoItem icon={User} label={t("labels.name")} value={result.studentName} />
           <InfoItem icon={Hash} label={t("labels.index")} value={result.indexNumber} />
-          <InfoItem icon={IdCard} label={t("labels.nic")} value={result.nicNumber ?? "—"} />
+          <InfoItem icon={School} label={t("labels.school")} value={result.schoolName ?? "—"} />
           {result.district && <InfoItem icon={MapPin} label={t("labels.district")} value={result.district} />}
-          {result.schoolName && <InfoItem icon={School} label={t("labels.school")} value={result.schoolName} />}
         </div>
         <div className="space-y-5">
-          <InfoItem icon={Trophy} label={t("labels.districtRank")} value={districtRank ?? "—"} />
-          <InfoItem icon={TrendingUp} label={t("labels.zScore")} value={formatZScore(zScore)} />
+          <InfoItem icon={Trophy} label={t("labels.districtRank")} value={result.districtRank ?? "—"} />
           <InfoItem icon={BookOpen} label={t("labels.stream")} value={formatStream(result.stream)} highlight />
         </div>
       </div>
@@ -265,7 +246,7 @@ function ResultsSearchForm() {
                 required
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="200572507152"
+                placeholder="26001"
               />
               <button type="submit" disabled={loading} className="results-search-btn">
                 <Search className="h-4 w-4" />
