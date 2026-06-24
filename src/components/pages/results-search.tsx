@@ -191,7 +191,7 @@ function ResultsSearchForm() {
   if (dataLoading) {
     return (
       <div className="kit-container pb-16">
-        <div className="kit-card flex min-h-[400px] items-center justify-center">
+        <div className="kit-card flex min-h-100 items-center justify-center">
           <p className="results-muted">{t("loadingData")}</p>
         </div>
       </div>
@@ -256,13 +256,13 @@ function ResultsSearchForm() {
           </div>
         </form>
 
-        <div className="min-h-[380px]">
+        <div className="min-h-95">
           {loading ? (
-            <div className="results-panel flex min-h-[420px] items-center justify-center">
+            <div className="results-panel flex min-h-105 items-center justify-center">
               <p className="results-muted">{t("searchingResults")}</p>
             </div>
           ) : !searched ? (
-            <div className="results-empty-state min-h-[420px]">
+            <div className="results-empty-state min-h-105">
               <Search className="results-subtle mb-4 h-14 w-14" />
               <p className="text-lg font-medium" style={{ color: "var(--text-primary)" }}>
                 {t("placeholderTitle")}
@@ -272,7 +272,7 @@ function ResultsSearchForm() {
               </p>
             </div>
           ) : !result ? (
-            <div className="results-panel flex min-h-[420px] items-center justify-center p-8">
+            <div className="results-panel flex min-h-105 items-center justify-center p-8">
               <p className="results-muted text-center">{t("notFound")}</p>
             </div>
           ) : (
@@ -290,7 +290,7 @@ export function ResultsSearch() {
     <Suspense
       fallback={
         <div className="kit-container">
-          <div className="kit-card flex min-h-[400px] items-center justify-center">
+          <div className="kit-card flex min-h-100 items-center justify-center">
             <p className="results-muted">{t("loadingSearch")}</p>
           </div>
         </div>
