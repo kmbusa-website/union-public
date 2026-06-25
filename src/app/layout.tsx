@@ -1,10 +1,5 @@
-import type { Metadata } from "next";
 import { Inter, Noto_Sans_Tamil } from "next/font/google";
 import { getLocale } from "next-intl/server";
-
-export const metadata: Metadata = {
-  icons: { icon: "/logo.png" },
-};
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const notoTamil = Noto_Sans_Tamil({ subsets: ["tamil"], variable: "--font-tamil" });
