@@ -69,6 +69,7 @@ const HEADER_ALIASES = {
   chemistry: "che",
   che: "che",
   combinedmathematics: "mat",
+  combinedmaths: "mat",
   mathematics: "mat",
   maths: "mat",
   mat: "mat",
@@ -155,6 +156,14 @@ function buildColumnMap(headers) {
   return map;
 }
 
+function parseDistrictRank(value) {
+  if (value == null || value === "") return undefined;
+  const text = String(value).trim();
+  if (!text) return undefined;
+  const n = Number(text);
+  return Number.isFinite(n) ? String(Math.trunc(n)) : text;
+}
+
 function rowToResult(cells, col) {
   const studentName = cell(cells[col.studentName]);
   const indexNumber = formatDigits(cells[col.indexNumber]);
@@ -162,7 +171,7 @@ function rowToResult(cells, col) {
 
   const stream = resolveStream(cells, col);
   const zScore = toNumber(cells[col.zScore]);
-  const districtRank = toNumber(cells[col.districtRank]);
+  const districtRank = parseDistrictRank(cells[col.districtRank]);
   const islandRank = toNumber(cells[col.islandRank]);
 
   const subjectKeys =
@@ -175,13 +184,7 @@ function rowToResult(cells, col) {
       if (!grade) return null;
       const meta = SUBJECT_META[key];
       const subject = { ...meta, grade };
-      if (key === subjectKeys[0]) {
-        if (zScore != null) subject.zScore = zScore;
-        if (districtRank != null) subject.districtRank = districtRank;
-        if (islandRank != null) subject.islandRank = islandRank;
-      } else if (zScore != null) {
-        subject.zScore = zScore;
-      }
+      if (zScore != null) subject.zScore = zScore;
       return subject;
     })
     .filter(Boolean);
@@ -197,6 +200,7 @@ function rowToResult(cells, col) {
     stream,
     district: cell(cells[col.district]) || undefined,
     schoolName: cell(cells[col.schoolName]) || undefined,
+    districtRank: districtRank || undefined,
     subjectResults,
   };
 }
