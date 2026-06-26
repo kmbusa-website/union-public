@@ -18,6 +18,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body
         className={`flex min-h-screen flex-col antialiased ${locale === "ta" ? "font-tamil" : "font-sans"}`}
         style={{ fontFamily: locale === "ta" ? "var(--font-tamil), var(--font-inter), system-ui, sans-serif" : undefined }}
+        suppressHydrationWarning
       >
         {children}
       </body>

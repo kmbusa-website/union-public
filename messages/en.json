@@ -242,8 +242,8 @@
   },
   "results": {
     "findResults": "Find Your Results",
-    "searchHint": "Enter your index number to view results.",
-    "indexOrNic": "Index Number",
+    "searchHint": "Enter your index number or NIC number to view results.",
+    "indexOrNic": "Index Number or NIC Number",
     "studentsLoaded": "{count} students loaded. Search by exact index number.",
     "searching": "Searching...",
     "searchButton": "Search Results",
@@ -256,10 +256,10 @@
     "success": "Your Success Tomorrow!",
     "searchingResults": "Searching results...",
     "placeholderTitle": "Results will appear here",
-    "placeholderHint": "Search by index number to view your A/L examination results.",
+    "placeholderHint": "Search by index number or NIC number to view your A/L examination results.",
     "notFound": "No results found for this index number.",
     "yearBadge": "{year} Year",
-    "examLabel": "G.C.E. (A/L) Examination",
+    "examLabel": "G.C.E.(A/L) PILOT EXAM RESULTS",
     "subjectResults": "Subject Results",
     "labels": {
       "name": "Name",

@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { ThemeInit } from "@/components/shared/theme-init";
+import { LocaleHtmlSync } from "@/components/shared/locale-html-sync";
 import { routing, type Locale } from "@/i18n/routing";
 import "../globals.css";
 
@@ -39,6 +40,7 @@ export default async function LocaleLayout({
   return (
     <NextIntlClientProvider messages={messages}>
       <ThemeInit />
+      <LocaleHtmlSync />
       <SiteHeader />
       <main className="flex-1">{children}</main>
       <SiteFooter />

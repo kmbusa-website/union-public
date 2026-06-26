@@ -4,10 +4,11 @@ import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
+import Image from "next/image";
 import {
-  Award,
   BarChart3,
   BookOpen,
+  CreditCard,
   Hash,
   MapPin,
   School,
@@ -17,6 +18,7 @@ import {
   User,
 } from "lucide-react";
 import { loadAlResults, searchAlResults } from "@/lib/data/al-results";
+import { LOGO_PATH } from "@/lib/brand";
 import type { AlResult, SubjectResult } from "@/lib/types/api";
 
 const SUBJECT_ORDER: Record<string, string[]> = {
@@ -97,13 +99,19 @@ function ResultDetail({ result }: { result: AlResult }) {
         className="border-b px-6 pb-8 pt-10 text-center"
         style={{ borderColor: "var(--border-color)" }}
       >
-        <div className="results-award-icon mx-auto">
-          <Award className="results-accent h-10 w-10" strokeWidth={1.5} />
+        <div className="results-award-icon mx-auto overflow-hidden p-0">
+          <Image
+            src={LOGO_PATH}
+            alt="KMBUSA"
+            width={80}
+            height={80}
+            className="h-full w-full rounded-full object-contain"
+          />
         </div>
         <h3 className="mt-5 text-2xl font-bold tracking-tight sm:text-3xl" style={{ color: "var(--text-primary)" }}>
-          {result.studentName}
+          KMBUSA
         </h3>
-        <p className="results-accent mt-1 text-sm font-medium">{t("examLabel")}</p>
+        <p className="results-accent mt-1 text-sm font-medium not-italic">{t("examLabel")}</p>
       </div>
 
       <div
@@ -113,6 +121,9 @@ function ResultDetail({ result }: { result: AlResult }) {
         <div className="space-y-5">
           <InfoItem icon={User} label={t("labels.name")} value={result.studentName} />
           <InfoItem icon={Hash} label={t("labels.index")} value={result.indexNumber} />
+          {result.nicNumber && (
+            <InfoItem icon={CreditCard} label={t("labels.nic")} value={result.nicNumber} />
+          )}
           <InfoItem icon={School} label={t("labels.school")} value={result.schoolName ?? "—"} />
           {result.district && <InfoItem icon={MapPin} label={t("labels.district")} value={result.district} />}
         </div>
