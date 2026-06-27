@@ -42,6 +42,45 @@ const FEATURED_EVENT_IDS_BY_YEAR = {
 
 const EVENT_CATEGORIES = new Set(["meeting", "seminar", "cultural", "ceremony", "sports"]);
 
+const MONTH_NAMES = {
+  jan: "01", feb: "02", mar: "03", apr: "04", may: "05", jun: "06",
+  jul: "07", aug: "08", sep: "09", oct: "10", nov: "11", dec: "12",
+};
+
+/**
+ * Normalize a date string to ISO `YYYY-MM-DD`.
+ * Accepts: YYYY-MM-DD, DD/MM/YYYY, DD-MM-YYYY, D/M/YYYY, and "1 Sep 2024".
+ * Returns "" if it cannot be parsed.
+ */
+function normalizeDate(value) {
+  const raw = String(value ?? "").trim();
+  if (!raw) return "";
+
+  // Already ISO (YYYY-MM-DD)
+  let m = raw.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
+  if (m) {
+    const [, y, mo, d] = m;
+    return `${y}-${mo.padStart(2, "0")}-${d.padStart(2, "0")}`;
+  }
+
+  // DD/MM/YYYY or DD-MM-YYYY (day first)
+  m = raw.match(/^(\d{1,2})[/-](\d{1,2})[/-](\d{4})$/);
+  if (m) {
+    const [, d, mo, y] = m;
+    return `${y}-${mo.padStart(2, "0")}-${d.padStart(2, "0")}`;
+  }
+
+  // "1 Sep 2024" / "1 September 2024"
+  m = raw.match(/^(\d{1,2})\s+([A-Za-z]+)\s+(\d{4})$/);
+  if (m) {
+    const [, d, monthWord, y] = m;
+    const mo = MONTH_NAMES[monthWord.slice(0, 3).toLowerCase()];
+    if (mo) return `${y}-${mo}-${d.padStart(2, "0")}`;
+  }
+
+  return "";
+}
+
 function parseCsv(text) {
   const rows = [];
   let row = [];
@@ -96,11 +135,16 @@ function parseCsv(text) {
       const category = entry.category ?? "";
       if (!EVENT_CATEGORIES.has(category)) return null;
 
+      const date = normalizeDate(entry.date);
+      if (entry.date && !date) {
+        console.warn(`  ⚠ Skipping "${entry.id}": unrecognized date "${entry.date}" (use DD/MM/YYYY or YYYY-MM-DD)`);
+      }
+
       return {
         id: entry.id ?? "",
         title: entry.title ?? "",
         year: Number(entry.year ?? 0),
-        date: entry.date ?? "",
+        date,
         category,
         description: entry.description ?? "",
         imageUrl: entry.imageUrl ?? "",
